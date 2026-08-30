@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spicy Lip Plumper</title>
+<!--
+  ONE-PRODUCT DROPSHIPPING STORE TEMPLATE — "Spicy Lip Plumper"
+  Structure mirrors sonasleep.shop, section for section, rewritten for a skincare / lip product.
+  No brand name is used anywhere. Replace the copy, prices, review text and links with your own.
+  All testimonials below are SAMPLE PLACEHOLDER TEXT — swap them for real, verifiable reviews
+  before you take payments. Cosmetic claims should be checked against your supplier's approved wording.
+-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+  :root{
+    --bg:#fbf3ee;
+    --bg-2:#f4e3da;
+    --ink:#3a1220;
+    --ink-soft:#6b4553;
+    --wine:#7c1533;
+    --wine-deep:#4a0c20;
+    --coral:#ff4d4d;
+    --coral-deep:#e02f4a;
+    --blush:#ffd9d0;
+    --gold:#c98a2e;
+    --card:#ffffff;
+    --line:#ecd4c8;
+    --radius:18px;
+    --shadow:0 18px 45px -20px rgba(74,12,32,.35);
+    --maxw:1120px;
+    --font:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --serif:'Playfair Display',Georgia,'Times New Roman',serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#1c0a12;
+      --bg-2:#2a0f1b;
+      --ink:#fbe9e4;
+      --ink-soft:#d3a7b1;
+      --wine:#ff6f91;
+      --wine-deep:#ffd9d0;
+      --card:#2b1019;
+      --line:#472030;
+      --blush:#5a2233;
+      --shadow:0 18px 45px -20px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .eyebrow{
+    font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--coral-deep);margin-bottom:14px;
+  }
+  h1,h2,h3{font-family:var(--serif);line-height:1.15;font-weight:600}
+  h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:14px;color:var(--wine-deep)}
+  .section{padding:82px 0}
+  .section.tight{padding:56px 0}
+  .lead{font-size:1.05rem;color:var(--ink-soft);max-width:620px}
+  .center{text-align:center}
+  .center .lead{margin:0 auto}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    background:linear-gradient(180deg,var(--coral),var(--coral-deep));
+    color:#fff;font-weight:700;font-size:1rem;
+    padding:16px 30px;border-radius:999px;border:0;cursor:pointer;
+    box-shadow:0 14px 30px -10px rgba(224,47,74,.6);
+    transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 20px 38px -10px rgba(224,47,74,.7)}
+  .btn.ghost{
+    background:transparent;color:var(--wine-deep);
+    box-shadow:inset 0 0 0 2px var(--line);
+  }
+  .btn.big{padding:19px 40px;font-size:1.08rem}
+
+  /* Announcement bar */
+  .announce{
+    background:var(--wine-deep);color:#ffe9e2;
+    font-size:.82rem;font-weight:600;letter-spacing:.04em;
+    text-align:center;padding:9px 14px;
+  }
+  .announce span{opacity:.85}
+
+  /* Nav */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:color-mix(in srgb,var(--bg) 88%,transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-family:var(--serif);font-weight:700;font-size:1.15rem;letter-spacing:.02em;color:var(--wine-deep)}
+  .nav-cta{font-size:.9rem;padding:11px 20px}
+
+  /* Hero */
+  .hero{background:linear-gradient(180deg,var(--bg),var(--bg-2));overflow:hidden}
+  .hero .wrap{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;
+    padding-top:64px;padding-bottom:80px;
+  }
+  .stars{display:flex;align-items:center;gap:8px;font-weight:600;font-size:.9rem;color:var(--ink-soft);margin-bottom:20px}
+  .stars b{color:var(--gold);letter-spacing:2px}
+  .hero h1{font-size:clamp(2.3rem,5.4vw,3.6rem);color:var(--wine-deep);margin-bottom:18px}
+  .hero p.sub{font-size:1.08rem;color:var(--ink-soft);margin-bottom:26px;max-width:520px}
+  .ticks{display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:26px}
+  .ticks li{list-style:none;font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:8px}
+  .ticks li::before{content:"✓";color:var(--coral-deep);font-weight:800}
+  .price{display:flex;align-items:baseline;gap:12px;margin-bottom:20px}
+  .price .now{font-size:2rem;font-weight:700;color:var(--wine-deep)}
+  .price .was{text-decoration:line-through;color:var(--ink-soft);font-weight:500}
+  .price .off{
+    background:var(--blush);color:var(--wine-deep);font-weight:700;font-size:.8rem;
+    padding:4px 10px;border-radius:999px;
+  }
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:18px}
+  .urgency{font-size:.85rem;color:var(--ink-soft);font-weight:600}
+  .hero-media{position:relative}
+  .hero-card{
+    background:var(--card);border:1px solid var(--line);border-radius:26px;
+    padding:26px;box-shadow:var(--shadow);
+  }
+  .hero-card .shot{
+    aspect-ratio:1/1;border-radius:18px;overflow:hidden;
+    background:radial-gradient(circle at 30% 25%,var(--blush),var(--bg-2) 70%);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero-card .shot img{width:78%;height:78%;object-fit:contain;filter:drop-shadow(0 20px 30px rgba(74,12,32,.28))}
+  .float{
+    position:absolute;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);font-size:.82rem;font-weight:600;
+  }
+  .float.one{top:14px;left:-18px}
+  .float.two{bottom:22px;right:-16px}
+  .float .big{font-family:var(--serif);font-size:1.2rem;color:var(--coral-deep);display:block}
+
+  /* Feature tiles */
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .tile{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;min-height:180px;display:flex;flex-direction:column;justify-content:flex-end;
+    box-shadow:var(--shadow);
+  }
+  .tile .k{font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--coral-deep);margin-bottom:6px}
+  .tile .v{font-family:var(--serif);font-size:1.3rem;color:var(--wine-deep)}
+  .tile.quote{background:linear-gradient(160deg,var(--wine),var(--wine-deep));color:#ffe9e2;justify-content:center}
+  .tile.quote .q{font-family:var(--serif);font-size:1.25rem;line-height:1.35}
+  .tile.quote .by{font-size:.8rem;margin-top:12px;opacity:.85}
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;text-align:center;box-shadow:var(--shadow)}
+  .stat .n{font-family:var(--serif);font-size:1.7rem;color:var(--coral-deep)}
+  .stat .l{font-size:.82rem;color:var(--ink-soft);font-weight:600}
+
+  /* Problem / solution cards */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:36px}
+  .pcard{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px;box-shadow:var(--shadow);
+  }
+  .pcard h3{font-size:1.15rem;margin-bottom:8px;color:var(--wine-deep)}
+  .pcard p{font-size:.94rem;color:var(--ink-soft)}
+  .pcard .ic{
+    width:42px;height:42px;border-radius:12px;background:var(--blush);
+    display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:14px;
+  }
+  .closer{
+    margin-top:34px;font-family:var(--serif);font-size:1.25rem;color:var(--wine-deep);
+    max-width:720px;
+  }
+  .solution{background:linear-gradient(180deg,var(--bg-2),var(--bg))}
+
+  /* Social proof strip */
+  .proof{
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 34px;
+    margin-top:44px;padding:22px;border:1px dashed var(--line);border-radius:var(--radius);
+    font-weight:600;
+  }
+  .proof .big{font-family:var(--serif);font-size:1.4rem;color:var(--coral-deep)}
+
+  /* Reviews */
+  .reviews{background:linear-gradient(180deg,var(--bg),var(--bg-2))}
+  .rtrack{
+    display:flex;gap:20px;overflow-x:auto;padding:10px 4px 24px;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
+  .rtrack::-webkit-scrollbar{height:8px}
+  .rtrack::-webkit-scrollbar-thumb{background:var(--line);border-radius:999px}
+  .rcard{
+    scroll-snap-align:start;flex:0 0 320px;background:var(--card);border:1px solid var(--line);
+    border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px;
+  }
+  .rcard .rs{color:var(--gold);letter-spacing:2px;font-size:.95rem}
+  .rcard .rt{font-size:.96rem;color:var(--ink)}
+  .rcard .ru{display:flex;align-items:center;gap:12px;margin-top:auto}
+  .rcard .av{
+    width:38px;height:38px;border-radius:50%;background:linear-gradient(150deg,var(--coral),var(--wine));
+    color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;
+  }
+  .rcard .rn{font-weight:600;font-size:.9rem}
+  .rcard .rl{font-size:.78rem;color:var(--ink-soft)}
+
+  /* Specs */
+  .scard{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px;box-shadow:var(--shadow);
+  }
+  .scard .h{font-family:var(--serif);font-size:1.15rem;color:var(--coral-deep);margin-bottom:8px}
+  .scard p{font-size:.92rem;color:var(--ink-soft)}
+
+  /* Final CTA */
+  .final{background:linear-gradient(160deg,var(--wine),var(--wine-deep));color:#ffe9e2;text-align:center}
+  .final h2{color:#fff}
+  .final .lead{color:#ffd9d0}
+  .final .price .now{color:#fff}
+  .final .price .was{color:#ffb3a7}
+  .final .price .off{background:rgba(255,255,255,.15);color:#fff}
+  .final .price{justify-content:center;margin:24px 0}
+  .final .badges{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-top:22px;font-weight:600;font-size:.88rem}
+
+  /* FAQ */
+  .faq details{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 20px;margin-bottom:12px;box-shadow:var(--shadow);
+  }
+  .faq summary{font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;color:var(--wine-deep)}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-size:1.3rem;color:var(--coral-deep)}
+  .faq details[open] summary::after{content:"–"}
+  .faq p{margin-top:12px;color:var(--ink-soft);font-size:.94rem}
+
+  /* Footer */
+  footer{background:var(--wine-deep);color:#e9c7cf;padding:56px 0 34px;font-size:.86rem}
+  footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;margin-bottom:34px}
+  footer h4{font-family:var(--serif);color:#fff;margin-bottom:12px;font-size:1rem}
+  footer a{display:block;padding:4px 0;opacity:.8}
+  footer a:hover{opacity:1}
+  footer .fine{border-top:1px solid rgba(255,255,255,.15);padding-top:20px;opacity:.65;font-size:.78rem;line-height:1.7}
+
+  @media (max-width:900px){
+    .hero .wrap{grid-template-columns:1fr;gap:40px}
+    .tiles,.grid-3,.grid-4,.stat-row{grid-template-columns:1fr 1fr}
+    footer .cols{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:560px){
+    .section{padding:60px 0}
+    .tiles,.grid-3,.grid-4,.stat-row,footer .cols{grid-template-columns:1fr}
+    .float.one{left:6px}
+    .float.two{right:6px}
+    .cta-row .btn{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ ANNOUNCEMENT BAR ============ -->
+<div class="announce">FREE SHIPPING ON BUNDLES &nbsp;·&nbsp; <span>4.9 ★ &nbsp;12,000+ reviews</span> &nbsp;·&nbsp; 30-DAY MONEY-BACK GUARANTEE</div>
+
+<!-- ============ NAV ============ -->
+<div class="nav">
+  <div class="wrap">
+    <a href="product.html" class="logo">Spicy Lip Plumper</a>
+    <a href="product.html" class="btn nav-cta">Shop Now</a>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="stars"><b>★★★★★</b> 4.9 · 12,000+ reviews</div>
+      <h1>Fuller Lips in 5&nbsp;Minutes.<br>No Needles. No Filler.</h1>
+      <p class="sub">A tingling peptide gloss that plumps, smooths and redefines your natural lip line — visible volume in minutes, softer lips over weeks. The warm, spicy tingle is how you know it's working.</p>
+      <ul class="ticks">
+        <li>30-Day Guarantee</li>
+        <li>Free Shipping On Bundles</li>
+        <li>Plumps In 5 Minutes</li>
+      </ul>
+      <div class="price">
+        <span class="now">$24.99</span>
+        <span class="was">$39.98</span>
+        <span class="off">37% OFF</span>
+      </div>
+      <div class="cta-row">
+        <a href="product.html" class="btn big">Shop Now — 37% Off Today</a>
+        <a href="product.html" class="btn ghost big">See How It Works</a>
+      </div>
+      <p class="urgency">⚡ Processed in 24–48 hrs · Launch Week pricing</p>
+    </div>
+
+    <div class="hero-media">
+      <div class="float one">Dermatologist-tested<span class="big">0 needles</span></div>
+      <div class="hero-card">
+        <div class="shot"><img src="data:image/avif;base64,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" alt="Spicy lip plumper applicator"></div>
+      </div>
+      <div class="float two"><span class="big">+ Instant</span>visible plump</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ FEATURE TILES ============ -->
+<section class="section tight">
+  <div class="wrap">
+    <div class="tiles">
+      <div class="tile">
+        <div class="k">Instant Volume</div>
+        <div class="v">Visible Plump</div>
+      </div>
+      <div class="tile quote">
+        <div class="q">"People keep asking if I got filler."</div>
+        <div class="by">— Sarah M. &nbsp;✓ Verified</div>
+      </div>
+      <div class="tile">
+        <div class="k">Non-Invasive</div>
+        <div class="v">No Needles Needed</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="n">5 min</div><div class="l">To Visible Plump</div></div>
+      <div class="stat"><div class="n">8 hr</div><div class="l">Cushiony Hydration</div></div>
+      <div class="stat"><div class="n">0</div><div class="l">Needles · No Downtime</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="eyebrow">Sound Familiar?</div>
+    <h2>Thin Lips Aren't Your Fault</h2>
+    <p class="lead">Most lip plumpers make you choose between a real result and comfortable lips. If any of these feel familiar — you're not the only one.</p>
+    <div class="grid-3">
+      <div class="pcard">
+        <div class="ic">⏳</div>
+        <h3>Your lips look thinner every year</h3>
+        <p>Natural volume and definition fade over time. Lipstick settles into fine lines, the border of your lip softens, and nothing in your bag actually fixes it.</p>
+      </div>
+      <div class="pcard">
+        <div class="ic">💉</div>
+        <h3>You want fuller lips — but not filler</h3>
+        <p>Needles are expensive, they wear off, and the results can look stiff or uneven. You want more volume without booking an appointment or committing to a syringe.</p>
+      </div>
+      <div class="pcard">
+        <div class="ic">😖</div>
+        <h3>Every plumper you've tried let you down</h3>
+        <p>Some just burn with no payoff. Others are sticky, or the tingle fades in two minutes with nothing to show for it. There's never been a plumper that's actually comfortable to wear.</p>
+      </div>
+    </div>
+    <p class="closer">This one gives you a real, visible plump — with a warm spicy tingle instead of a harsh sting, and hydration that stays long after the tingle is gone.</p>
+  </div>
+</section>
+
+<!-- ============ SOLUTION ============ -->
+<section class="section solution">
+  <div class="wrap">
+    <div class="eyebrow">The Solution</div>
+    <h2>Meet the Spicy Lip Plumper</h2>
+    <p class="lead">A glossy, tingling serum you swipe on like a lip gloss. A spicy botanical blend brings blood flow to the surface for instant fullness, while peptides and hyaluronic acid smooth and hydrate over time. No needles, no liner, no compromise.</p>
+    <div class="grid-4">
+      <div class="pcard">
+        <div class="ic">🌶️</div>
+        <h3>Plumps On Contact</h3>
+        <p>A warm spicy complex boosts micro-circulation the moment it touches your lips — fuller, rosier, more defined within about five minutes.</p>
+      </div>
+      <div class="pcard">
+        <div class="ic">✨</div>
+        <h3>Smooths Lip Texture</h3>
+        <p>A tri-peptide blend supports your lips' natural collagen, softening vertical lines and lipstick bleed with daily use.</p>
+      </div>
+      <div class="pcard">
+        <div class="ic">✒️</div>
+        <h3>Redefines Your Lip Line</h3>
+        <p>The plumping effect sharpens the border of your lips, so they look sculpted and intentional even with nothing else on.</p>
+      </div>
+      <div class="pcard">
+        <div class="ic">💧</div>
+        <h3>Hydrates, Doesn't Dry</h3>
+        <p>Hyaluronic acid and vitamin E leave lips cushiony and soft — never the tight, cracked feeling cheap plumpers leave behind.</p>
+      </div>
+    </div>
+    <div class="proof">
+      <span class="big">12,000+ Verified Buyers</span>
+      <span>★ 4.9 / 5 Average Rating</span>
+      <span>92% saw visible plump on first use*</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="section reviews">
+  <div class="wrap">
+    <div class="eyebrow center">Verified Reviews</div>
+    <h2 class="center">12,000 People Skipped the Filler</h2>
+    <p class="lead center">4.9 / 5 · Verified Buyers</p>
+    <!-- SAMPLE reviews — replace with real, verifiable customer reviews before selling -->
+    <div class="rtrack">
+      <div class="rcard">
+        <div class="rs">★★★★★</div>
+        <div class="rt">"I've spent a fortune on filler over the years. Three swipes of this and my lips look full and defined — my friends genuinely thought I'd had them done again."</div>
+        <div class="ru"><div class="av">S</div><div><div class="rn">Sarah M.</div><div class="rl">Austin, TX · Verified ✓</div></div></div>
+      </div>
+      <div class="rcard">
+        <div class="rs">★★★★★</div>
+        <div class="rt">"The tingle is warm and kind of nice, not painful like the last plumper I bought. My top lip actually has a shape now."</div>
+        <div class="ru"><div class="av">J</div><div><div class="rn">Jenna K.</div><div class="rl">Denver, CO · Verified ✓</div></div></div>
+      </div>
+      <div class="rcard">
+        <div class="rs">★★★★★</div>
+        <div class="rt">"I wear it alone during the day and under lipstick at night. My lips feel hydrated for hours afterward, which no other plumper has done."</div>
+        <div class="ru"><div class="av">E</div><div><div class="rn">Emily R.</div><div class="rl">Seattle, WA · Verified ✓</div></div></div>
+      </div>
+      <div class="rcard">
+        <div class="rs">★★★★★</div>
+        <div class="rt">"Bought it half-expecting to return it because of the guarantee. Ended up ordering the 3-pack. It just works and it doesn't dry my lips out."</div>
+        <div class="ru"><div class="av">D</div><div><div class="rn">Dana L.</div><div class="rl">Chicago, IL · Verified ✓</div></div></div>
+      </div>
+      <div class="rcard">
+        <div class="rs">★★★★★</div>
+        <div class="rt">"My lipstick used to bleed into the lines around my mouth. A few weeks of using this every morning and that's basically stopped."</div>
+        <div class="ru"><div class="av">M</div><div><div class="rn">Maria T.</div><div class="rl">Miami, FL · Verified ✓</div></div></div>
+      </div>
+      <div class="rcard">
+        <div class="rs">★★★★★</div>
+        <div class="rt">"41 and my lips had started to thin out. This gave me back the fullness I had in my 20s without an appointment. I keep one in every bag."</div>
+        <div class="ru"><div class="av">C</div><div><div class="rn">Chris P.</div><div class="rl">Portland, OR · Verified ✓</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPECS / WHAT'S INSIDE ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow">What's Inside</div>
+    <h2>Formulated Around Your Lips</h2>
+    <p class="lead">Every ingredient earns its place — for an instant plump you can see and a lip surface that improves with use.</p>
+    <div class="grid-4">
+      <div class="scard">
+        <div class="h">Spicy Tingle Complex</div>
+        <p>Capsicum, ginger root and wintergreen create the warm tingle that draws blood flow to the surface for immediate volume and colour.</p>
+      </div>
+      <div class="scard">
+        <div class="h">Tri-Peptide Blend</div>
+        <p>Supports your lips' own collagen over time — smoother texture, softer fine lines, a firmer-looking lip border with daily use.</p>
+      </div>
+      <div class="scard">
+        <div class="h">Hyaluronic Acid + Vitamin E</div>
+        <p>Pulls moisture into the lip and holds it there, so lips stay plump and cushiony long after the tingle settles.</p>
+      </div>
+      <div class="scard">
+        <div class="h">Clean, Kind Base</div>
+        <p>Vegan and cruelty-free. No parabens, no lidocaine, no harsh menthol overload. Dermatologist-tested and safe for daily wear.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA / GUARANTEE ============ -->
+<section class="section final" id="buy">
+  <div class="wrap">
+    <div class="eyebrow" style="color:#ffd9d0">Zero Risk</div>
+    <h2>Try It Today — Zero Risk</h2>
+    <p class="lead">A visible plump in about five minutes, or your money back. 30-Day Satisfaction Promise on every order.</p>
+    <div class="price">
+      <span class="now">$24.99</span>
+      <span class="was">$39.98</span>
+      <span class="off">37% OFF</span>
+    </div>
+    <a href="product.html" class="btn big">Get Yours — 37% Off Today</a>
+    <p class="urgency" style="color:#ffd9d0;margin-top:14px">⚡ Processed in 24–48 hours · Launch Week pricing</p>
+    <div class="badges">
+      <span>✓ 30-Day Satisfaction Promise</span>
+      <span>✓ Free Shipping On Bundles</span>
+      <span>✓ Secure Checkout</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section faq">
+  <div class="wrap" style="max-width:760px">
+    <div class="eyebrow center">Questions</div>
+    <h2 class="center">Before You Order</h2>
+    <div style="margin-top:30px">
+      <details open>
+        <summary>How long does the plumping effect last?</summary>
+        <p>The visible plump typically lasts 2–4 hours per application and can be topped up any time. With daily use, most people notice smoother, fuller-looking lips even between applications after a few weeks.</p>
+      </details>
+      <details>
+        <summary>Is the tingle supposed to be that strong?</summary>
+        <p>A warm, tingly sensation for the first few minutes is normal and means the circulation-boosting actives are working. It should feel spicy, not painful. Start with one layer and build up as your lips get used to it.</p>
+      </details>
+      <details>
+        <summary>Can I wear it under or over lipstick?</summary>
+        <p>Both. Wear it alone as a glossy tint, as a base before lip liner and lipstick, or dab it over the top for extra shine and volume.</p>
+      </details>
+      <details>
+        <summary>What if it doesn't work for me?</summary>
+        <p>You're covered by our 30-Day Money-Back Guarantee. If you're not happy with your results, contact us for a full refund — no need to send the tube back.</p>
+      </details>
+      <details>
+        <summary>How fast is shipping?</summary>
+        <p>Orders are processed within 24–48 hours. Delivery is typically 5–9 business days, with tracking emailed to you once your order ships. Bundles ship free.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>Spicy Lip Plumper</h4>
+        <p style="opacity:.8;max-width:280px">A needle-free, tingling peptide lip plumper for instant volume and softer, more defined lips over time.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <a href="product.html">Single Tube</a>
+        <a href="product.html">3-Pack Bundle</a>
+        <a href="product.html">5-Pack Bundle</a>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <a href="#">Track Your Order</a>
+        <a href="#">Shipping &amp; Delivery</a>
+        <a href="#">Returns &amp; Refunds</a>
+        <a href="#">Contact Us</a>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Refund Policy</a>
+      </div>
+    </div>
+    <div class="fine">
+      *Based on an internal customer survey. Individual results vary. This product is a cosmetic and is not intended to diagnose, treat, cure or prevent any condition. Patch-test before first use and discontinue if irritation occurs. Not for use on broken or chapped skin. Keep out of reach of children.<br><br>
+      © 2026 Spicy Lip Plumper. All rights reserved. Prices in USD.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
