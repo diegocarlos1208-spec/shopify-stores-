@@ -1,0 +1,18 @@
+<div class="wrap" style="padding:64px 22px;max-width:820px;margin:0 auto">
+  <h1 style="font-family:var(--serif);color:var(--wine-deep);margin-bottom:18px">Search</h1>
+  <form action="{{ routes.search_url }}" method="get" role="search" style="display:flex;gap:10px;margin-bottom:26px">
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" style="flex:1;padding:13px 16px;border:1px solid var(--line);border-radius:12px">
+    <button type="submit" class="btn">Search</button>
+  </form>
+  {%- if search.performed -%}
+    <p style="color:var(--ink-soft);margin-bottom:18px">{{ search.results_count }} results for "{{ search.terms | escape }}"</p>
+    <div class="pgrid">
+      {%- for item in search.results -%}
+        <a href="{{ item.url }}" class="pgrid-card">
+          <span class="pgrid-title">{{ item.title }}</span>
+          {%- if item.price -%}<span class="pgrid-price">{{ item.price | money }}</span>{%- endif -%}
+        </a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>

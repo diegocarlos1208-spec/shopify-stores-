@@ -1,0 +1,47 @@
+{%- assign s = section.settings -%}
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow">{{ s.eyebrow | default: "What's Inside" }}</div>
+    <h2>{{ s.heading | default: 'Formulated Around Your Lips' }}</h2>
+    <p class="lead">{{ s.intro | default: 'Every ingredient earns its place — for an instant plump you can see and a lip surface that improves with use.' }}</p>
+
+    <div class="grid-4">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="scard" {{ block.shopify_attributes }}>
+            <div class="h">{{ block.settings.title }}</div>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="scard"><div class="h">Spicy Tingle Complex</div><p>Capsicum, ginger root and wintergreen create the warm tingle that draws blood flow to the surface for immediate volume and colour.</p></div>
+        <div class="scard"><div class="h">Tri-Peptide Blend</div><p>Supports your lips' own collagen over time — smoother texture, softer fine lines, a firmer-looking lip border with daily use.</p></div>
+        <div class="scard"><div class="h">Hyaluronic Acid + Vitamin E</div><p>Pulls moisture into the lip and holds it there, so lips stay plump and cushiony long after the tingle settles.</p></div>
+        <div class="scard"><div class="h">Clean, Kind Base</div><p>Vegan and cruelty-free. No parabens, no lidocaine, no harsh menthol overload. Dermatologist-tested and safe for daily wear.</p></div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Specs / What's inside",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What's Inside" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Formulated Around Your Lips" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Every ingredient earns its place — for an instant plump you can see and a lip surface that improves with use." }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Ingredient / spec",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Ingredient" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "What it does." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "Specs / What's inside" }]
+}
+{% endschema %}

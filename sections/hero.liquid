@@ -1,0 +1,77 @@
+{%- liquid
+  assign s = section.settings
+  if s.product != blank
+    assign cta_url = s.product.url
+  else
+    assign cta_url = routes.all_products_collection_url
+  endif
+-%}
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="stars"><b>★★★★★</b> {{ s.rating_text | default: '4.9 · 12,000+ reviews' }}</div>
+      <h1>{{ s.heading | default: 'Fuller Lips in 5 Minutes.<br>No Needles. No Filler.' }}</h1>
+      <p class="sub">{{ s.subheading | default: "A tingling peptide gloss that plumps, smooths and redefines your natural lip line — visible volume in minutes, softer lips over weeks. The warm, spicy tingle is how you know it's working." }}</p>
+
+      <ul class="ticks">
+        {%- assign ticks = s.ticks | default: '30-Day Guarantee|Free Shipping On Bundles|Plumps In 5 Minutes' | split: '|' -%}
+        {%- for t in ticks -%}<li>{{ t | strip }}</li>{%- endfor -%}
+      </ul>
+
+      <div class="price">
+        <span class="now">{{ s.price | default: '$24.99' }}</span>
+        {%- if s.compare_price != blank -%}<span class="was">{{ s.compare_price }}</span>{%- endif -%}
+        {%- if s.badge != blank -%}<span class="off">{{ s.badge }}</span>{%- endif -%}
+      </div>
+
+      <div class="cta-row">
+        <a href="{{ cta_url }}" class="btn big">{{ s.cta_primary | default: 'Shop Now — 37% Off Today' }}</a>
+        {%- if s.cta_secondary != blank -%}
+          <a href="#how" class="btn ghost big">{{ s.cta_secondary }}</a>
+        {%- endif -%}
+      </div>
+
+      {%- if s.urgency != blank -%}<p class="urgency">{{ s.urgency }}</p>{%- endif -%}
+    </div>
+
+    <div class="hero-media">
+      {%- if s.float_one != blank -%}<div class="float one">{{ s.float_one }}</div>{%- endif -%}
+      <div class="hero-card">
+        <div class="shot">
+          {%- if s.image != blank -%}
+            {{ s.image | image_url: width: 900 | image_tag: alt: 'Spicy lip plumper', loading: 'eager' }}
+          {%- elsif s.product != blank and s.product.featured_image -%}
+            {{ s.product.featured_image | image_url: width: 900 | image_tag: alt: s.product.title, loading: 'eager' }}
+          {%- else -%}
+            <img src="{{ 'product.avif' | asset_url }}" alt="Spicy lip plumper" width="600" height="600">
+          {%- endif -%}
+        </div>
+      </div>
+      {%- if s.float_two != blank -%}<div class="float two">{{ s.float_two }}</div>{%- endif -%}
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product the CTAs link to" },
+    { "type": "text", "id": "rating_text", "label": "Rating line", "default": "4.9 · 12,000+ reviews" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Fuller Lips in 5 Minutes. No Needles. No Filler.</p>" },
+    { "type": "textarea", "id": "subheading", "label": "Sub-heading", "default": "A tingling peptide gloss that plumps, smooths and redefines your natural lip line — visible volume in minutes, softer lips over weeks. The warm, spicy tingle is how you know it's working." },
+    { "type": "text", "id": "ticks", "label": "Trust ticks (separate with |)", "default": "30-Day Guarantee|Free Shipping On Bundles|Plumps In 5 Minutes" },
+    { "type": "text", "id": "price", "label": "Price", "default": "$24.99" },
+    { "type": "text", "id": "compare_price", "label": "Compare-at price", "default": "$39.98" },
+    { "type": "text", "id": "badge", "label": "Discount badge", "default": "37% OFF" },
+    { "type": "text", "id": "cta_primary", "label": "Primary button text", "default": "Shop Now — 37% Off Today" },
+    { "type": "text", "id": "cta_secondary", "label": "Secondary button text", "default": "See How It Works" },
+    { "type": "text", "id": "urgency", "label": "Urgency line", "default": "⚡ Processed in 24–48 hrs · Launch Week pricing" },
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "text", "id": "float_one", "label": "Floating badge (top-left) HTML", "default": "Dermatologist-tested<span class=\"big\">0 needles</span>" },
+    { "type": "text", "id": "float_two", "label": "Floating badge (bottom-right) HTML", "default": "<span class=\"big\">+ Instant</span>visible plump" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

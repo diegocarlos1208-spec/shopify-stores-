@@ -1,0 +1,28 @@
+{
+  "general": {
+    "accessibility": { "skip_to_text": "Skip to content" },
+    "search": { "placeholder": "Search" },
+    "404": { "title": "Page not found", "link": "Continue shopping" },
+    "pagination": { "previous": "Previous", "next": "Next" }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "quantity": "Quantity"
+    }
+  },
+  "cart": {
+    "general": { "title": "Your cart", "empty": "Your cart is empty", "checkout": "Check out", "subtotal": "Subtotal" }
+  },
+  "customer": {
+    "login_page": { "title": "Login" },
+    "register": { "title": "Create account" },
+    "account": { "title": "Account" },
+    "orders": { "title": "Order history" },
+    "addresses": { "title": "Addresses" },
+    "reset_password": { "title": "Reset account password" },
+    "activate_account": { "title": "Activate account" }
+  }
+}

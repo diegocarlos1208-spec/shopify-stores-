@@ -1,0 +1,7 @@
+<div class="wrap" style="padding:64px 22px;max-width:720px;margin:0 auto">
+  <h1 style="font-family:var(--serif);color:var(--wine-deep);margin-bottom:18px">{{ 'customer.addresses.title' | t }}</h1>
+  <p><a href="{{ routes.account_url }}" class="btn ghost">Back to account</a></p>
+  {%- for address in customer.addresses -%}
+    <div style="border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:14px">{{ address | format_address }}</div>
+  {%- endfor -%}
+</div>

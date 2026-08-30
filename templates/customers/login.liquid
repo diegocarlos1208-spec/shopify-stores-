@@ -1,0 +1,10 @@
+<div class="wrap" style="padding:64px 22px;max-width:420px;margin:0 auto">
+  <h1 style="font-family:var(--serif);color:var(--wine-deep);margin-bottom:18px">{{ 'customer.login_page.title' | t }}</h1>
+  {%- form 'customer_login' -%}
+    {{ form.errors | default_errors }}
+    <input type="email" name="customer[email]" placeholder="Email" class="fld">
+    <input type="password" name="customer[password]" placeholder="Password" class="fld">
+    <button type="submit" class="btn" style="width:100%">Sign in</button>
+  {%- endform -%}
+  <p style="margin-top:14px;font-size:.9rem"><a href="{{ routes.account_register_url }}">Create account</a></p>
+</div>

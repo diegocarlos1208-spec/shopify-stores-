@@ -1,0 +1,51 @@
+{%- assign s = section.settings -%}
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="eyebrow">{{ s.eyebrow | default: 'Sound Familiar?' }}</div>
+    <h2>{{ s.heading | default: "Thin Lips Aren't Your Fault" }}</h2>
+    <p class="lead">{{ s.intro | default: "Most lip plumpers make you choose between a real result and comfortable lips. If any of these feel familiar — you're not the only one." }}</p>
+
+    <div class="grid-3">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="pcard" {{ block.shopify_attributes }}>
+            <div class="ic">{{ block.settings.icon }}</div>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.text }}</p>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="pcard"><div class="ic">⏳</div><h3>Your lips look thinner every year</h3><p>Natural volume and definition fade over time. Lipstick settles into fine lines, the border of your lip softens, and nothing in your bag actually fixes it.</p></div>
+        <div class="pcard"><div class="ic">💉</div><h3>You want fuller lips — but not filler</h3><p>Needles are expensive, they wear off, and the results can look stiff or uneven. You want more volume without booking an appointment or committing to a syringe.</p></div>
+        <div class="pcard"><div class="ic">😖</div><h3>Every plumper you've tried let you down</h3><p>Some just burn with no payoff. Others are sticky, or the tingle fades in two minutes with nothing to show for it. There's never been a plumper that's actually comfortable to wear.</p></div>
+      {%- endif -%}
+    </div>
+
+    <p class="closer">{{ s.closer | default: 'This one gives you a real, visible plump — with a warm spicy tingle instead of a harsh sting, and hydration that stays long after the tingle is gone.' }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Problem",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Sound Familiar?" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Thin Lips Aren't Your Fault" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Most lip plumpers make you choose between a real result and comfortable lips. If any of these feel familiar — you're not the only one." },
+    { "type": "textarea", "id": "closer", "label": "Closing line", "default": "This one gives you a real, visible plump — with a warm spicy tingle instead of a harsh sting, and hydration that stays long after the tingle is gone." }
+  ],
+  "blocks": [
+    {
+      "type": "pain",
+      "name": "Pain point",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Emoji / icon", "default": "⏳" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Pain point title" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Describe the frustration." }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [{ "name": "Problem" }]
+}
+{% endschema %}

@@ -1,0 +1,49 @@
+{%- liquid
+  assign s = section.settings
+  if s.product != blank
+    assign cta_url = s.product.url
+  else
+    assign cta_url = routes.all_products_collection_url
+  endif
+-%}
+
+<section class="section final" id="buy">
+  <div class="wrap">
+    <div class="eyebrow" style="color:#ffd9d0">{{ s.eyebrow | default: 'Zero Risk' }}</div>
+    <h2>{{ s.heading | default: 'Try It Today — Zero Risk' }}</h2>
+    <p class="lead">{{ s.intro | default: 'A visible plump in about five minutes, or your money back. 30-Day Satisfaction Promise on every order.' }}</p>
+
+    <div class="price">
+      <span class="now">{{ s.price | default: '$24.99' }}</span>
+      {%- if s.compare_price != blank -%}<span class="was">{{ s.compare_price }}</span>{%- endif -%}
+      {%- if s.badge != blank -%}<span class="off">{{ s.badge }}</span>{%- endif -%}
+    </div>
+
+    <a href="{{ cta_url }}" class="btn big">{{ s.cta | default: 'Get Yours — 37% Off Today' }}</a>
+    {%- if s.urgency != blank -%}<p class="urgency" style="color:#ffd9d0;margin-top:14px">{{ s.urgency }}</p>{%- endif -%}
+
+    <div class="badges">
+      {%- assign badges = s.badges | default: '30-Day Satisfaction Promise|Free Shipping On Bundles|Secure Checkout' | split: '|' -%}
+      {%- for b in badges -%}<span>✓ {{ b | strip }}</span>{%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Final CTA",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Button → product" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Zero Risk" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Try It Today — Zero Risk" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "A visible plump in about five minutes, or your money back. 30-Day Satisfaction Promise on every order." },
+    { "type": "text", "id": "price", "label": "Price", "default": "$24.99" },
+    { "type": "text", "id": "compare_price", "label": "Compare-at price", "default": "$39.98" },
+    { "type": "text", "id": "badge", "label": "Discount badge", "default": "37% OFF" },
+    { "type": "text", "id": "cta", "label": "Button text", "default": "Get Yours — 37% Off Today" },
+    { "type": "text", "id": "urgency", "label": "Urgency line", "default": "⚡ Processed in 24–48 hours · Launch Week pricing" },
+    { "type": "text", "id": "badges", "label": "Trust badges (separate with |)", "default": "30-Day Satisfaction Promise|Free Shipping On Bundles|Secure Checkout" }
+  ],
+  "presets": [{ "name": "Final CTA" }]
+}
+{% endschema %}

@@ -1,0 +1,10 @@
+<div class="wrap" style="padding:64px 22px;max-width:420px;margin:0 auto">
+  <h1 style="font-family:var(--serif);color:var(--wine-deep);margin-bottom:18px">{{ 'customer.activate_account.title' | t }}</h1>
+  {%- form 'activate_customer_password' -%}
+    {{ form.errors | default_errors }}
+    <input type="password" name="customer[password]" placeholder="Password" class="fld">
+    <input type="password" name="customer[password_confirmation]" placeholder="Confirm password" class="fld">
+    <button type="submit" class="btn" style="width:100%">Activate</button>
+    <button type="submit" name="decline" class="btn ghost" style="width:100%;margin-top:8px">Decline</button>
+  {%- endform -%}
+</div>

@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": { "type": "main-product" },
+    "specs": { "type": "specs" },
+    "reviews": { "type": "reviews" },
+    "faq": { "type": "faq" }
+  },
+  "order": ["main", "specs", "reviews", "faq"]
+}

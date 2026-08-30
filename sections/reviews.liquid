@@ -1,0 +1,61 @@
+{%- assign s = section.settings -%}
+<section class="section reviews" id="reviews">
+  <div class="wrap">
+    <div class="eyebrow center">{{ s.eyebrow | default: 'Verified Reviews' }}</div>
+    <h2 class="center">{{ s.heading | default: '12,000 People Skipped the Filler' }}</h2>
+    <p class="lead center">{{ s.subheading | default: '4.9 / 5 · Verified Buyers' }}</p>
+
+    <div class="rtrack">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- assign initial = block.settings.name | strip | slice: 0 -%}
+          <div class="rcard" {{ block.shopify_attributes }}>
+            <div class="rs">★★★★★</div>
+            <div class="rt">{{ block.settings.text }}</div>
+            <div class="ru">
+              <div class="av">{{ initial }}</div>
+              <div><div class="rn">{{ block.settings.name }}</div><div class="rl">{{ block.settings.location }}</div></div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="rcard"><div class="rs">★★★★★</div><div class="rt">"I've spent a fortune on filler over the years. Three swipes of this and my lips look full and defined — my friends genuinely thought I'd had them done again."</div><div class="ru"><div class="av">S</div><div><div class="rn">Sarah M.</div><div class="rl">Austin, TX · Verified ✓</div></div></div></div>
+        <div class="rcard"><div class="rs">★★★★★</div><div class="rt">"The tingle is warm and kind of nice, not painful like the last plumper I bought. My top lip actually has a shape now."</div><div class="ru"><div class="av">J</div><div><div class="rn">Jenna K.</div><div class="rl">Denver, CO · Verified ✓</div></div></div></div>
+        <div class="rcard"><div class="rs">★★★★★</div><div class="rt">"I wear it alone during the day and under lipstick at night. My lips feel hydrated for hours afterward, which no other plumper has done."</div><div class="ru"><div class="av">E</div><div><div class="rn">Emily R.</div><div class="rl">Seattle, WA · Verified ✓</div></div></div></div>
+        <div class="rcard"><div class="rs">★★★★★</div><div class="rt">"Bought it half-expecting to return it because of the guarantee. Ended up ordering the 3-pack. It just works and it doesn't dry my lips out."</div><div class="ru"><div class="av">D</div><div><div class="rn">Dana L.</div><div class="rl">Chicago, IL · Verified ✓</div></div></div></div>
+        <div class="rcard"><div class="rs">★★★★★</div><div class="rt">"My lipstick used to bleed into the lines around my mouth. A few weeks of using this every morning and that's basically stopped."</div><div class="ru"><div class="av">M</div><div><div class="rn">Maria T.</div><div class="rl">Miami, FL · Verified ✓</div></div></div></div>
+        <div class="rcard"><div class="rs">★★★★★</div><div class="rt">"41 and my lips had started to thin out. This gave me back the fullness I had in my 20s without an appointment. I keep one in every bag."</div><div class="ru"><div class="av">C</div><div><div class="rn">Chris P.</div><div class="rl">Portland, OR · Verified ✓</div></div></div></div>
+      {%- endif -%}
+    </div>
+
+    {%- if s.button_product != blank -%}
+      <div style="max-width:360px;margin:8px auto 0"><a href="{{ s.button_product.url }}" class="btn">{{ s.button_label | default: 'Get Yours — 37% Off Today' }}</a></div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Verified Reviews" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "12,000 People Skipped the Filler" },
+    { "type": "text", "id": "subheading", "label": "Sub-heading", "default": "4.9 / 5 · Verified Buyers" },
+    { "type": "product", "id": "button_product", "label": "CTA button → product (optional)" },
+    { "type": "text", "id": "button_label", "label": "CTA button label", "default": "Get Yours — 37% Off Today" },
+    { "type": "paragraph", "content": "Replace the sample reviews with real, verifiable customer reviews before selling." }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Review text", "default": "\"Loved it.\"" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Sarah M." },
+        { "type": "text", "id": "location", "label": "Location / meta", "default": "Austin, TX · Verified ✓" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Reviews" }]
+}
+{% endschema %}

@@ -1,0 +1,20 @@
+<div class="wrap" style="padding:64px 22px;max-width:760px;margin:0 auto">
+  <h1 style="font-family:var(--serif);color:var(--wine-deep);margin-bottom:18px">{{ 'customer.account.title' | t }}</h1>
+  <p style="margin-bottom:18px"><a href="{{ routes.account_logout_url }}" class="btn ghost">Log out</a></p>
+  <h2 style="font-family:var(--serif);margin-bottom:12px">{{ 'customer.orders.title' | t }}</h2>
+  {%- paginate customer.orders by 20 -%}
+  <table style="width:100%;border-collapse:collapse">
+    <tbody>
+    {%- for order in customer.orders -%}
+      <tr style="border-bottom:1px solid var(--line)">
+        <td style="padding:10px 0"><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+        <td>{{ order.created_at | date: "%b %-d, %Y" }}</td>
+        <td>{{ order.financial_status_label }}</td>
+        <td style="text-align:right">{{ order.total_net_amount | money }}</td>
+      </tr>
+    {%- endfor -%}
+    </tbody>
+  </table>
+  {{ paginate | default_pagination }}
+  {%- endpaginate -%}
+</div>

@@ -1,0 +1,19 @@
+<div class="wrap" style="padding:64px 22px">
+  <h1 style="font-family:var(--serif);color:var(--wine-deep);margin-bottom:24px">{{ collection.title }}</h1>
+  {%- paginate collection.products by 24 -%}
+  <div class="pgrid">
+    {%- for product in collection.products -%}
+      <a href="{{ product.url }}" class="pgrid-card">
+        {%- if product.featured_media -%}
+          {{ product.featured_media | image_url: width: 500 | image_tag: loading: 'lazy', alt: product.title }}
+        {%- endif -%}
+        <span class="pgrid-title">{{ product.title }}</span>
+        <span class="pgrid-price">{{ product.price | money }}</span>
+      </a>
+    {%- else -%}
+      <p style="color:var(--ink-soft)">No products yet.</p>
+    {%- endfor -%}
+  </div>
+  <div class="pagination">{{ paginate | default_pagination }}</div>
+  {%- endpaginate -%}
+</div>

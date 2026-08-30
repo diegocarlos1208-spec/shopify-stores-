@@ -1,0 +1,45 @@
+{%- assign s = section.settings -%}
+<section class="section tight">
+  <div class="wrap">
+    <div class="tiles">
+      <div class="tile">
+        <div class="k">{{ s.tile1_k | default: 'Instant Volume' }}</div>
+        <div class="v">{{ s.tile1_v | default: 'Visible Plump' }}</div>
+      </div>
+      <div class="tile quote">
+        <div class="q">{{ s.quote | default: '"People keep asking if I got filler."' }}</div>
+        <div class="by">{{ s.quote_by | default: '— Sarah M.  ✓ Verified' }}</div>
+      </div>
+      <div class="tile">
+        <div class="k">{{ s.tile2_k | default: 'Non-Invasive' }}</div>
+        <div class="v">{{ s.tile2_v | default: 'No Needles Needed' }}</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="n">{{ s.stat1_n | default: '5 min' }}</div><div class="l">{{ s.stat1_l | default: 'To Visible Plump' }}</div></div>
+      <div class="stat"><div class="n">{{ s.stat2_n | default: '8 hr' }}</div><div class="l">{{ s.stat2_l | default: 'Cushiony Hydration' }}</div></div>
+      <div class="stat"><div class="n">{{ s.stat3_n | default: '0' }}</div><div class="l">{{ s.stat3_l | default: 'Needles · No Downtime' }}</div></div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Feature tiles",
+  "settings": [
+    { "type": "text", "id": "tile1_k", "label": "Tile 1 label", "default": "Instant Volume" },
+    { "type": "text", "id": "tile1_v", "label": "Tile 1 value", "default": "Visible Plump" },
+    { "type": "text", "id": "quote", "label": "Quote", "default": "\"People keep asking if I got filler.\"" },
+    { "type": "text", "id": "quote_by", "label": "Quote attribution", "default": "— Sarah M.  ✓ Verified" },
+    { "type": "text", "id": "tile2_k", "label": "Tile 2 label", "default": "Non-Invasive" },
+    { "type": "text", "id": "tile2_v", "label": "Tile 2 value", "default": "No Needles Needed" },
+    { "type": "text", "id": "stat1_n", "label": "Stat 1 number", "default": "5 min" },
+    { "type": "text", "id": "stat1_l", "label": "Stat 1 label", "default": "To Visible Plump" },
+    { "type": "text", "id": "stat2_n", "label": "Stat 2 number", "default": "8 hr" },
+    { "type": "text", "id": "stat2_l", "label": "Stat 2 label", "default": "Cushiony Hydration" },
+    { "type": "text", "id": "stat3_n", "label": "Stat 3 number", "default": "0" },
+    { "type": "text", "id": "stat3_l", "label": "Stat 3 label", "default": "Needles · No Downtime" }
+  ],
+  "presets": [{ "name": "Feature tiles" }]
+}
+{% endschema %}

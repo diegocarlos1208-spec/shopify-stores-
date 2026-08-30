@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "hero":     { "type": "hero" },
+    "features": { "type": "feature-tiles" },
+    "problem":  { "type": "problem" },
+    "solution": { "type": "solution" },
+    "reviews":  { "type": "reviews" },
+    "specs":    { "type": "specs" },
+    "faq":      { "type": "faq" },
+    "final":    { "type": "final-cta" }
+  },
+  "order": ["hero", "features", "problem", "solution", "reviews", "specs", "faq", "final"]
+}

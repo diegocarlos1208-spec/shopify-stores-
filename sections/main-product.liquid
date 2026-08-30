@@ -1,0 +1,143 @@
+{%- liquid
+  assign s = section.settings
+  assign p = product
+  assign current_variant = p.selected_or_first_available_variant
+-%}
+
+<section class="pdp">
+  <div class="wrap">
+    <div class="grid">
+
+      {%- comment -%} -------- Gallery -------- {%- endcomment -%}
+      <div class="gallery">
+        <div class="main">
+          {%- if p.featured_media -%}
+            {{ p.featured_media | image_url: width: 1000 | image_tag: loading: 'eager', alt: p.title }}
+          {%- else -%}
+            <img src="{{ 'product.avif' | asset_url }}" alt="{{ p.title | default: 'Spicy lip plumper' }}" width="700" height="700">
+          {%- endif -%}
+        </div>
+        {%- if p.media.size > 1 -%}
+          <div class="thumbs">
+            {%- for media in p.media limit: 4 -%}
+              {{ media | image_url: width: 240 | image_tag: loading: 'lazy', alt: p.title }}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} -------- Buy box -------- {%- endcomment -%}
+      <div id="buybox">
+        <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / {{ p.title | default: 'Spicy Lip Plumper' }}</div>
+        <h1>{{ p.title | default: 'Spicy Lip Plumper — Tingle & Volume Serum' }}</h1>
+        <div class="rate"><b>★★★★★</b> {{ s.rating_text | default: '4.9 · 12,000+ verified reviews' }}</div>
+
+        <div class="price">
+          <span class="now" id="priceNow">
+            {%- if current_variant -%}{{ current_variant.price | money }}{%- else -%}$24.99{%- endif -%}
+          </span>
+          <span class="was" id="priceWas"
+            {% unless current_variant.compare_at_price > current_variant.price %}style="display:none"{% endunless %}>
+            {%- if current_variant.compare_at_price > current_variant.price -%}{{ current_variant.compare_at_price | money }}{%- endif -%}
+          </span>
+        </div>
+
+        <p class="blurb">
+          {{ p.description | strip_html | truncatewords: 55 | default: 'A glossy, tingling peptide serum that plumps on contact, smooths lip texture and redefines your natural lip line. Needle-free volume you can see in about five minutes — with hydration that lasts for hours.' }}
+        </p>
+
+        {%- if p != blank -%}
+          {%- form 'product', p, id: 'product-form' -%}
+            <input type="hidden" name="id" id="variant-id" value="{{ current_variant.id }}">
+
+            {%- unless p.has_only_default_variant -%}
+              <div class="opt-label">{{ s.option_label | default: 'Choose your option' }}</div>
+              <div class="bundles">
+                {%- for variant in p.variants -%}
+                  <label class="bundle {% if variant.id == current_variant.id %}active{% endif %}">
+                    <input type="radio" name="variant-radio" value="{{ variant.id }}"
+                      data-price="{{ variant.price }}"
+                      data-compare="{{ variant.compare_at_price | default: 0 }}"
+                      data-available="{{ variant.available }}"
+                      {% if variant.id == current_variant.id %}checked{% endif %} hidden>
+                    <span class="dot"></span>
+                    <span class="bt">{{ variant.title }}</span>
+                    <span class="bp">
+                      <span class="p">{{ variant.price | money }}</span>
+                      {%- if variant.compare_at_price > variant.price -%}
+                        <br><span class="u" style="font-size:.76rem;color:var(--ink-soft);text-decoration:line-through">{{ variant.compare_at_price | money }}</span>
+                      {%- endif -%}
+                    </span>
+                  </label>
+                {%- endfor -%}
+              </div>
+            {%- endunless -%}
+
+            <div class="qty">
+              <span class="opt-label" style="margin:0">Qty</span>
+              <div class="stepper">
+                <button type="button" id="qtyMinus" aria-label="Decrease">&minus;</button>
+                <input type="number" id="quantity" name="quantity" value="1" min="1" inputmode="numeric">
+                <button type="button" id="qtyPlus" aria-label="Increase">+</button>
+              </div>
+            </div>
+
+            <div class="buy-actions">
+              <button type="submit" name="add" id="addBtn" class="btn"
+                data-label="{{ s.add_label | default: 'Add to Cart' }}"
+                {% unless current_variant.available %}disabled{% endunless %}>
+                <span>{% if current_variant.available %}{{ s.add_label | default: 'Add to Cart' }}{% else %}Sold out{% endif %}</span><span id="addBtnPrice"></span>
+              </button>
+            </div>
+          {%- endform -%}
+        {%- else -%}
+          <p style="color:var(--ink-soft)"><em>Assign a product to this template in the theme editor to enable checkout.</em></p>
+        {%- endif -%}
+
+        <div class="pay-row">
+          <span>VISA</span><span>MASTERCARD</span><span>AMEX</span><span>PAYPAL</span><span>SHOP PAY</span><span>G PAY</span>
+        </div>
+        <div class="assur">
+          <div>{{ s.assur1 | default: '30-Day Money-Back Guarantee — plump in 5 minutes or refund' }}</div>
+          <div>{{ s.assur2 | default: 'Free shipping on all bundles' }}</div>
+          <div>{{ s.assur3 | default: 'Ships in 24–48 hours with tracking' }}</div>
+        </div>
+
+        <div class="acc">
+          <details open>
+            <summary>Description</summary>
+            <div class="rte">{{ p.description | default: '<p>The Spicy Lip Plumper uses a warm botanical tingle complex to gently boost micro-circulation, giving lips an instant, natural-looking flush of volume and colour. Underneath the gloss, a tri-peptide blend plus hyaluronic acid work over time to smooth vertical lip lines, soften lipstick bleed and leave lips cushiony rather than dry. No needles, no lidocaine, no harsh sting.</p>' }}</div>
+          </details>
+          <details>
+            <summary>Key Ingredients</summary>
+            <div class="rte">{{ p.metafields.custom.ingredients | default: '<ul><li><strong>Spicy Tingle Complex</strong> (capsicum, ginger root, wintergreen) — instant plump from increased blood flow</li><li><strong>Tri-Peptide Blend</strong> — smoother texture with daily use</li><li><strong>Hyaluronic Acid + Vitamin E</strong> — draws in moisture and holds it</li><li>Vegan · cruelty-free · no parabens · dermatologist-tested</li></ul>' }}</div>
+          </details>
+          <details>
+            <summary>How to Use</summary>
+            <div class="rte">{{ p.metafields.custom.how_to_use | default: '<p>Sweep one thin layer over clean lips. Expect a warm tingle within 60 seconds and visible plump in about 5 minutes. Wear alone as a gloss, as a base under lip liner and lipstick, or dab over the top for extra shine. Reapply through the day as needed. Patch-test before first use.</p>' }}</div>
+          </details>
+          <details>
+            <summary>Shipping &amp; Returns</summary>
+            <div class="rte">{{ s.shipping_text | default: '<p>Orders are processed within 24–48 hours. Delivery is typically 5–9 business days with tracking emailed on dispatch. Bundles ship free. Not happy? Contact us within 30 days for a full refund — no need to return the tube.</p>' }}</div>
+          </details>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "text", "id": "rating_text", "label": "Rating line", "default": "4.9 · 12,000+ verified reviews" },
+    { "type": "text", "id": "option_label", "label": "Variant chooser label", "default": "Choose your option" },
+    { "type": "text", "id": "add_label", "label": "Add to cart label", "default": "Add to Cart" },
+    { "type": "text", "id": "assur1", "label": "Assurance 1", "default": "30-Day Money-Back Guarantee — plump in 5 minutes or refund" },
+    { "type": "text", "id": "assur2", "label": "Assurance 2", "default": "Free shipping on all bundles" },
+    { "type": "text", "id": "assur3", "label": "Assurance 3", "default": "Ships in 24–48 hours with tracking" },
+    { "type": "richtext", "id": "shipping_text", "label": "Shipping & returns text" }
+  ]
+}
+{% endschema %}

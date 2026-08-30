@@ -1,0 +1,30 @@
+<div class="wrap" style="padding:64px 22px;max-width:820px;margin:0 auto">
+  <h1 style="font-family:var(--serif);color:var(--wine-deep);margin-bottom:24px">{{ 'cart.general.title' | t }}</h1>
+  {%- if cart.item_count == 0 -%}
+    <p style="color:var(--ink-soft);margin-bottom:20px">{{ 'cart.general.empty' | t }}</p>
+    <a href="{{ routes.all_products_collection_url }}" class="btn">Continue shopping</a>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post" novalidate>
+      {%- for item in cart.items -%}
+        <div class="cart-row">
+          <div>
+            <div style="font-weight:600">{{ item.product.title }}</div>
+            <div style="font-size:.85rem;color:var(--ink-soft)">{{ item.variant.title }}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px">
+            <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width:60px;padding:8px;border:1px solid var(--line);border-radius:8px">
+            <span style="font-weight:600">{{ item.final_line_price | money }}</span>
+          </div>
+        </div>
+      {%- endfor -%}
+      <div class="cart-foot">
+        <span>{{ 'cart.general.subtotal' | t }}</span>
+        <strong>{{ cart.total_price | money }}</strong>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:16px">
+        <button type="submit" name="update" class="btn ghost">Update</button>
+        <button type="submit" name="checkout" class="btn">{{ 'cart.general.checkout' | t }}</button>
+      </div>
+    </form>
+  {%- endif -%}
+</div>

@@ -1,0 +1,11 @@
+<div class="wrap" style="padding:64px 22px">
+  <h1 style="font-family:var(--serif);color:var(--wine-deep);margin-bottom:24px">Collections</h1>
+  <div class="pgrid">
+    {%- for collection in collections -%}
+      <a href="{{ collection.url }}" class="pgrid-card">
+        {%- if collection.featured_image -%}{{ collection.featured_image | image_url: width: 500 | image_tag: loading: 'lazy' }}{%- endif -%}
+        <span class="pgrid-title">{{ collection.title }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>

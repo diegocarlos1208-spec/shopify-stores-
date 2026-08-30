@@ -1,45 +1,70 @@
-# Spicy Lip Plumper — one-product store
+# Spicy Lip Plumper
 
-Static, single-product landing + product page for a tingling / "spicy" lip plumper.
-Section structure mirrors a typical one-product Shopify store. **No brand name is used** —
+One-product store for a tingling / "spicy" lip plumper. **No brand name is used** —
 replace copy, prices, photos and reviews with your own before selling.
 
-## Files
+This repo is **two things at once**:
 
-| File | Purpose |
-|---|---|
-| `index.html` | Landing page. Every CTA links to `product.html`. |
-| `product.html` | Product page: gallery, bundle selector, quantity, add-to-cart, accordions, sticky mobile buy bar. |
-| `product.avif` | Source product image (currently the supplier photo — **replace it**; it still shows the supplier's name). |
+| | What | Served by |
+|---|---|---|
+| **Static pages** | `index.html`, `product.html` (self-contained, open from disk or host anywhere) | GitHub Pages |
+| **Shopify theme** | `layout/ templates/ sections/ config/ assets/ locales/` (real Liquid theme) | Shopify → Online Store → Themes → *Connect from GitHub* |
 
-Both HTML files are fully self-contained (CSS inline, images embedded as data URIs), so they
-work opened directly from disk with no server.
+## Connect as a Shopify theme
 
-## Host it on GitHub Pages
+1. Shopify admin → **Online Store → Themes → Add theme → Connect from GitHub**
+2. Account `diegocarlos1208-spec` → repo `shopify-stores-` → branch `main` → **Connect**
+3. It appears in your theme library (unpublished). **Customize** to preview.
+4. In the editor, open each section and set the **product** on Hero / Final CTA (and assign a
+   product to the **Product** template). Then **Publish**.
 
-1. Push this folder to a **public** GitHub repo (private repos need a paid plan for Pages).
-2. Repo → **Settings → Pages** → *Source: Deploy from a branch* → Branch `main` / folder `/ (root)` → **Save**.
-3. Live in ~1 min at `https://<your-username>.github.io/<repo-name>/`.
+Pushes to `main` sync into Shopify automatically; edits in the Shopify theme editor push back
+to `main` as commits.
 
-Edits pushed to `main` redeploy automatically.
+## Theme structure
 
-## Before taking payments — must do
+```
+layout/theme.liquid          global HTML shell, loads assets/base.css + assets/theme.js
+layout/password.liquid       storefront password page
 
-- **Wire the buy buttons.** In `product.html`, the `<script>` block has a `checkout()`
-  placeholder that currently just shows an alert. Point it at your real cart / checkout, e.g.
-  `window.location.href = 'https://your-store.myshopify.com/cart/VARIANT_ID:' + qty;`
-- **Replace the product photo** in `product.avif` and the embedded `data:image/avif` in both HTML files.
-- **Replace all reviews** and the "12,000+", "4.9", "92%" figures — they are placeholder text.
-- **Fill the footer links** (shipping, returns, contact, terms, privacy) — payment processors require them.
-- Check cosmetic wording against your supplier's approved claims.
+templates/index.json         home: orders the landing sections
+templates/product.json       product: main-product + specs + reviews + faq
+templates/*.liquid           collection / cart / search / page / blog / 404 / customers …
 
-## Using this with a Shopify theme
+sections/header.liquid        announcement bar + logo + nav + Shop Now
+sections/footer.liquid        footer columns + legal disclaimer
+sections/hero.liquid          headline, price, CTAs, product image
+sections/feature-tiles.liquid 3 tiles + quote + 3 stats
+sections/problem.liquid       "Thin Lips Aren't Your Fault" + 3 pain cards (blocks)
+sections/solution.liquid      "Meet the …" + 4 benefit cards (blocks) + proof bar
+sections/reviews.liquid       heading + review cards (blocks) — SAMPLE text, replace
+sections/specs.liquid         "Formulated Around Your Lips" + 4 cards (blocks)
+sections/faq.liquid           accordion (blocks)
+sections/final-cta.liquid     zero-risk band + CTA
+sections/main-product.liquid  gallery + real {% form 'product' %} + variant/bundle picker
+                              + quantity stepper + accordions
 
-These are plain HTML pages, not a Shopify theme (Shopify uses Liquid + a `layout/ templates/
-sections/ snippets/ assets/ config/` structure). Two paths:
+assets/base.css              all styles (colour tokens also come from theme settings)
+assets/theme.js              bundle/variant selector + quantity stepper
+assets/product.avif          placeholder image — replace (still shows supplier name)
+config/settings_schema.json  4 colour settings + favicon
+locales/en.default.json      strings
+```
 
-- **Fastest:** keep this as the GitHub Pages landing page and send every "Buy" to a Shopify
-  product/checkout permalink. No theme changes needed.
-- **Port into the theme:** move the CSS into `assets/`, split each block (hero, problem,
-  solution, reviews, FAQ) into `sections/*.liquid` with schema settings, and add it as a
-  custom landing template. This is a separate build — open an issue / ask and it can be scaffolded.
+Every section has default copy baked in, so the theme looks right the moment it's connected —
+no block setup required. All text is editable in the theme customizer.
+
+## Before taking payments
+
+- **Create the product** in Shopify admin with price + variants (e.g. 1 / 3 / 5 tubes). The
+  `main-product` section turns each variant into a selectable bundle and checks out for real.
+- Set the product on the **Hero** and **Final CTA** sections, and assign it to the **Product** template.
+- **Replace all reviews** and the "12,000+", "4.9", "92%" figures — placeholder text.
+- **Replace `assets/product.avif`** and the image on the real product.
+- Add your shop policies (Settings → Policies) — the footer links to them.
+- Check cosmetic claims against your supplier's approved wording.
+
+## Local static pages
+
+`index.html` / `product.html` are unchanged self-contained files for quick preview or hosting
+on GitHub Pages (`.nojekyll` keeps Pages from trying to build the Liquid files).

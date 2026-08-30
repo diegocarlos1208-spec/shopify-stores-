@@ -1,0 +1,8 @@
+<div class="wrap" style="padding:64px 22px;max-width:820px;margin:0 auto">
+  <h1 style="font-family:var(--serif);color:var(--wine-deep);margin-bottom:18px">Order {{ order.name }}</h1>
+  <p style="color:var(--ink-soft);margin-bottom:18px">Placed {{ order.created_at | date: "%B %-d, %Y" }}</p>
+  {%- for line_item in order.line_items -%}
+    <div class="cart-row"><span>{{ line_item.title }} &times; {{ line_item.quantity }}</span><span>{{ line_item.final_line_price | money }}</span></div>
+  {%- endfor -%}
+  <div class="cart-foot"><span>Total</span><strong>{{ order.total_price | money }}</strong></div>
+</div>
