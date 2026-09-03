@@ -35,6 +35,10 @@
         <a href="{{ routes.root_url }}#reviews" class="hide-sm">{{ reviews_label }}</a>
       {%- endif -%}
       <a href="{{ cta_url }}" class="btn nav-cta">{{ section.settings.button_label | default: 'Shop Now' }}</a>
+      <button type="button" class="nav-cart" data-cd-open aria-label="Open cart">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="nav-cart__count{% if cart.item_count == 0 %} is-zero{% endif %}" data-cd-count>{{ cart.item_count }}</span>
+      </button>
     </nav>
   </div>
 </div>

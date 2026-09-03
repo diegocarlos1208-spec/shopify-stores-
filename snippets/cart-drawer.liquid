@@ -1,0 +1,27 @@
+{%- comment -%} Slide-in cart drawer. Populated & controlled by assets/theme.js {%- endcomment -%}
+<div class="cd" id="cart-drawer" aria-hidden="true">
+  <div class="cd__overlay" data-cd-close></div>
+  <aside class="cd__panel" role="dialog" aria-modal="true" aria-label="Shopping cart">
+    <div class="cd__head">
+      <h2 class="cd__title">Your cart <span class="cd__count" data-cd-count>{{ cart.item_count }}</span></h2>
+      <button type="button" class="cd__x" data-cd-close aria-label="Close cart">&times;</button>
+    </div>
+
+    <div class="cd__body" data-cd-items></div>
+
+    <div class="cd__empty" data-cd-empty hidden>
+      <p>Your cart is empty.</p>
+      <button type="button" class="btn ghost" data-cd-close>Continue shopping</button>
+    </div>
+
+    <div class="cd__foot" data-cd-foot hidden>
+      <div class="cd__sub">
+        <span>Subtotal</span>
+        <strong data-cd-subtotal>{{ cart.total_price | money }}</strong>
+      </div>
+      <a href="{{ routes.cart_url }}" class="btn ghost cd__viewcart">View full cart</a>
+      <form action="{{ routes.cart_url }}" method="post"><button type="submit" name="checkout" class="btn" style="width:100%">Check out</button></form>
+      <p class="cd__note">Shipping &amp; taxes calculated at checkout</p>
+    </div>
+  </aside>
+</div>
