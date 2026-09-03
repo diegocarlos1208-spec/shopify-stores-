@@ -24,10 +24,16 @@
         {%- assign lt = link.title | downcase -%}
         {%- if lt contains 'contact' and contact_email != blank -%}
           <a href="mailto:{{ contact_email }}" class="hide-sm">{{ link.title }}</a>
+        {%- elsif lt contains 'review' -%}
+          {%- comment -%} handled by the dedicated Reviews link below {%- endcomment -%}
         {%- else -%}
           <a href="{{ link.url }}" class="hide-sm">{{ link.title }}</a>
         {%- endif -%}
       {%- endfor -%}
+      {%- assign reviews_label = section.settings.reviews_label | default: 'Reviews' -%}
+      {%- if reviews_label != blank -%}
+        <a href="{{ routes.root_url }}#reviews" class="hide-sm">{{ reviews_label }}</a>
+      {%- endif -%}
       <a href="{{ cta_url }}" class="btn nav-cta">{{ section.settings.button_label | default: 'Shop Now' }}</a>
     </nav>
   </div>
@@ -42,6 +48,7 @@
     { "type": "text", "id": "brand_name", "label": "Brand name (if no logo image)", "default": "Spicy Lip Plumper" },
     { "type": "link_list", "id": "menu", "label": "Navigation menu", "default": "main-menu" },
     { "type": "text", "id": "contact_email", "label": "Contact email (menu \"Contact\" opens this)", "default": "plumptheoryshop@gmail.com" },
+    { "type": "text", "id": "reviews_label", "label": "Reviews link label (blank to hide)", "default": "Reviews" },
     { "type": "product", "id": "button_product", "label": "Shop Now button → product" },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Now" }
   ]
