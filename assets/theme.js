@@ -24,17 +24,41 @@
     var moneyFormat = form.getAttribute('data-money-format') || '${{amount}}';
 
     var radios = form.querySelectorAll('input[name="variant-radio"]');
+    var subRadios = form.querySelectorAll('input[name="purchase-type"]');
+    var sellingPlanInput = document.getElementById('selling-plan-input');
 
     function currentQty() {
       var q = parseInt(qtyInput && qtyInput.value, 10);
       return isNaN(q) || q < 1 ? 1 : q;
     }
 
+    function subscribeActive() {
+      var checked = form.querySelector('input[name="purchase-type"]:checked');
+      return checked ? checked.value === 'subscribe' : false;
+    }
+
+    function syncSellingPlan() {
+      var checked = form.querySelector('input[name="purchase-type"]:checked');
+      var plan = checked ? (checked.getAttribute('data-selling-plan') || '') : '';
+      form.querySelectorAll('.subopt').forEach(function (s) { s.classList.remove('active'); });
+      if (checked) {
+        var lbl = checked.closest('.subopt');
+        if (lbl) lbl.classList.add('active');
+      }
+      if (sellingPlanInput) {
+        if (plan) { sellingPlanInput.value = plan; sellingPlanInput.disabled = false; }
+        else { sellingPlanInput.value = ''; sellingPlanInput.disabled = true; }
+      }
+    }
+
     function apply(radio) {
       if (!radio) return;
       var price = parseInt(radio.getAttribute('data-price'), 10);
+      var subPrice = parseInt(radio.getAttribute('data-sub-price'), 10);
       var compare = parseInt(radio.getAttribute('data-compare'), 10);
       var available = radio.getAttribute('data-available') === 'true';
+      var isSub = subscribeActive() && !isNaN(subPrice);
+      var eff = isSub ? subPrice : price;
 
       if (idField) idField.value = radio.value;
 
@@ -42,16 +66,17 @@
       var label = radio.closest('.bundle');
       if (label) label.classList.add('active');
 
-      if (priceNow && !isNaN(price)) priceNow.textContent = money(price * currentQty(), moneyFormat);
+      if (priceNow && !isNaN(eff)) priceNow.textContent = money(eff * currentQty(), moneyFormat);
       if (priceWas) {
-        if (!isNaN(compare) && compare > price) {
-          priceWas.textContent = money(compare * currentQty(), moneyFormat);
+        var wasVal = isSub && !isNaN(price) ? price : compare;
+        if (!isNaN(wasVal) && wasVal > eff) {
+          priceWas.textContent = money(wasVal * currentQty(), moneyFormat);
           priceWas.style.display = '';
         } else {
           priceWas.style.display = 'none';
         }
       }
-      if (addBtnPrice && !isNaN(price)) addBtnPrice.textContent = ' — ' + money(price * currentQty(), moneyFormat);
+      if (addBtnPrice && !isNaN(eff)) addBtnPrice.textContent = ' — ' + money(eff * currentQty(), moneyFormat);
       if (addBtn) {
         addBtn.disabled = !available;
         addBtn.textContent = '';
@@ -62,9 +87,24 @@
       }
     }
 
+    function currentVariantRadio() {
+      return form.querySelector('input[name="variant-radio"]:checked') || radios[0];
+    }
+
     radios.forEach(function (r) {
       r.addEventListener('change', function () { apply(r); });
     });
+    subRadios.forEach(function (r) {
+      r.addEventListener('change', function () { syncSellingPlan(); apply(currentVariantRadio()); });
+    });
+    // clicking anywhere on a .subopt label selects its radio
+    form.querySelectorAll('.subopt').forEach(function (lbl) {
+      lbl.addEventListener('click', function () {
+        var input = lbl.querySelector('input[name="purchase-type"]');
+        if (input && !input.checked) { input.checked = true; syncSellingPlan(); apply(currentVariantRadio()); }
+      });
+    });
+    syncSellingPlan();
 
     // quantity stepper
     var minus = document.getElementById('qtyMinus');

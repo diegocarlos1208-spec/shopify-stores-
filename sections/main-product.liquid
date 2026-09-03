@@ -62,13 +62,33 @@
           {%- form 'product', p, id: 'product-form' -%}
             <input type="hidden" name="id" id="variant-id" value="{{ current_variant.id }}">
 
+            {%- liquid
+              assign has_sub = false
+              assign first_plan = nil
+              if product.selling_plan_groups.size > 0
+                assign has_sub = true
+                assign first_plan = product.selling_plan_groups.first.selling_plans.first
+              endif
+            -%}
+
             {%- unless p.has_only_default_variant -%}
               <div class="opt-label">{{ s.option_label | default: 'Choose your option' }}</div>
               <div class="bundles">
                 {%- for variant in p.variants -%}
+                  {%- liquid
+                    assign v_sub_price = variant.price
+                    if has_sub
+                      for alloc in variant.selling_plan_allocations
+                        if alloc.selling_plan.id == first_plan.id
+                          assign v_sub_price = alloc.price
+                        endif
+                      endfor
+                    endif
+                  -%}
                   <label class="bundle {% if variant.id == current_variant.id %}active{% endif %}">
                     <input type="radio" name="variant-radio" value="{{ variant.id }}"
                       data-price="{{ variant.price }}"
+                      data-sub-price="{{ v_sub_price }}"
                       data-compare="{{ variant.compare_at_price | default: 0 }}"
                       data-available="{{ variant.available }}"
                       {% if variant.id == current_variant.id %}checked{% endif %} hidden>
@@ -84,6 +104,35 @@
                 {%- endfor -%}
               </div>
             {%- endunless -%}
+
+            {%- if has_sub and first_plan != blank -%}
+              {%- assign cur_sub_price = current_variant.price -%}
+              {%- for alloc in current_variant.selling_plan_allocations -%}
+                {%- if alloc.selling_plan.id == first_plan.id -%}{%- assign cur_sub_price = alloc.price -%}{%- endif -%}
+              {%- endfor -%}
+              <div class="opt-label">{{ s.purchase_label | default: 'Purchase type' }}</div>
+              <div class="subbox">
+                <label class="subopt active">
+                  <input type="radio" name="purchase-type" value="subscribe" data-selling-plan="{{ first_plan.id }}" checked hidden>
+                  <span class="dot"></span>
+                  <span class="subt">
+                    {{ s.sub_label | default: 'Subscribe &amp; Save' }}
+                    <span class="subm">{{ first_plan.name }} · cancel anytime</span>
+                  </span>
+                  <span class="subp">
+                    <span class="p">{{ cur_sub_price | money }}</span>
+                    {%- if current_variant.price > cur_sub_price -%}<br><span class="u">{{ current_variant.price | money }}</span>{%- endif -%}
+                  </span>
+                </label>
+                <label class="subopt">
+                  <input type="radio" name="purchase-type" value="onetime" data-selling-plan="" hidden>
+                  <span class="dot"></span>
+                  <span class="subt">One-time purchase</span>
+                  <span class="subp"><span class="p">{{ current_variant.price | money }}</span></span>
+                </label>
+              </div>
+              <input type="hidden" name="selling_plan" id="selling-plan-input" value="{{ first_plan.id }}">
+            {%- endif -%}
 
             <div class="qty">
               <span class="opt-label" style="margin:0">Qty</span>
@@ -117,10 +166,6 @@
 
         <div class="acc">
           <details open>
-            <summary>Description</summary>
-            <div class="rte">{{ p.description | default: '<p>The Spicy Lip Plumper uses a warm botanical tingle complex to gently boost micro-circulation, giving lips an instant, natural-looking flush of volume and colour. Underneath the gloss, a tri-peptide blend plus hyaluronic acid work over time to smooth vertical lip lines, soften lipstick bleed and leave lips cushiony rather than dry. No needles, no lidocaine, no harsh sting.</p>' }}</div>
-          </details>
-          <details>
             <summary>Key Ingredients</summary>
             <div class="rte">{{ p.metafields.custom.ingredients | default: '<ul><li><strong>Spicy Tingle Complex</strong> (capsicum, ginger root, wintergreen) — instant plump from increased blood flow</li><li><strong>Tri-Peptide Blend</strong> — smoother texture with daily use</li><li><strong>Hyaluronic Acid + Vitamin E</strong> — draws in moisture and holds it</li><li>Vegan · cruelty-free · no parabens · dermatologist-tested</li></ul>' }}</div>
           </details>
@@ -145,6 +190,8 @@
   "settings": [
     { "type": "text", "id": "rating_text", "label": "Rating line", "default": "4.7 · 2,000+ verified reviews" },
     { "type": "text", "id": "option_label", "label": "Variant chooser label", "default": "Choose your option" },
+    { "type": "text", "id": "purchase_label", "label": "Purchase-type label (subscriptions)", "default": "Purchase type" },
+    { "type": "text", "id": "sub_label", "label": "Subscribe option label", "default": "Subscribe & Save" },
     { "type": "text", "id": "add_label", "label": "Add to cart label", "default": "Add to Cart" },
     { "type": "text", "id": "assur1", "label": "Assurance 1", "default": "30-Day Money-Back Guarantee — plump in 5 minutes or refund" },
     { "type": "text", "id": "assur2", "label": "Assurance 2", "default": "Free shipping on all bundles" },

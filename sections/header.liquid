@@ -10,11 +10,11 @@
 
 <div class="nav">
   <div class="wrap">
-    <a href="{{ routes.root_url }}" class="logo">
+    <a href="{{ routes.root_url }}" class="logo" aria-label="{{ shop.name }} — home">
       {%- if section.settings.logo != blank -%}
-        {{ section.settings.logo | image_url: width: 240 | image_tag: alt: shop.name, style: 'max-height:34px;width:auto' }}
+        {{ section.settings.logo | image_url: width: 500 | image_tag: alt: shop.name, class: 'logo-img' }}
       {%- else -%}
-        {{ section.settings.brand_name | default: shop.name }}
+        <img class="logo-img" src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" width="954" height="448">
       {%- endif -%}
     </a>
 

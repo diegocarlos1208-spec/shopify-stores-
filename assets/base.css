@@ -53,7 +53,9 @@ h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:14px;color:var(--wine-deep)}
 .announce span{opacity:.85}
 .nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:20px}
-.logo{font-family:var(--serif);font-weight:700;font-size:1.15rem;letter-spacing:.02em;color:var(--wine-deep)}
+.logo{font-family:var(--serif);font-weight:700;font-size:1.15rem;letter-spacing:.02em;color:var(--wine-deep);display:flex;align-items:center}
+.logo-img{height:46px;width:auto;display:block}
+@media (max-width:600px){.logo-img{height:38px}}
 .nav-links{display:flex;gap:22px;align-items:center;font-size:.9rem;font-weight:600}
 .nav-links a{opacity:.8}
 .nav-links a:hover{opacity:1}
@@ -179,6 +181,17 @@ h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:14px;color:var(--wine-deep)}
 .bundle .bt{font-weight:700;font-size:.98rem}
 .bundle .bp{margin-left:auto;text-align:right}
 .bundle .bp .p{font-weight:700}
+.subbox{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.subopt{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:14px;padding:13px 16px;cursor:pointer;background:var(--card);transition:border-color .15s ease}
+.subopt:hover{border-color:var(--coral)}
+.subopt.active{border-color:var(--coral-deep);box-shadow:0 0 0 1px var(--coral-deep)}
+.subopt .dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);flex:0 0 auto}
+.subopt.active .dot{border-color:var(--coral-deep);background:radial-gradient(circle,var(--coral-deep) 0 45%,transparent 55%)}
+.subopt .subt{font-weight:700;font-size:.95rem;display:flex;flex-direction:column;gap:2px}
+.subopt .subm{font-weight:500;font-size:.78rem;color:var(--ink-soft);letter-spacing:0;text-transform:none}
+.subopt .subp{margin-left:auto;text-align:right;white-space:nowrap}
+.subopt .subp .p{font-weight:700}
+.subopt .subp .u{font-size:.76rem;color:var(--ink-soft);text-decoration:line-through}
 .qty{display:flex;align-items:center;gap:14px;margin-bottom:16px}
 .stepper{display:flex;align-items:center;border:1px solid var(--line);border-radius:999px;overflow:hidden}
 .stepper button{width:42px;height:42px;border:0;background:transparent;font-size:1.2rem;cursor:pointer;color:var(--ink)}

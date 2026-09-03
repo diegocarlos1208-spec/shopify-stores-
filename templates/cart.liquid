@@ -10,6 +10,9 @@
           <div>
             <div style="font-weight:600">{{ item.product.title }}</div>
             <div style="font-size:.85rem;color:var(--ink-soft)">{{ item.variant.title }}</div>
+            {%- if item.selling_plan_allocation -%}
+              <div style="font-size:.8rem;color:var(--coral-deep);font-weight:600;margin-top:2px">↻ {{ item.selling_plan_allocation.selling_plan.name }}</div>
+            {%- endif -%}
           </div>
           <div style="display:flex;align-items:center;gap:14px">
             <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width:60px;padding:8px;border:1px solid var(--line);border-radius:8px">
