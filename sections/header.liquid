@@ -1,6 +1,8 @@
 {%- liquid
-  assign announce = section.settings.announcement | default: 'FREE SHIPPING ON BUNDLES · 4.9 ★ 12,000+ reviews · 30-DAY MONEY-BACK GUARANTEE'
+  assign announce = section.settings.announcement | default: 'FREE SHIPPING ON BUNDLES · 4.9 ★ 5,000+ reviews · 30-DAY MONEY-BACK GUARANTEE'
 -%}
+{%- capture cta_url -%}{%- render 'shop-url', section_product: section.settings.button_product -%}{%- endcapture -%}
+{%- assign cta_url = cta_url | strip -%}
 
 {%- if announce != blank -%}
   <div class="announce">{{ announce }}</div>
@@ -17,14 +19,16 @@
     </a>
 
     <nav class="nav-links">
+      {%- assign contact_email = section.settings.contact_email | default: 'plumptheoryshop@gmail.com' -%}
       {%- for link in section.settings.menu.links -%}
-        <a href="{{ link.url }}" class="hide-sm">{{ link.title }}</a>
+        {%- assign lt = link.title | downcase -%}
+        {%- if lt contains 'contact' and contact_email != blank -%}
+          <a href="mailto:{{ contact_email }}" class="hide-sm">{{ link.title }}</a>
+        {%- else -%}
+          <a href="{{ link.url }}" class="hide-sm">{{ link.title }}</a>
+        {%- endif -%}
       {%- endfor -%}
-      {%- if section.settings.button_product != blank -%}
-        <a href="{{ section.settings.button_product.url }}" class="btn nav-cta">{{ section.settings.button_label | default: 'Shop Now' }}</a>
-      {%- else -%}
-        <a href="{{ routes.all_products_collection_url }}" class="btn nav-cta">{{ section.settings.button_label | default: 'Shop Now' }}</a>
-      {%- endif -%}
+      <a href="{{ cta_url }}" class="btn nav-cta">{{ section.settings.button_label | default: 'Shop Now' }}</a>
     </nav>
   </div>
 </div>
@@ -33,10 +37,11 @@
 {
   "name": "Header",
   "settings": [
-    { "type": "text", "id": "announcement", "label": "Announcement bar text", "default": "FREE SHIPPING ON BUNDLES · 4.9 ★ 12,000+ reviews · 30-DAY MONEY-BACK GUARANTEE" },
+    { "type": "text", "id": "announcement", "label": "Announcement bar text", "default": "FREE SHIPPING ON BUNDLES · 4.9 ★ 5,000+ reviews · 30-DAY MONEY-BACK GUARANTEE" },
     { "type": "image_picker", "id": "logo", "label": "Logo image" },
     { "type": "text", "id": "brand_name", "label": "Brand name (if no logo image)", "default": "Spicy Lip Plumper" },
     { "type": "link_list", "id": "menu", "label": "Navigation menu", "default": "main-menu" },
+    { "type": "text", "id": "contact_email", "label": "Contact email (menu \"Contact\" opens this)", "default": "plumptheoryshop@gmail.com" },
     { "type": "product", "id": "button_product", "label": "Shop Now button → product" },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Now" }
   ]

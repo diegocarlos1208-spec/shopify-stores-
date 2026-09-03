@@ -9,18 +9,30 @@
     <div class="grid">
 
       {%- comment -%} -------- Gallery -------- {%- endcomment -%}
-      <div class="gallery">
-        <div class="main">
-          {%- if p.featured_media -%}
-            {{ p.featured_media | image_url: width: 1000 | image_tag: loading: 'eager', alt: p.title }}
-          {%- else -%}
-            <img src="{{ 'product.avif' | asset_url }}" alt="{{ p.title | default: 'Spicy lip plumper' }}" width="700" height="700">
+      <div class="gallery" id="pdp-gallery">
+        {%- if p.media.size > 0 -%}
+          <div class="main">
+            {{ p.featured_media | image_url: width: 1100 | image_tag: loading: 'eager', alt: p.title }}
+          </div>
+          {%- if p.media.size > 1 -%}
+            <div class="thumbs">
+              {%- for media in p.media limit: 6 -%}
+                <button type="button" class="pdp-thumb{% if forloop.first %} active{% endif %}" data-full="{{ media | image_url: width: 1100 }}">
+                  {{ media | image_url: width: 260 | image_tag: loading: 'lazy', alt: p.title }}
+                </button>
+              {%- endfor -%}
+            </div>
           {%- endif -%}
-        </div>
-        {%- if p.media.size > 1 -%}
+        {%- else -%}
+          {%- assign gallery = 'plumper-1.jpg,plumper-2.jpg,plumper-3.jpg,plumper-4.jpg,plumper-5.jpg' | split: ',' -%}
+          <div class="main">
+            <img src="{{ 'plumper-1.jpg' | asset_url }}" alt="{{ p.title | default: 'Spicy Lip Plumper' }}" width="1100" height="1100">
+          </div>
           <div class="thumbs">
-            {%- for media in p.media limit: 4 -%}
-              {{ media | image_url: width: 240 | image_tag: loading: 'lazy', alt: p.title }}
+            {%- for img in gallery -%}
+              <button type="button" class="pdp-thumb{% if forloop.first %} active{% endif %}" data-full="{{ img | asset_url }}">
+                <img src="{{ img | asset_url }}" alt="{{ p.title | default: 'Spicy Lip Plumper' }} — view {{ forloop.index }}" loading="lazy">
+              </button>
             {%- endfor -%}
           </div>
         {%- endif -%}
@@ -30,7 +42,7 @@
       <div id="buybox">
         <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / {{ p.title | default: 'Spicy Lip Plumper' }}</div>
         <h1>{{ p.title | default: 'Spicy Lip Plumper — Tingle & Volume Serum' }}</h1>
-        <div class="rate"><b>★★★★★</b> {{ s.rating_text | default: '4.9 · 12,000+ verified reviews' }}</div>
+        <div class="rate"><b>★★★★★</b> {{ s.rating_text | default: '4.9 · 5,000+ verified reviews' }}</div>
 
         <div class="price">
           <span class="now" id="priceNow">
@@ -131,7 +143,7 @@
 {
   "name": "Product",
   "settings": [
-    { "type": "text", "id": "rating_text", "label": "Rating line", "default": "4.9 · 12,000+ verified reviews" },
+    { "type": "text", "id": "rating_text", "label": "Rating line", "default": "4.9 · 5,000+ verified reviews" },
     { "type": "text", "id": "option_label", "label": "Variant chooser label", "default": "Choose your option" },
     { "type": "text", "id": "add_label", "label": "Add to cart label", "default": "Add to Cart" },
     { "type": "text", "id": "assur1", "label": "Assurance 1", "default": "30-Day Money-Back Guarantee — plump in 5 minutes or refund" },

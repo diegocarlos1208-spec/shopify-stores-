@@ -1,0 +1,19 @@
+{%- comment -%}
+  Resolves the URL that "Shop Now" / CTA buttons should point to.
+  Priority:
+   1. A product explicitly chosen on the section (param: section_product)
+   2. The store's single / first product (one-product store)
+   3. The all-products collection page (fallback)
+  Usage:
+   {%- capture cta_url -%}{%- render 'shop-url', section_product: section.settings.product -%}{%- endcapture -%}
+   {%- assign cta_url = cta_url | strip -%}
+{%- endcomment -%}
+{%- liquid
+  if section_product != blank
+    echo section_product.url
+  elsif collections.all.products.first != blank
+    echo collections.all.products.first.url
+  else
+    echo routes.all_products_collection_url
+  endif
+-%}

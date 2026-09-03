@@ -84,9 +84,26 @@
     apply(form.querySelector('input[name="variant-radio"]:checked') || radios[0]);
   }
 
+  function initGallery() {
+    var gallery = document.getElementById('pdp-gallery');
+    if (!gallery) return;
+    var mainImg = gallery.querySelector('.main img');
+    var thumbs = gallery.querySelectorAll('.pdp-thumb');
+    thumbs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var full = t.getAttribute('data-full');
+        if (mainImg && full) mainImg.src = full;
+        thumbs.forEach(function (x) { x.classList.remove('active'); });
+        t.classList.add('active');
+      });
+    });
+  }
+
+  function init() { initProductForm(); initGallery(); }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initProductForm);
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    initProductForm();
+    init();
   }
 })();

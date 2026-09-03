@@ -1,9 +1,13 @@
+{%- assign contact_email = section.settings.contact_email | default: 'plumptheoryshop@gmail.com' -%}
 <footer class="site-footer">
   <div class="wrap">
     <div class="cols">
       <div>
         <h4>{{ section.settings.brand_name | default: shop.name }}</h4>
         <p style="opacity:.8;max-width:280px">{{ section.settings.blurb | default: 'A needle-free, tingling peptide lip plumper for instant volume and softer, more defined lips over time.' }}</p>
+        {%- if contact_email != blank -%}
+          <p style="margin-top:12px;opacity:.9">Contact us:<br><a href="mailto:{{ contact_email }}" style="text-decoration:underline">{{ contact_email }}</a></p>
+        {%- endif -%}
       </div>
 
       {%- for block in section.blocks -%}
@@ -22,7 +26,7 @@
         </div>
         <div>
           <h4>Help</h4>
-          <a href="{{ routes.root_url }}pages/contact">Contact us</a>
+          <a href="mailto:{{ contact_email }}">Contact us</a>
           <a href="{{ routes.root_url }}policies/shipping-policy">Shipping &amp; delivery</a>
           <a href="{{ routes.root_url }}policies/refund-policy">Returns &amp; refunds</a>
         </div>
@@ -50,6 +54,7 @@
   "settings": [
     { "type": "text", "id": "brand_name", "label": "Brand name", "default": "Spicy Lip Plumper" },
     { "type": "textarea", "id": "blurb", "label": "Short blurb", "default": "A needle-free, tingling peptide lip plumper for instant volume and softer, more defined lips over time." },
+    { "type": "text", "id": "contact_email", "label": "Contact email", "default": "plumptheoryshop@gmail.com" },
     { "type": "textarea", "id": "disclaimer", "label": "Legal disclaimer" }
   ],
   "blocks": [

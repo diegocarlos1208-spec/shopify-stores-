@@ -1,16 +1,11 @@
-{%- liquid
-  assign s = section.settings
-  if s.product != blank
-    assign cta_url = s.product.url
-  else
-    assign cta_url = routes.all_products_collection_url
-  endif
--%}
+{%- assign s = section.settings -%}
+{%- capture cta_url -%}{%- render 'shop-url', section_product: s.product -%}{%- endcapture -%}
+{%- assign cta_url = cta_url | strip -%}
 
 <header class="hero">
   <div class="wrap">
     <div>
-      <div class="stars"><b>★★★★★</b> {{ s.rating_text | default: '4.9 · 12,000+ reviews' }}</div>
+      <div class="stars"><b>★★★★★</b> {{ s.rating_text | default: '4.9 · 5,000+ reviews' }}</div>
       <h1>{{ s.heading | default: 'Fuller Lips in 5 Minutes.<br>No Needles. No Filler.' }}</h1>
       <p class="sub">{{ s.subheading | default: "A tingling peptide gloss that plumps, smooths and redefines your natural lip line — visible volume in minutes, softer lips over weeks. The warm, spicy tingle is how you know it's working." }}</p>
 
@@ -44,7 +39,7 @@
           {%- elsif s.product != blank and s.product.featured_image -%}
             {{ s.product.featured_image | image_url: width: 900 | image_tag: alt: s.product.title, loading: 'eager' }}
           {%- else -%}
-            <img src="{{ 'product.avif' | asset_url }}" alt="Spicy lip plumper" width="600" height="600">
+            <img src="{{ 'plumper-1.jpg' | asset_url }}" alt="Spicy lip plumper" width="600" height="600">
           {%- endif -%}
         </div>
       </div>
@@ -58,7 +53,7 @@
   "name": "Hero",
   "settings": [
     { "type": "product", "id": "product", "label": "Product the CTAs link to" },
-    { "type": "text", "id": "rating_text", "label": "Rating line", "default": "4.9 · 12,000+ reviews" },
+    { "type": "text", "id": "rating_text", "label": "Rating line", "default": "4.9 · 5,000+ reviews" },
     { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Fuller Lips in 5 Minutes. No Needles. No Filler.</p>" },
     { "type": "textarea", "id": "subheading", "label": "Sub-heading", "default": "A tingling peptide gloss that plumps, smooths and redefines your natural lip line — visible volume in minutes, softer lips over weeks. The warm, spicy tingle is how you know it's working." },
     { "type": "text", "id": "ticks", "label": "Trust ticks (separate with |)", "default": "30-Day Guarantee|Free Shipping On Bundles|Plumps In 5 Minutes" },
