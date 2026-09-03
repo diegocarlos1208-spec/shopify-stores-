@@ -92,7 +92,14 @@
     thumbs.forEach(function (t) {
       t.addEventListener('click', function () {
         var full = t.getAttribute('data-full');
-        if (mainImg && full) mainImg.src = full;
+        if (mainImg && full) {
+          // Shopify's image_tag output carries a srcset/sizes, so the browser
+          // ignores a plain .src change — strip them before swapping.
+          mainImg.removeAttribute('srcset');
+          mainImg.removeAttribute('sizes');
+          mainImg.removeAttribute('data-srcset');
+          mainImg.src = full.indexOf('//') === 0 ? window.location.protocol + full : full;
+        }
         thumbs.forEach(function (x) { x.classList.remove('active'); });
         t.classList.add('active');
       });
