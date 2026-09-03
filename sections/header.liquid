@@ -1,5 +1,5 @@
 {%- liquid
-  assign announce = section.settings.announcement | default: 'FREE SHIPPING ON BUNDLES · 4.9 ★ 2,000+ reviews · 30-DAY MONEY-BACK GUARANTEE'
+  assign announce = section.settings.announcement | default: 'FREE SHIPPING ON BUNDLES · 4.7 ★ 2,000+ reviews · 30-DAY MONEY-BACK GUARANTEE'
 -%}
 {%- capture cta_url -%}{%- render 'shop-url', section_product: section.settings.button_product -%}{%- endcapture -%}
 {%- assign cta_url = cta_url | strip -%}
@@ -37,7 +37,7 @@
 {
   "name": "Header",
   "settings": [
-    { "type": "text", "id": "announcement", "label": "Announcement bar text", "default": "FREE SHIPPING ON BUNDLES · 4.9 ★ 2,000+ reviews · 30-DAY MONEY-BACK GUARANTEE" },
+    { "type": "text", "id": "announcement", "label": "Announcement bar text", "default": "FREE SHIPPING ON BUNDLES · 4.7 ★ 2,000+ reviews · 30-DAY MONEY-BACK GUARANTEE" },
     { "type": "image_picker", "id": "logo", "label": "Logo image" },
     { "type": "text", "id": "brand_name", "label": "Brand name (if no logo image)", "default": "Spicy Lip Plumper" },
     { "type": "link_list", "id": "menu", "label": "Navigation menu", "default": "main-menu" },
