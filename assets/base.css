@@ -81,6 +81,7 @@ html.cd-lock{overflow:hidden}
 .cd__body.is-busy{opacity:.5;pointer-events:none}
 .cd__empty{padding:40px 22px;text-align:center;color:var(--ink-soft);display:flex;flex-direction:column;gap:16px;align-items:center}
 .cd__foot{border-top:1px solid var(--line);padding:18px 22px;display:flex;flex-direction:column;gap:10px}
+.cd__empty[hidden],.cd__foot[hidden]{display:none}
 .cd__sub{display:flex;justify-content:space-between;font-size:1.05rem}
 .cd__sub strong{color:var(--wine-deep)}
 .cd__note{font-size:.76rem;color:var(--ink-soft);text-align:center}
