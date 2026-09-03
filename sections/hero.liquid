@@ -38,6 +38,8 @@
             {{ s.image | image_url: width: 900 | image_tag: alt: 'Spicy lip plumper', loading: 'eager' }}
           {%- elsif s.product != blank and s.product.featured_image -%}
             {{ s.product.featured_image | image_url: width: 900 | image_tag: alt: s.product.title, loading: 'eager' }}
+          {%- elsif settings.featured_product != blank and settings.featured_product.featured_image -%}
+            {{ settings.featured_product.featured_image | image_url: width: 900 | image_tag: alt: settings.featured_product.title, loading: 'eager' }}
           {%- else -%}
             <img src="{{ 'plumper-1.jpg' | asset_url }}" alt="Spicy lip plumper" width="600" height="600">
           {%- endif -%}

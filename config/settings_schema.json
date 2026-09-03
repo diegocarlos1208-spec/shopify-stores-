@@ -2,10 +2,21 @@
   {
     "name": "theme_info",
     "theme_name": "Spicy Lip Plumper",
-    "theme_version": "1.0.0",
+    "theme_version": "1.1.0",
     "theme_author": "diegocarlos1208-spec",
     "theme_documentation_url": "https://github.com/diegocarlos1208-spec/shopify-stores-",
     "theme_support_url": "https://github.com/diegocarlos1208-spec/shopify-stores-/issues"
+  },
+  {
+    "name": "Store product",
+    "settings": [
+      {
+        "type": "product",
+        "id": "featured_product",
+        "label": "Featured product",
+        "info": "Every Shop Now / CTA button and the hero image use this product. Leave blank to fall back to the first product in your catalog."
+      }
+    ]
   },
   {
     "name": "Brand",
