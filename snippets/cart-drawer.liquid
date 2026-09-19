@@ -19,9 +19,10 @@
         <span>Subtotal</span>
         <strong data-cd-subtotal>{{ cart.total_price | money }}</strong>
       </div>
+      <p class="cd__ship" data-cd-shiphint>Free shipping on orders $35+</p>
       <a href="{{ routes.cart_url }}" class="btn ghost cd__viewcart">View full cart</a>
       <form action="{{ routes.cart_url }}" method="post"><button type="submit" name="checkout" class="btn" style="width:100%">Check out</button></form>
-      <p class="cd__note">Shipping &amp; taxes calculated at checkout</p>
+      <p class="cd__note">30-day money-back guarantee · taxes calculated at checkout</p>
     </div>
   </aside>
 </div>

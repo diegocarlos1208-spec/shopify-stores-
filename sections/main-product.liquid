@@ -55,8 +55,25 @@
         </div>
 
         <p class="blurb">
-          {{ p.description | strip_html | truncatewords: 55 | default: 'A glossy, tingling peptide serum that plumps on contact, smooths lip texture and redefines your natural lip line. Needle-free volume you can see in about five minutes — with hydration that lasts for hours.' }}
+          {{ p.description | strip_html | truncatewords: 55 | default: "Hydrates while it plumps — unlike tingle formulas that leave lips drier every time you use them. A warm, gentle tingle (not a burn) builds visible volume in about five minutes, and hyaluronic acid + vitamin E lock the moisture back in." }}
         </p>
+
+        <div class="expect">
+          <span>🌶️ Warm tingle, ~60 sec</span>
+          <span>👄 Visible plump in 5 min</span>
+          <span>💧 Hydrates, doesn't dry</span>
+        </div>
+
+        <div class="trustrow">
+          <span>✓ Dermatologist-tested</span>
+          <span>✓ No cinnamon irritants</span>
+          <span>✓ Vegan &amp; cruelty-free</span>
+        </div>
+
+        <blockquote class="pquote">
+          "Three swipes and my lips look full and defined — friends thought I'd had filler again."
+          <cite>— Sarah M., verified buyer</cite>
+        </blockquote>
 
         {%- if p != blank -%}
           {%- form 'product', p, id: 'product-form' -%}
@@ -93,7 +110,12 @@
                       data-available="{{ variant.available }}"
                       {% if variant.id == current_variant.id %}checked{% endif %} hidden>
                     <span class="dot"></span>
-                    <span class="bt">{{ variant.title }}</span>
+                    <span class="bt">
+                      {{ variant.title }}
+                      {%- if variant.compare_at_price > variant.price -%}
+                        <span class="save">save {{ variant.compare_at_price | minus: variant.price | money }}</span>
+                      {%- endif -%}
+                    </span>
                     <span class="bp">
                       <span class="p">{{ variant.price | money }}</span>
                       {%- if variant.compare_at_price > variant.price -%}
@@ -149,6 +171,7 @@
                 {% unless current_variant.available %}disabled{% endunless %}>
                 <span>{% if current_variant.available %}{{ s.add_label | default: 'Add to Cart' }}{% else %}Sold out{% endif %}</span><span id="addBtnPrice"></span>
               </button>
+              {{ form | payment_button }}
             </div>
           {%- endform -%}
         {%- else -%}
@@ -167,11 +190,11 @@
         <div class="acc">
           <details open>
             <summary>Key Ingredients</summary>
-            <div class="rte">{{ p.metafields.custom.ingredients | default: '<ul><li><strong>Spicy Tingle Complex</strong> (capsicum, ginger root, wintergreen) — instant plump from increased blood flow</li><li><strong>Tri-Peptide Blend</strong> — smoother texture with daily use</li><li><strong>Hyaluronic Acid + Vitamin E</strong> — draws in moisture and holds it</li><li>Vegan · cruelty-free · no parabens · dermatologist-tested</li></ul>' }}</div>
+            <div class="rte">{{ p.metafields.custom.ingredients | default: "<ul><li><strong>Spicy Tingle Complex</strong> (capsicum, ginger root, wintergreen) — a gentle buzz, not a burn: enough warmth to draw blood flow for instant plump, dosed low enough not to sting</li><li><strong>No cinnamon</strong> — cinnamal is one of the most common lip-irritant allergens in tingle formulas, so we left it out</li><li><strong>Tri-Peptide Blend</strong> — smoother texture with daily use</li><li><strong>Hyaluronic Acid + Vitamin E</strong> — draws moisture in and locks it there, so lips stay soft instead of drying out with repeat use like most tingle glosses</li><li>Vegan · cruelty-free · no parabens · dermatologist-tested</li></ul>" }}</div>
           </details>
           <details>
             <summary>How to Use</summary>
-            <div class="rte">{{ p.metafields.custom.how_to_use | default: '<p>Sweep one thin layer over clean lips. Expect a warm tingle within 60 seconds and visible plump in about 5 minutes. Wear alone as a gloss, as a base under lip liner and lipstick, or dab over the top for extra shine. Reapply through the day as needed. Patch-test before first use.</p>' }}</div>
+            <div class="rte">{{ p.metafields.custom.how_to_use | default: "<p>Sweep <strong>one thin layer</strong> over clean lips — this is the #1 thing that determines whether you feel a pleasant tingle or an unpleasant sting. Expect warmth within 60 seconds and visible plump in about 5 minutes, lasting 2–4 hours. Wear alone as a gloss, as a base under lip liner and lipstick, or dab over the top for extra shine. Patch-test on your inner wrist before first use if you have sensitive skin.</p>" }}</div>
           </details>
           <details>
             <summary>Shipping &amp; Returns</summary>

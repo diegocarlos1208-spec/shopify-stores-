@@ -214,6 +214,19 @@
       footEl.hidden = false;
       itemsEl.innerHTML = cart.items.map(lineHTML).join('');
       if (subtotalEl) subtotalEl.textContent = fmt(cart.total_price);
+
+      var shipHint = drawer.querySelector('[data-cd-shiphint]');
+      if (shipHint) {
+        var threshold = 3500; // $35.00 in cents — keep in sync with the Standard shipping rate
+        var remaining = threshold - cart.total_price;
+        if (remaining > 0) {
+          shipHint.textContent = fmt(remaining) + ' away from free shipping';
+          shipHint.classList.remove('is-met');
+        } else {
+          shipHint.textContent = 'You unlocked free shipping';
+          shipHint.classList.add('is-met');
+        }
+      }
     }
 
     function getCart() {
