@@ -11,7 +11,7 @@
 {%- if mask != blank and mask.available and current_variant != blank -%}
   {%- liquid
     assign combined = current_variant.price | plus: mask_variant.price
-    assign discount_amt = current_variant.price | times: 20 | divided_by: 100
+    assign discount_amt = current_variant.price | times: 0.2 | round
     assign bundle_price = combined | minus: discount_amt
   -%}
   <div class="fbt">
