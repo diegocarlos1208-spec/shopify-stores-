@@ -11,6 +11,7 @@
         "assur1": "30-Day Money-Back Guarantee",
         "assur2": "Free shipping on all bundles",
         "assur3": "Ships in 24–48 hours with tracking",
+        "show_compare": false,
         "expect1": "🌙 Apply before bed",
         "expect2": "💧 Deep overnight hydration",
         "expect3": "✨ Softer lips by morning",
@@ -18,8 +19,7 @@
         "trust2": "✓ No parabens, no dyes",
         "trust3": "✓ Vegan &amp; cruelty-free",
         "quote_text": "\"I put this on every night before bed and my lips stopped peeling within a week. Wakes up so much softer.\"",
-        "quote_author": "— Priya N., verified buyer",
-        "show_compare": false
+        "quote_author": "— Priya N., verified buyer"
       }
     },
     "faq": {
