@@ -15,6 +15,10 @@
     var form = document.getElementById('product-form');
     if (!form) return;
 
+    var gallery = document.getElementById('pdp-gallery');
+    var mainImg = gallery && gallery.querySelector('.main img');
+    var thumbs = gallery ? gallery.querySelectorAll('.pdp-thumb') : [];
+
     var idField = form.querySelector('#variant-id');
     var priceNow = document.getElementById('priceNow');
     var priceWas = document.getElementById('priceWas');
@@ -61,6 +65,18 @@
       var eff = isSub ? subPrice : price;
 
       if (idField) idField.value = radio.value;
+
+      var image = radio.getAttribute('data-image');
+      if (image && mainImg && mainImg.getAttribute('data-current') !== image) {
+        mainImg.removeAttribute('srcset');
+        mainImg.removeAttribute('sizes');
+        mainImg.removeAttribute('data-srcset');
+        mainImg.src = image;
+        mainImg.setAttribute('data-current', image);
+        thumbs.forEach(function (t) {
+          t.classList.toggle('active', t.getAttribute('data-full') === image);
+        });
+      }
 
       form.querySelectorAll('.bundle').forEach(function (b) { b.classList.remove('active'); });
       var label = radio.closest('.bundle');

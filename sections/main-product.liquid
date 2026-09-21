@@ -74,20 +74,20 @@
         </p>
 
         <div class="expect">
-          <span>🌶️ Warm tingle, ~60 sec</span>
-          <span>👄 Visible plump in 5 min</span>
-          <span>💧 Hydrates, doesn't dry</span>
+          <span>{{ s.expect1 | default: '🌶️ Warm tingle, ~60 sec' }}</span>
+          <span>{{ s.expect2 | default: '👄 Visible plump in 5 min' }}</span>
+          <span>{{ s.expect3 | default: "💧 Hydrates, doesn't dry" }}</span>
         </div>
 
         <div class="trustrow">
-          <span>✓ Dermatologist-tested</span>
-          <span>✓ No cinnamon irritants</span>
-          <span>✓ Vegan &amp; cruelty-free</span>
+          <span>{{ s.trust1 | default: '✓ Dermatologist-tested' }}</span>
+          <span>{{ s.trust2 | default: '✓ No cinnamon irritants' }}</span>
+          <span>{{ s.trust3 | default: '✓ Vegan &amp; cruelty-free' }}</span>
         </div>
 
         <blockquote class="pquote">
-          "Three swipes and my lips look full and defined — friends thought I'd had filler again."
-          <cite>— Sarah M., verified buyer</cite>
+          {{ s.quote_text | default: '"Three swipes and my lips look full and defined — friends thought I\'d had filler again."' }}
+          <cite>{{ s.quote_author | default: '— Sarah M., verified buyer' }}</cite>
         </blockquote>
 
         {%- if p != blank -%}
@@ -143,6 +143,7 @@
                         data-sub-price="{{ v_sub_price }}"
                         data-compare="{{ variant.compare_at_price | default: 0 }}"
                         data-available="{{ variant.available }}"
+                        {% if variant.featured_image %}data-image="{{ variant.featured_image | image_url: width: 1100 }}"{% endif %}
                         {% if variant.id == current_variant.id %}checked{% endif %} hidden>
 
                       {%- if is_popular -%}<span class="tier-badge popular">★ Most Popular</span>{%- endif -%}
@@ -253,6 +254,7 @@
           </details>
         </div>
 
+        {%- if s.show_compare != false -%}
         <div class="compare">
           <div class="opt-label" style="margin-bottom:12px">How it stacks up</div>
           <div class="compare-grid">
@@ -264,6 +266,7 @@
             <div class="compare-row"><span>Commitment</span><span class="win">Reapply anytime</span><span>Reapply anytime</span><span>Appointment + upkeep</span></div>
           </div>
         </div>
+        {%- endif -%}
       </div>
 
     </div>
@@ -282,7 +285,16 @@
     { "type": "text", "id": "assur1", "label": "Assurance 1", "default": "30-Day Money-Back Guarantee — plump in 5 minutes or refund" },
     { "type": "text", "id": "assur2", "label": "Assurance 2", "default": "Free shipping on all bundles" },
     { "type": "text", "id": "assur3", "label": "Assurance 3", "default": "Ships in 24–48 hours with tracking" },
-    { "type": "richtext", "id": "shipping_text", "label": "Shipping & returns text" }
+    { "type": "richtext", "id": "shipping_text", "label": "Shipping & returns text" },
+    { "type": "text", "id": "expect1", "label": "Expect line 1", "default": "🌶️ Warm tingle, ~60 sec" },
+    { "type": "text", "id": "expect2", "label": "Expect line 2", "default": "👄 Visible plump in 5 min" },
+    { "type": "text", "id": "expect3", "label": "Expect line 3", "default": "💧 Hydrates, doesn't dry" },
+    { "type": "text", "id": "trust1", "label": "Trust line 1", "default": "✓ Dermatologist-tested" },
+    { "type": "text", "id": "trust2", "label": "Trust line 2", "default": "✓ No cinnamon irritants" },
+    { "type": "text", "id": "trust3", "label": "Trust line 3", "default": "✓ Vegan &amp; cruelty-free" },
+    { "type": "text", "id": "quote_text", "label": "Testimonial quote", "default": "\"Three swipes and my lips look full and defined — friends thought I'd had filler again.\"" },
+    { "type": "text", "id": "quote_author", "label": "Testimonial author", "default": "— Sarah M., verified buyer" },
+    { "type": "checkbox", "id": "show_compare", "label": "Show comparison table", "default": true }
   ]
 }
 {% endschema %}
