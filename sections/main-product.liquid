@@ -2,6 +2,10 @@
   assign s = section.settings
   assign p = product
   assign current_variant = p.selected_or_first_available_variant
+  assign is_lip_mask = false
+  if p.handle contains 'sleeping-mask'
+    assign is_lip_mask = true
+  endif
 -%}
 
 <section class="pdp">
@@ -73,6 +77,24 @@
           {{ p.description | strip_html | truncatewords: 55 | default: "Hydrates while it plumps — unlike tingle formulas that leave lips drier every time you use them. A warm, gentle tingle (not a burn) builds visible volume in about five minutes, and hyaluronic acid + vitamin E lock the moisture back in." }}
         </p>
 
+        {%- if is_lip_mask -%}
+        <div class="expect">
+          <span>🌙 Apply before bed</span>
+          <span>💧 Deep overnight hydration</span>
+          <span>✨ Softer lips by morning</span>
+        </div>
+
+        <div class="trustrow">
+          <span>✓ Dermatologist-tested</span>
+          <span>✓ No parabens, no dyes</span>
+          <span>✓ Vegan &amp; cruelty-free</span>
+        </div>
+
+        <blockquote class="pquote">
+          "I put this on every night before bed and my lips stopped peeling within a week. Wakes up so much softer."
+          <cite>— Priya N., verified buyer</cite>
+        </blockquote>
+        {%- else -%}
         <div class="expect">
           <span>{{ s.expect1 | default: '🌶️ Warm tingle, ~60 sec' }}</span>
           <span>{{ s.expect2 | default: '👄 Visible plump in 5 min' }}</span>
@@ -89,6 +111,7 @@
           {{ s.quote_text | default: '"Three swipes and my lips look full and defined — friends thought I\'d had filler again."' }}
           <cite>{{ s.quote_author | default: '— Sarah M., verified buyer' }}</cite>
         </blockquote>
+        {%- endif -%}
 
         {%- if p != blank -%}
           {%- form 'product', p, id: 'product-form' -%}
@@ -232,7 +255,11 @@
           <span>VISA</span><span>MASTERCARD</span><span>AMEX</span><span>PAYPAL</span><span>SHOP PAY</span><span>G PAY</span>
         </div>
         <div class="assur">
+          {%- if is_lip_mask -%}
+          <div>30-Day Money-Back Guarantee</div>
+          {%- else -%}
           <div>{{ s.assur1 | default: '30-Day Money-Back Guarantee — plump in 5 minutes or refund' }}</div>
+          {%- endif -%}
           <div>{{ s.assur2 | default: 'Free shipping on all bundles' }}</div>
           <div>{{ s.assur3 | default: 'Ships in 24–48 hours with tracking' }}</div>
         </div>
@@ -240,13 +267,21 @@
         {%- render 'frequently-bought', p: p, current_variant: current_variant -%}
 
         <div class="acc">
+          {%- liquid
+            assign ingredients_default = "<ul><li><strong>Spicy Tingle Complex</strong> (capsicum, ginger root, wintergreen) — a gentle buzz, not a burn: enough warmth to draw blood flow for instant plump, dosed low enough not to sting</li><li><strong>No cinnamon</strong> — cinnamal is one of the most common lip-irritant allergens in tingle formulas, so we left it out</li><li><strong>Tri-Peptide Blend</strong> — smoother texture with daily use</li><li><strong>Hyaluronic Acid + Vitamin E</strong> — draws moisture in and locks it there, so lips stay soft instead of drying out with repeat use like most tingle glosses</li><li>Vegan · cruelty-free · no parabens · dermatologist-tested</li></ul>"
+            assign howtouse_default = "<p>Sweep <strong>one thin layer</strong> over clean lips — this is the #1 thing that determines whether you feel a pleasant tingle or an unpleasant sting. Expect warmth within 60 seconds and visible plump in about 5 minutes, lasting 2–4 hours. Wear alone as a gloss, as a base under lip liner and lipstick, or dab over the top for extra shine. Patch-test on your inner wrist before first use if you have sensitive skin.</p>"
+            if is_lip_mask
+              assign ingredients_default = "<ul><li><strong>Moisturizing Complex</strong> — deeply hydrates while you sleep, so lips wake up soft instead of dry or flaky</li><li><strong>Gentle Exfoliants</strong> — smooth away dead, chapped skin overnight without irritation</li><li><strong>Antioxidants</strong> — help repair lips stressed by weather, plumper use, or daily wear</li><li>Vegan · cruelty-free · no parabens · dermatologist-tested</li></ul>"
+              assign howtouse_default = "<p>Apply a <strong>generous layer</strong> over clean lips as the last step of your night routine, right before bed. It works while you sleep — no need to rinse off. Wake up to softer, smoother, more hydrated lips. Use nightly, or pair with your Spicy Lip Plumper by day for round-the-clock care.</p>"
+            endif
+          -%}
           <details open>
             <summary>Key Ingredients</summary>
-            <div class="rte">{{ p.metafields.custom.ingredients | default: "<ul><li><strong>Spicy Tingle Complex</strong> (capsicum, ginger root, wintergreen) — a gentle buzz, not a burn: enough warmth to draw blood flow for instant plump, dosed low enough not to sting</li><li><strong>No cinnamon</strong> — cinnamal is one of the most common lip-irritant allergens in tingle formulas, so we left it out</li><li><strong>Tri-Peptide Blend</strong> — smoother texture with daily use</li><li><strong>Hyaluronic Acid + Vitamin E</strong> — draws moisture in and locks it there, so lips stay soft instead of drying out with repeat use like most tingle glosses</li><li>Vegan · cruelty-free · no parabens · dermatologist-tested</li></ul>" }}</div>
+            <div class="rte">{{ p.metafields.custom.ingredients | default: ingredients_default }}</div>
           </details>
           <details id="howtouse">
             <summary>How to Use</summary>
-            <div class="rte">{{ p.metafields.custom.how_to_use | default: "<p>Sweep <strong>one thin layer</strong> over clean lips — this is the #1 thing that determines whether you feel a pleasant tingle or an unpleasant sting. Expect warmth within 60 seconds and visible plump in about 5 minutes, lasting 2–4 hours. Wear alone as a gloss, as a base under lip liner and lipstick, or dab over the top for extra shine. Patch-test on your inner wrist before first use if you have sensitive skin.</p>" }}</div>
+            <div class="rte">{{ p.metafields.custom.how_to_use | default: howtouse_default }}</div>
           </details>
           <details>
             <summary>Shipping &amp; Returns</summary>
@@ -254,7 +289,7 @@
           </details>
         </div>
 
-        {%- if s.show_compare != false -%}
+        {%- if s.show_compare != false and is_lip_mask != true -%}
         <div class="compare">
           <div class="opt-label" style="margin-bottom:12px">How it stacks up</div>
           <div class="compare-grid">
