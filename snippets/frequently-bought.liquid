@@ -1,0 +1,45 @@
+{%- comment -%}
+  Cross-sell: buy this product + the Peach Lip Sleeping Mask together.
+  Pricing shown here mirrors the "Buy X, Get Y" automatic discount configured
+  in Shopify Admin (20% off the plumper when the mask is also in the cart) —
+  update both together if the discount % changes.
+{%- endcomment -%}
+{%- liquid
+  assign mask = all_products['peach-lip-sleeping-mask']
+  assign mask_variant = mask.selected_or_first_available_variant
+-%}
+{%- if mask != blank and mask.available and current_variant != blank -%}
+  {%- liquid
+    assign combined = current_variant.price | plus: mask_variant.price
+    assign discount_amt = current_variant.price | times: 20 | divided_by: 100
+    assign bundle_price = combined | minus: discount_amt
+  -%}
+  <div class="fbt">
+    <div class="fbt-eyebrow">🛍️ Frequently Bought Together</div>
+    <div class="fbt-row">
+      <div class="fbt-item">
+        <img src="{{ p.featured_media | image_url: width: 160 }}" alt="{{ p.title }}" width="80" height="80" loading="lazy">
+        <div class="fbt-item__title">{{ p.title }}</div>
+        <div class="fbt-item__price">{{ current_variant.price | money }}</div>
+      </div>
+      <span class="fbt-plus">+</span>
+      <div class="fbt-item">
+        <img src="{{ mask.featured_media | image_url: width: 160 }}" alt="{{ mask.title }}" width="80" height="80" loading="lazy">
+        <div class="fbt-item__title">{{ mask.title }}</div>
+        <div class="fbt-item__price">{{ mask_variant.price | money }}</div>
+      </div>
+    </div>
+    <div class="fbt-foot">
+      <div class="fbt-total">
+        <span class="fbt-total__label">Bundle total <b>save 20% on the plumper</b></span>
+        <span class="fbt-total__now">{{ bundle_price | money }}</span>
+        <span class="fbt-total__was">{{ combined | money }}</span>
+      </div>
+      <button type="button" class="btn ghost fbt-add"
+        data-cd-add-bundle
+        data-items='[{"id":{{ current_variant.id }},"quantity":1},{"id":{{ mask_variant.id }},"quantity":1}]'>
+        Add Both to Cart
+      </button>
+    </div>
+  </div>
+{%- endif -%}

@@ -305,6 +305,29 @@
         });
       });
     }
+
+    // "Add Both to Cart" — frequently-bought-together widget
+    document.querySelectorAll('[data-cd-add-bundle]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var items;
+        try { items = JSON.parse(btn.getAttribute('data-items')); } catch (err) { return; }
+        btn.classList.add('is-loading');
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ items: items })
+        }).then(function (r) {
+          if (!r.ok) throw new Error('add failed');
+          return getCart();
+        }).then(function (cart) {
+          btn.classList.remove('is-loading');
+          render(cart);
+          open();
+        }).catch(function () {
+          btn.classList.remove('is-loading');
+        });
+      });
+    });
   }
 
   function init() { initProductForm(); initGallery(); initCartDrawer(); }

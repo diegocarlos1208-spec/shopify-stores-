@@ -236,6 +236,8 @@
           <div>{{ s.assur3 | default: 'Ships in 24–48 hours with tracking' }}</div>
         </div>
 
+        {%- render 'frequently-bought', p: p, current_variant: current_variant -%}
+
         <div class="acc">
           <details open>
             <summary>Key Ingredients</summary>
