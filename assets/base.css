@@ -341,3 +341,21 @@ html.cd-lock{overflow:hidden}
   .float.two{right:6px}
   .cta-row .btn{width:100%}
 }
+
+/* Lip Sleeping Mask template overrides — main-product.liquid's own copy is
+   plumper-specific and can't be swapped per-product without new schema
+   settings (theme sync doesn't pick those up on this store), so re-skin
+   these few lines here instead, scoped to the lip-mask template body class. */
+.template-product--lip-mask .compare{display:none}
+.template-product--lip-mask .expect span{font-size:0;color:transparent}
+.template-product--lip-mask .expect span:nth-child(1)::before{content:"🌙 Apply before bed";font-size:.82rem;color:var(--wine-deep)}
+.template-product--lip-mask .expect span:nth-child(2)::before{content:"💧 Deep overnight hydration";font-size:.82rem;color:var(--wine-deep)}
+.template-product--lip-mask .expect span:nth-child(3)::before{content:"✨ Softer lips by morning";font-size:.82rem;color:var(--wine-deep)}
+.template-product--lip-mask .trustrow span{font-size:0;color:transparent}
+.template-product--lip-mask .trustrow span:nth-child(1)::before{content:"✓ Dermatologist-tested";font-size:.78rem;color:var(--ink-soft)}
+.template-product--lip-mask .trustrow span:nth-child(2)::before{content:"✓ No parabens, no dyes";font-size:.78rem;color:var(--ink-soft)}
+.template-product--lip-mask .trustrow span:nth-child(3)::before{content:"✓ Vegan & cruelty-free";font-size:.78rem;color:var(--ink-soft)}
+.template-product--lip-mask .pquote{font-size:0}
+.template-product--lip-mask .pquote::before{content:"\"I put this on every night before bed and my lips stopped peeling within a week. Wakes up so much softer.\"";font-family:var(--serif);font-size:.94rem;font-style:italic;color:var(--ink)}
+.template-product--lip-mask .pquote cite{font-size:0}
+.template-product--lip-mask .pquote cite::before{content:"— Priya N., verified buyer";font-family:var(--font);font-size:.76rem;font-style:normal;font-weight:600;color:var(--ink-soft)}
