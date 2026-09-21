@@ -36,6 +36,21 @@
             {%- endfor -%}
           </div>
         {%- endif -%}
+
+        <div class="mini-faq">
+          <details open>
+            <summary>Is it safe for sensitive lips?</summary>
+            <p>Yes — patch-test on your wrist first if you're prone to irritation. No cinnamon, no parabens, dermatologist-tested.</p>
+          </details>
+          <details>
+            <summary>How fast will it ship?</summary>
+            <p>Processed within 24–48 hours, with tracking emailed the moment it ships.</p>
+          </details>
+          <details>
+            <summary>What if it's not for me?</summary>
+            <p>30-day money-back guarantee — no need to send the tube back.</p>
+          </details>
+        </div>
       </div>
 
       {%- comment -%} -------- Buy box -------- {%- endcomment -%}
@@ -89,41 +104,75 @@
             -%}
 
             {%- unless p.has_only_default_variant -%}
-              <div class="opt-label">{{ s.option_label | default: 'Choose your option' }}</div>
-              <div class="bundles">
-                {%- for variant in p.variants -%}
-                  {%- liquid
-                    assign v_sub_price = variant.price
-                    if has_sub
-                      for alloc in variant.selling_plan_allocations
-                        if alloc.selling_plan.id == first_plan.id
-                          assign v_sub_price = alloc.price
-                        endif
-                      endfor
-                    endif
-                  -%}
-                  <label class="bundle {% if variant.id == current_variant.id %}active{% endif %}">
-                    <input type="radio" name="variant-radio" value="{{ variant.id }}"
-                      data-price="{{ variant.price }}"
-                      data-sub-price="{{ v_sub_price }}"
-                      data-compare="{{ variant.compare_at_price | default: 0 }}"
-                      data-available="{{ variant.available }}"
-                      {% if variant.id == current_variant.id %}checked{% endif %} hidden>
-                    <span class="dot"></span>
-                    <span class="bt">
-                      {{ variant.title }}
-                      {%- if variant.compare_at_price > variant.price -%}
-                        <span class="save">save {{ variant.compare_at_price | minus: variant.price | money }}</span>
+              {%- liquid
+                assign best_variant = p.variants.last
+                assign best_pct = 0
+                if best_variant.compare_at_price > best_variant.price
+                  assign best_pct = best_variant.compare_at_price | minus: best_variant.price | times: 100 | divided_by: best_variant.compare_at_price
+                endif
+              -%}
+              <div class="offer-card">
+                <div class="offer-head">
+                  <span class="offer-eyebrow">✨ {{ s.option_label | default: 'Bundle &amp; Save — Limited Time' }}</span>
+                  {%- if best_pct > 0 -%}<span class="offer-pill">{{ best_pct }}% OFF</span>{%- endif -%}
+                </div>
+
+                <div class="bundles">
+                  {%- for variant in p.variants -%}
+                    {%- liquid
+                      assign v_sub_price = variant.price
+                      if has_sub
+                        for alloc in variant.selling_plan_allocations
+                          if alloc.selling_plan.id == first_plan.id
+                            assign v_sub_price = alloc.price
+                          endif
+                        endfor
+                      endif
+                      assign is_popular = false
+                      assign is_best = false
+                      if variant.title contains '2'
+                        assign is_popular = true
+                      endif
+                      if variant.title contains '3'
+                        assign is_best = true
+                      endif
+                    -%}
+                    <label class="bundle {% if variant.id == current_variant.id %}active{% endif %} {% if is_popular or is_best %}glow{% endif %}">
+                      <input type="radio" name="variant-radio" value="{{ variant.id }}"
+                        data-price="{{ variant.price }}"
+                        data-sub-price="{{ v_sub_price }}"
+                        data-compare="{{ variant.compare_at_price | default: 0 }}"
+                        data-available="{{ variant.available }}"
+                        {% if variant.id == current_variant.id %}checked{% endif %} hidden>
+
+                      {%- if is_popular -%}<span class="tier-badge popular">★ Most Popular</span>{%- endif -%}
+                      {%- if is_best -%}<span class="tier-badge best">🏆 Best Value</span>{%- endif -%}
+
+                      <div class="bundle-row">
+                        <span class="dot"></span>
+                        <span class="bt">
+                          {{ variant.title }}
+                          {%- if variant.compare_at_price > variant.price -%}
+                            <span class="save">save {{ variant.compare_at_price | minus: variant.price | money }}</span>
+                          {%- endif -%}
+                        </span>
+                        <span class="bp">
+                          <span class="p">{{ variant.price | money }}</span>
+                          {%- if variant.compare_at_price > variant.price -%}
+                            <br><span class="u">{{ variant.compare_at_price | money }}</span>
+                          {%- endif -%}
+                        </span>
+                      </div>
+
+                      {%- if is_popular or is_best -%}
+                        <div class="bonus-box">
+                          🎁 <strong>Free bonus:</strong> the 5-Minute Plump Routine guide{% if is_best %} + free shipping{% endif %} —
+                          <a href="#howtouse" class="bonus-link">included, see below</a>
+                        </div>
                       {%- endif -%}
-                    </span>
-                    <span class="bp">
-                      <span class="p">{{ variant.price | money }}</span>
-                      {%- if variant.compare_at_price > variant.price -%}
-                        <br><span class="u" style="font-size:.76rem;color:var(--ink-soft);text-decoration:line-through">{{ variant.compare_at_price | money }}</span>
-                      {%- endif -%}
-                    </span>
-                  </label>
-                {%- endfor -%}
+                    </label>
+                  {%- endfor -%}
+                </div>
               </div>
             {%- endunless -%}
 
@@ -192,7 +241,7 @@
             <summary>Key Ingredients</summary>
             <div class="rte">{{ p.metafields.custom.ingredients | default: "<ul><li><strong>Spicy Tingle Complex</strong> (capsicum, ginger root, wintergreen) — a gentle buzz, not a burn: enough warmth to draw blood flow for instant plump, dosed low enough not to sting</li><li><strong>No cinnamon</strong> — cinnamal is one of the most common lip-irritant allergens in tingle formulas, so we left it out</li><li><strong>Tri-Peptide Blend</strong> — smoother texture with daily use</li><li><strong>Hyaluronic Acid + Vitamin E</strong> — draws moisture in and locks it there, so lips stay soft instead of drying out with repeat use like most tingle glosses</li><li>Vegan · cruelty-free · no parabens · dermatologist-tested</li></ul>" }}</div>
           </details>
-          <details>
+          <details id="howtouse">
             <summary>How to Use</summary>
             <div class="rte">{{ p.metafields.custom.how_to_use | default: "<p>Sweep <strong>one thin layer</strong> over clean lips — this is the #1 thing that determines whether you feel a pleasant tingle or an unpleasant sting. Expect warmth within 60 seconds and visible plump in about 5 minutes, lasting 2–4 hours. Wear alone as a gloss, as a base under lip liner and lipstick, or dab over the top for extra shine. Patch-test on your inner wrist before first use if you have sensitive skin.</p>" }}</div>
           </details>

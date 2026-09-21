@@ -1,9 +1,11 @@
 {
   "sections": {
     "main": { "type": "main-product" },
+    "problem": { "type": "problem" },
+    "solution": { "type": "solution" },
     "specs": { "type": "specs" },
     "reviews": { "type": "reviews" },
     "faq": { "type": "faq" }
   },
-  "order": ["main", "specs", "reviews", "faq"]
+  "order": ["main", "problem", "solution", "specs", "reviews", "faq"]
 }
