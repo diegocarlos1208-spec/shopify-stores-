@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "rating_text": "4.8 · Loved for overnight repair",
+        "option_label": "Choose Your Flavor",
+        "purchase_label": "Purchase type",
+        "sub_label": "Subscribe & Save",
+        "add_label": "Add to Cart",
+        "assur1": "30-Day Money-Back Guarantee",
+        "assur2": "Free shipping on all bundles",
+        "assur3": "Ships in 24–48 hours with tracking",
+        "expect1": "🌙 Apply before bed",
+        "expect2": "💧 Deep overnight hydration",
+        "expect3": "✨ Softer lips by morning",
+        "trust1": "✓ Dermatologist-tested",
+        "trust2": "✓ No parabens, no dyes",
+        "trust3": "✓ Vegan &amp; cruelty-free",
+        "quote_text": "\"I put this on every night before bed and my lips stopped peeling within a week. Wakes up so much softer.\"",
+        "quote_author": "— Priya N., verified buyer",
+        "show_compare": false
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "question": "Which flavor should I pick?",
+            "answer": "They all use the same moisturizing, antioxidant-rich formula — the flavors just change the scent and taste. Peach and Grapefruit are lighter and fruity, Strawberry is sweeter, and Grape is a deeper, richer fruit note. Can't decide? Peach is our most popular."
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "question": "How do I use it?",
+            "answer": "Apply a generous layer over clean lips as the last step of your night routine, right before bed. It works while you sleep — no need to rinse off. Wake up to softer, smoother, more hydrated lips."
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "question": "Is it safe for sensitive lips?",
+            "answer": "Yes — it's gentle, fragrance-forward but not harsh, and safe for nightly use. Patch-test on your wrist first if you're prone to irritation."
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "question": "Can I use it with my lip plumper?",
+            "answer": "Absolutely — that's exactly what it's built for. Use the plumper during the day for volume, then this mask at night to repair and rehydrate. Bundle both and save 20%."
+          }
+        },
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "question": "How fast will it ship?",
+            "answer": "Processed within 24–48 hours, with tracking emailed the moment it ships."
+          }
+        },
+        "q6": {
+          "type": "qa",
+          "settings": {
+            "question": "What if it's not for me?",
+            "answer": "30-day money-back guarantee — no need to send the jar back."
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"]
+    }
+  },
+  "order": ["main", "faq"]
+}
