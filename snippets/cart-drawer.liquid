@@ -7,6 +7,14 @@
       <button type="button" class="cd__x" data-cd-close aria-label="Close cart">&times;</button>
     </div>
 
+    <div class="cd__shipbar" data-cd-shipbar>
+      <div class="cd__shipbar-row">
+        <span class="cd__shipbar-icon">🎉</span>
+        <span data-cd-shiphint>You&rsquo;ve unlocked free shipping</span>
+      </div>
+      <div class="cd__shipbar-track"><div class="cd__shipbar-fill" data-cd-shipfill></div></div>
+    </div>
+
     <div class="cd__body" data-cd-items></div>
 
     <div class="cd__empty" data-cd-empty hidden>
@@ -19,10 +27,14 @@
         <span>Subtotal</span>
         <strong data-cd-subtotal>{{ cart.total_price | money }}</strong>
       </div>
-      <p class="cd__ship" data-cd-shiphint>Free shipping on orders $35+</p>
-      <a href="{{ routes.cart_url }}" class="btn ghost cd__viewcart">View full cart</a>
+      <div class="cd__save" data-cd-save hidden>🎉 You&rsquo;re saving <strong data-cd-save-amt></strong></div>
       <form action="{{ routes.cart_url }}" method="post"><button type="submit" name="checkout" class="btn" style="width:100%">Check out</button></form>
-      <p class="cd__note">30-day money-back guarantee · taxes calculated at checkout</p>
+      <div class="cd__trust">
+        <span>🔒 Secure checkout</span>
+        <span>↩ 30-day guarantee</span>
+        <span>🚚 Free shipping</span>
+      </div>
+      <p class="cd__note">Taxes calculated at checkout</p>
     </div>
   </aside>
 </div>

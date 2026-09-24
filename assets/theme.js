@@ -231,16 +231,38 @@
       itemsEl.innerHTML = cart.items.map(lineHTML).join('');
       if (subtotalEl) subtotalEl.textContent = fmt(cart.total_price);
 
+      // Standard shipping is unconditionally free storewide now, so this
+      // always renders "unlocked" — threshold stays here in case a minimum
+      // ever comes back, rather than hardcoding the bar to a flat 100%.
       var shipHint = drawer.querySelector('[data-cd-shiphint]');
+      var shipFill = drawer.querySelector('[data-cd-shipfill]');
       if (shipHint) {
-        var threshold = 3500; // $35.00 in cents — keep in sync with the Standard shipping rate
+        var threshold = 0;
         var remaining = threshold - cart.total_price;
+        var pct = threshold > 0 ? Math.min(100, (cart.total_price / threshold) * 100) : 100;
+        if (shipFill) shipFill.style.width = pct + '%';
         if (remaining > 0) {
           shipHint.textContent = fmt(remaining) + ' away from free shipping';
-          shipHint.classList.remove('is-met');
         } else {
-          shipHint.textContent = 'You unlocked free shipping';
-          shipHint.classList.add('is-met');
+          shipHint.textContent = "You've unlocked free shipping";
+        }
+      }
+
+      // Savings bar — compare-at (bundle) and selling-plan (subscription)
+      // discounts both show up as original_price/compare_at_price vs price.
+      var saveEl = drawer.querySelector('[data-cd-save]');
+      var saveAmtEl = drawer.querySelector('[data-cd-save-amt]');
+      if (saveEl && saveAmtEl) {
+        var totalSavings = cart.items.reduce(function (sum, it) {
+          var was = Math.max(it.compare_at_price || 0, it.original_price || it.price);
+          var diff = was - it.price;
+          return sum + (diff > 0 ? diff * it.quantity : 0);
+        }, 0);
+        if (totalSavings > 0) {
+          saveAmtEl.textContent = fmt(totalSavings);
+          saveEl.hidden = false;
+        } else {
+          saveEl.hidden = true;
         }
       }
     }
