@@ -37,6 +37,16 @@
     {{ content_for_layout }}
   </main>
 
+  <script>
+    (function () {
+      var faq = document.querySelector('.mini-faq');
+      var bundleBox = document.querySelector('.offer-card');
+      if (faq && bundleBox && bundleBox.parentNode) {
+        bundleBox.parentNode.insertBefore(faq, bundleBox.nextSibling);
+      }
+    })();
+  </script>
+
   {% section 'footer' %}
 
   {% render 'cart-drawer' %}
