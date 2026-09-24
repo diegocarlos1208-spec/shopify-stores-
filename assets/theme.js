@@ -248,13 +248,16 @@
         }
       }
 
-      // Savings bar — compare-at (bundle) and selling-plan (subscription)
-      // discounts both show up as original_price/compare_at_price vs price.
+      // Savings bar — a subscribed line's own original_price/compare_at_price
+      // already reflect the selling-plan discount baked in by the Cart API,
+      // so the "was" price for those lives on selling_plan_allocation.compare_at_price
+      // instead; bundle savings still come from the variant's own compare_at_price.
       var saveEl = drawer.querySelector('[data-cd-save]');
       var saveAmtEl = drawer.querySelector('[data-cd-save-amt]');
       if (saveEl && saveAmtEl) {
         var totalSavings = cart.items.reduce(function (sum, it) {
-          var was = Math.max(it.compare_at_price || 0, it.original_price || it.price);
+          var planWas = it.selling_plan_allocation ? it.selling_plan_allocation.compare_at_price : 0;
+          var was = Math.max(it.compare_at_price || 0, planWas || 0, it.original_price || it.price);
           var diff = was - it.price;
           return sum + (diff > 0 ? diff * it.quantity : 0);
         }, 0);
