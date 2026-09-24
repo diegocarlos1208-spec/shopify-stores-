@@ -40,21 +40,6 @@
             {%- endfor -%}
           </div>
         {%- endif -%}
-
-        <div class="mini-faq">
-          <details open>
-            <summary>Is it safe for sensitive lips?</summary>
-            <p>Yes — patch-test on your wrist first if you're prone to irritation. No cinnamon, no parabens, dermatologist-tested.</p>
-          </details>
-          <details>
-            <summary>How fast will it ship?</summary>
-            <p>Processed within 24–48 hours, with tracking emailed the moment it ships.</p>
-          </details>
-          <details>
-            <summary>What if it's not for me?</summary>
-            <p>30-day money-back guarantee — no need to send the tube back.</p>
-          </details>
-        </div>
       </div>
 
       {%- comment -%} -------- Buy box -------- {%- endcomment -%}
@@ -199,6 +184,21 @@
                 </div>
               </div>
             {%- endunless -%}
+
+            <div class="mini-faq">
+              <details open>
+                <summary>Is it safe for sensitive lips?</summary>
+                <p>Yes — patch-test on your wrist first if you're prone to irritation. No cinnamon, no parabens, dermatologist-tested.</p>
+              </details>
+              <details>
+                <summary>How fast will it ship?</summary>
+                <p>Processed within 24–48 hours, with tracking emailed the moment it ships.</p>
+              </details>
+              <details>
+                <summary>What if it's not for me?</summary>
+                <p>30-day money-back guarantee — no need to send the tube back.</p>
+              </details>
+            </div>
 
             {%- if has_sub and first_plan != blank -%}
               {%- assign cur_sub_price = current_variant.price -%}
