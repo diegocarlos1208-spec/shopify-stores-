@@ -39,10 +39,19 @@
 
   <script>
     (function () {
+      // Mini-FAQ belongs below the buy buttons (Add to Cart / Buy with Shop),
+      // not between the bundle box and the purchase-type selector.
       var faq = document.querySelector('.mini-faq');
-      var bundleBox = document.querySelector('.offer-card');
-      if (faq && bundleBox && bundleBox.parentNode) {
-        bundleBox.parentNode.insertBefore(faq, bundleBox.nextSibling);
+      var form = document.getElementById('product-form');
+      if (faq && form && form.parentNode) {
+        form.parentNode.insertBefore(faq, form.nextSibling);
+      }
+
+      // Trim the PDP description blurb down to its first sentence.
+      var blurb = document.querySelector('.pdp .blurb');
+      if (blurb) {
+        var firstSentence = blurb.textContent.trim().split('.')[0];
+        if (firstSentence) blurb.textContent = firstSentence + '.';
       }
     })();
   </script>
