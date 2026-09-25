@@ -59,7 +59,7 @@
         </div>
 
         <p class="blurb">
-          {{ p.description | strip_html | truncatewords: 55 | default: "Hydrates while it plumps — unlike tingle formulas that leave lips drier every time you use them. A warm, gentle tingle (not a burn) builds visible volume in about five minutes, and hyaluronic acid + vitamin E lock the moisture back in." }}
+          {{ p.description | strip_html | split: '.' | first | default: "Hydrates while it plumps — visible volume in about five minutes, no dryness, no irritation" }}.
         </p>
 
         {%- if is_lip_mask -%}
@@ -185,21 +185,6 @@
               </div>
             {%- endunless -%}
 
-            <div class="mini-faq">
-              <details open>
-                <summary>Is it safe for sensitive lips?</summary>
-                <p>Yes — patch-test on your wrist first if you're prone to irritation. No cinnamon, no parabens, dermatologist-tested.</p>
-              </details>
-              <details>
-                <summary>How fast will it ship?</summary>
-                <p>Processed within 24–48 hours, with tracking emailed the moment it ships.</p>
-              </details>
-              <details>
-                <summary>What if it's not for me?</summary>
-                <p>30-day money-back guarantee — no need to send the tube back.</p>
-              </details>
-            </div>
-
             {%- if has_sub and first_plan != blank -%}
               {%- assign cur_sub_price = current_variant.price -%}
               {%- for alloc in current_variant.selling_plan_allocations -%}
@@ -250,6 +235,21 @@
         {%- else -%}
           <p style="color:var(--ink-soft)"><em>Assign a product to this template in the theme editor to enable checkout.</em></p>
         {%- endif -%}
+
+        <div class="mini-faq">
+          <details open>
+            <summary>Is it safe for sensitive lips?</summary>
+            <p>Yes — patch-test on your wrist first if you're prone to irritation. No cinnamon, no parabens, dermatologist-tested.</p>
+          </details>
+          <details>
+            <summary>How fast will it ship?</summary>
+            <p>Processed within 24–48 hours, with tracking emailed the moment it ships.</p>
+          </details>
+          <details>
+            <summary>What if it's not for me?</summary>
+            <p>30-day money-back guarantee — no need to send the tube back.</p>
+          </details>
+        </div>
 
         <div class="pay-row">
           <span>VISA</span><span>MASTERCARD</span><span>AMEX</span><span>PAYPAL</span><span>SHOP PAY</span><span>G PAY</span>
