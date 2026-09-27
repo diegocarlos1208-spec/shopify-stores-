@@ -133,6 +133,11 @@ html.cd-lock{overflow:hidden}
 .float.two{bottom:22px;right:-16px}
 .float .big{font-family:var(--serif);font-size:1.2rem;color:var(--coral-deep);display:block}
 
+/* Lip mask cross-sell */
+.crosssell{background:var(--bg-2)}
+.crosssell .wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:54px;align-items:center;padding:64px 0}
+.crosssell h2{font-family:var(--serif);font-size:clamp(1.9rem,4vw,2.6rem);color:var(--wine-deep);margin-bottom:18px}
+
 /* Feature tiles */
 .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .tile{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;min-height:180px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:var(--shadow)}
@@ -337,6 +342,7 @@ html.cd-lock{overflow:hidden}
 
 @media (max-width:900px){
   .hero .wrap{grid-template-columns:1fr;gap:40px}
+  .crosssell .wrap{grid-template-columns:1fr;gap:40px}
   .tiles,.grid-3,.grid-4,.stat-row{grid-template-columns:1fr 1fr}
   .site-footer .cols{grid-template-columns:1fr 1fr}
   .pdp .grid{grid-template-columns:1fr;gap:34px}

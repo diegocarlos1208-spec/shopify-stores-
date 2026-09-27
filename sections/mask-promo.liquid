@@ -1,0 +1,63 @@
+{%- liquid
+  assign s = section.settings
+  assign mask = s.product
+  if mask == blank
+    assign mask = all_products['peach-lip-sleeping-mask']
+  endif
+-%}
+{%- capture cta_url -%}{%- render 'shop-url', section_product: mask -%}{%- endcapture -%}
+{%- assign cta_url = cta_url | strip -%}
+
+<section class="section crosssell">
+  <div class="wrap">
+    <div class="hero-media">
+      <div class="hero-card">
+        <div class="shot">
+          {%- if s.image != blank -%}
+            {{ s.image | image_url: width: 900 | image_tag: alt: mask.title, loading: 'lazy' }}
+          {%- elsif mask != blank and mask.featured_image -%}
+            {{ mask.featured_image | image_url: width: 900 | image_tag: alt: mask.title, loading: 'lazy' }}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="eyebrow">{{ s.eyebrow | default: 'New · Night Routine' }}</div>
+      <h2>{{ s.heading | default: 'Meet the Lip Sleeping Mask' }}</h2>
+      <p class="lead">{{ s.intro | default: "The overnight partner to your Spicy Lip Plumper. Apply a generous layer before bed and wake up to softer, smoother, more hydrated lips — no rinsing, no fuss. In Peach, Strawberry, Grape and Grapefruit." }}</p>
+
+      <ul class="ticks">
+        {%- assign ticks = s.ticks | default: 'Apply before bed|Deep overnight hydration|Softer lips by morning|4 flavors to choose from' | split: '|' -%}
+        {%- for t in ticks -%}<li>{{ t | strip }}</li>{%- endfor -%}
+      </ul>
+
+      {%- if mask != blank -%}
+        <div class="price">
+          <span class="now">{{ mask.price | money }}</span>
+          {%- if mask.compare_at_price > mask.price -%}<span class="was">{{ mask.compare_at_price | money }}</span>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="cta-row">
+        <a href="{{ cta_url }}" class="btn big">{{ s.cta | default: 'Shop the Lip Mask' }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lip mask cross-sell",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product", "info": "Defaults to the Lip Sleeping Mask" },
+    { "type": "image_picker", "id": "image", "label": "Image (defaults to product photo)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New · Night Routine" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Meet the Lip Sleeping Mask" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "The overnight partner to your Spicy Lip Plumper. Apply a generous layer before bed and wake up to softer, smoother, more hydrated lips — no rinsing, no fuss. In Peach, Strawberry, Grape and Grapefruit." },
+    { "type": "text", "id": "ticks", "label": "Trust ticks (separate with |)", "default": "Apply before bed|Deep overnight hydration|Softer lips by morning|4 flavors to choose from" },
+    { "type": "text", "id": "cta", "label": "Button text", "default": "Shop the Lip Mask" }
+  ],
+  "presets": [{ "name": "Lip mask cross-sell" }]
+}
+{% endschema %}
