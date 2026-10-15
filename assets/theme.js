@@ -171,6 +171,7 @@
     var emptyEl = drawer.querySelector('[data-cd-empty]');
     var footEl = drawer.querySelector('[data-cd-foot]');
     var subtotalEl = drawer.querySelector('[data-cd-subtotal]');
+    var upsellEl = drawer.querySelector('[data-cd-upsell]');
     var lastFocus = null;
 
     function fmt(cents) { return money(cents, '${{amount}}'); }
@@ -218,8 +219,17 @@
         '</div>';
     }
 
+    // Mask upsell: only offered while a cart has items and no mask yet.
+    function syncUpsell(cart) {
+      if (!upsellEl) return;
+      var pid = parseInt(upsellEl.getAttribute('data-product-id'), 10);
+      var has = cart.items.some(function (it) { return it.product_id === pid; });
+      upsellEl.hidden = cart.item_count === 0 || has;
+    }
+
     function render(cart) {
       setCounts(cart.item_count);
+      syncUpsell(cart);
       if (cart.item_count === 0) {
         itemsEl.innerHTML = '';
         emptyEl.hidden = false;
@@ -284,6 +294,28 @@
       }).then(function (r) { return r.json(); }).then(function (cart) {
         itemsEl.classList.remove('is-busy');
         render(cart);
+      });
+    }
+
+    // upsell: add the chosen flavor, then re-render
+    if (upsellEl) {
+      var upBtn = upsellEl.querySelector('[data-cd-upsell-add]');
+      var upSel = upsellEl.querySelector('[data-cd-upsell-variant]');
+      upBtn.addEventListener('click', function () {
+        upBtn.classList.add('is-loading');
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ id: upSel.value, quantity: 1 })
+        }).then(function (r) {
+          if (!r.ok) throw new Error('add failed');
+          return getCart();
+        }).then(function (cart) {
+          upBtn.classList.remove('is-loading');
+          render(cart);
+        }).catch(function () {
+          upBtn.classList.remove('is-loading');
+        });
       });
     }
 

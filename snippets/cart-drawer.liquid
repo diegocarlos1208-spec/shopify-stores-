@@ -17,6 +17,26 @@
 
     <div class="cd__body" data-cd-items></div>
 
+    {%- assign up = all_products['peach-lip-sleeping-mask'] -%}
+    {%- if up != blank and up.available -%}
+      <div class="cd__up" data-cd-upsell data-product-id="{{ up.id }}" hidden>
+        <div class="cd__up-tag">Complete your routine</div>
+        <div class="cd__up-row">
+          <img class="cd__up-img" src="{{ up.featured_media | image_url: width: 120 }}" alt="{{ up.title | escape }}" width="56" height="56" loading="lazy">
+          <div class="cd__up-info">
+            <div class="cd__up-title">{{ up.title }}</div>
+            <div class="cd__up-sub">Overnight lip hydration &middot; <strong>{{ up.selected_or_first_available_variant.price | money }}</strong></div>
+            <select class="cd__up-sel" data-cd-upsell-variant aria-label="Flavor">
+              {%- for v in up.variants -%}
+                {%- if v.available -%}<option value="{{ v.id }}">{{ v.title }}</option>{%- endif -%}
+              {%- endfor -%}
+            </select>
+          </div>
+          <button type="button" class="cd__up-add" data-cd-upsell-add>+ Add</button>
+        </div>
+      </div>
+    {%- endif -%}
+
     <div class="cd__empty" data-cd-empty hidden>
       <p>Your cart is empty.</p>
       <button type="button" class="btn ghost" data-cd-close>Continue shopping</button>
