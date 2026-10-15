@@ -94,6 +94,7 @@ html.cd-lock{overflow:hidden}
 .cd__up-title{font-weight:600;font-size:.86rem;color:var(--ink);line-height:1.25}
 .cd__up-sub{font-size:.74rem;color:var(--ink-soft);margin:1px 0 5px}
 .cd__up-sub strong{color:var(--wine-deep)}
+.cd__up-lbl{display:block;font-size:.7rem;font-weight:700;color:var(--wine-deep);margin-bottom:3px}
 .cd__up-sel{font:inherit;font-size:.76rem;padding:4px 8px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);max-width:100%}
 .cd__up-add{flex:none;border:0;border-radius:999px;background:var(--wine-deep);color:#fff;font:inherit;font-weight:700;font-size:.8rem;padding:9px 14px;cursor:pointer}
 .cd__up-add.is-loading{opacity:.6;pointer-events:none}

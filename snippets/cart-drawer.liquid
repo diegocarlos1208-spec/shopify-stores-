@@ -26,7 +26,8 @@
           <div class="cd__up-info">
             <div class="cd__up-title">{{ up.title }}</div>
             <div class="cd__up-sub">Overnight lip hydration &middot; <strong>{{ up.selected_or_first_available_variant.price | money }}</strong></div>
-            <select class="cd__up-sel" data-cd-upsell-variant aria-label="Flavor">
+            <label class="cd__up-lbl" for="cd-up-variant">Choose your lip mask color</label>
+            <select class="cd__up-sel" id="cd-up-variant" data-cd-upsell-variant>
               {%- for v in up.variants -%}
                 {%- if v.available -%}<option value="{{ v.id }}">{{ v.title }}</option>{%- endif -%}
               {%- endfor -%}
