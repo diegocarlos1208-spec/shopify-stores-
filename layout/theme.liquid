@@ -28,6 +28,12 @@
       --coral-deep:{{ settings.color_accent }};
       --wine-deep:{{ settings.color_wine }};
     }
+    /* No express / dynamic checkout buttons (Shop Pay, Buy it now, etc.) */
+    .shopify-payment-button,
+    .additional-checkout-buttons,
+    [data-shopify="payment-button"],
+    shopify-accelerated-checkout,
+    shopify-accelerated-checkout-cart{display:none!important}
   </style>
 
   {{ content_for_header }}

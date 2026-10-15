@@ -229,7 +229,6 @@
                 {% unless current_variant.available %}disabled{% endunless %}>
                 <span>{% if current_variant.available %}{{ s.add_label | default: 'Add to Cart' }}{% else %}Sold out{% endif %}</span><span id="addBtnPrice"></span>
               </button>
-              {{ form | payment_button }}
             </div>
           {%- endform -%}
         {%- else -%}
