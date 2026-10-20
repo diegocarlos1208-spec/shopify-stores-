@@ -1,0 +1,29 @@
+{%- comment -%} Sticky bottom bar: product + benefit CTA. On product pages it points at the buy box and hides while the Add to Cart button is on screen. {%- endcomment -%}
+{%- liquid
+  assign sp = settings.featured_product
+  assign on_pdp = false
+  if template.name == 'product' and product != blank
+    assign sp = product
+    assign on_pdp = true
+  endif
+-%}
+{%- if sp != blank and template.name != 'cart' and template.name != 'page' and template.name != 'password' and template.name != 'gift_card' -%}
+  <div class="sbar" id="sticky-cta" {% if on_pdp %}data-pdp="true"{% endif %}>
+    <div class="sbar__txt">
+      <strong>{{ sp.title }}</strong>
+      <span>Free US shipping &middot; 30-day money-back promise</span>
+    </div>
+    <a class="btn sbar__btn" href="{% if on_pdp %}#buybox{% else %}{{ sp.url }}{% endif %}">Get Fuller Lips Now</a>
+  </div>
+  <script>
+    (function () {
+      var bar = document.getElementById('sticky-cta');
+      if (!bar) return;
+      document.body.classList.add('has-sbar');
+      var add = document.getElementById('addBtn');
+      if (bar.getAttribute('data-pdp') && add && 'IntersectionObserver' in window) {
+        new IntersectionObserver(function (e) { bar.classList.toggle('is-hidden', e[0].isIntersecting); }).observe(add);
+      }
+    })();
+  </script>
+{%- endif -%}

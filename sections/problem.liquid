@@ -1,29 +1,44 @@
 {%- assign s = section.settings -%}
+{%- assign pm = settings.featured_product -%}
+{%- assign step_img = pm.images[1] | default: pm.featured_image -%}
+{%- capture cta_url -%}{%- render 'shop-url', section_product: nil -%}{%- endcapture -%}
+{%- assign cta_url = cta_url | strip -%}
 <section class="section" id="how">
   <div class="wrap">
-    <div class="eyebrow">{{ s.eyebrow | default: 'Meet Lip Fade' }}</div>
-    <h2>{{ s.heading | default: "Your Lips Didn't Get Thinner. They Faded." }}</h2>
-    <p class="lead">{{ s.intro | default: "Lip Fade is what happens as lips lose moisture, color and fullness over time: flatter, paler, drier, with lipstick settling into fine lines. Liner and gloss only fake the shape, and harsh plumpers burn and dry you out, so lips look worse after." }}</p>
+    <div class="steps-layout">
+      <div class="steps-copy">
+        <div class="eyebrow">{{ s.eyebrow | default: 'Meet Lip Fade' }}</div>
+        <h2>{{ s.heading | default: "Your Lips Didn't Get Thinner. They Faded." }}</h2>
+        <p class="lead">{{ s.intro | default: "Lip Fade is what happens as lips lose moisture, color and fullness over time: flatter, paler, drier, with lipstick settling into fine lines. Liner and gloss only fake the shape, and harsh plumpers burn and dry you out, so lips look worse after." }}</p>
 
-    <div class="grid-3">
-      {%- if section.blocks.size > 0 -%}
-        {%- for block in section.blocks -%}
-          <div class="pcard" {{ block.shopify_attributes }}>
-            <div class="ic">{{ block.settings.icon }}</div>
-            <h3>{{ block.settings.title }}</h3>
-            <p>{{ block.settings.text }}</p>
-          </div>
-        {%- endfor -%}
-      {%- else -%}
-        <div class="pcard"><div class="ic">⏳</div><h3>Your lips look thinner every year</h3><p>Natural volume and definition fade over time. Lipstick settles into fine lines, the border of your lip softens, and nothing in your bag actually fixes it.</p></div>
-        <div class="pcard"><div class="ic">💉</div><h3>You want fuller lips — but not filler</h3><p>Needles are expensive, they wear off, and the results can look stiff or uneven. You want more volume without booking an appointment or committing to a syringe.</p></div>
-        <div class="pcard"><div class="ic">😖</div><h3>Every plumper you've tried let you down</h3><p>Some just burn with no payoff. Others are sticky, or the tingle fades in two minutes with nothing to show for it. There's never been a plumper that's actually comfortable to wear.</p></div>
-      {%- endif -%}
-    </div>
+        <div class="steps">
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              <div class="pcard step" {{ block.shopify_attributes }}>
+                <div class="num">{{ forloop.index }}</div>
+                <div><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p></div>
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            <div class="pcard step"><div class="num">1</div><div><h3>Your lips look thinner every year</h3><p>Natural volume and definition fade over time. Lipstick settles into fine lines, the border of your lip softens, and nothing in your bag actually fixes it.</p></div></div>
+            <div class="pcard step"><div class="num">2</div><div><h3>You want fuller lips — but not filler</h3><p>Needles are expensive, they wear off, and the results can look stiff or uneven. You want more volume without booking an appointment or committing to a syringe.</p></div></div>
+            <div class="pcard step"><div class="num">3</div><div><h3>Every plumper you've tried let you down</h3><p>Some just burn with no payoff. Others are sticky, or the tingle fades in two minutes with nothing to show for it. There's never been a plumper that's actually comfortable to wear.</p></div></div>
+          {%- endif -%}
+        </div>
 
-    <div class="who">
-      <div class="who__card"><h3>Skipping filler?</h3><p>Get the &ldquo;did you get filler?&rdquo; look without the needle, the downtime or the appointment price.</p></div>
-      <div class="who__card"><h3>Want your lips back?</h3><p>Bring back the color and fullness you remember, softly and naturally, with lips that look smoother and more defined.</p></div>
+        <div class="who">
+          <div class="who__card"><h3>Skipping filler?</h3><p>Get the &ldquo;did you get filler?&rdquo; look without the needle, the downtime or the appointment price.</p></div>
+          <div class="who__card"><h3>Want your lips back?</h3><p>Bring back the color and fullness you remember, softly and naturally, with lips that look smoother and more defined.</p></div>
+        </div>
+      </div>
+
+      <div class="steps-media">
+        {%- if step_img != blank -%}
+          <div class="steps-card">{{ step_img | image_url: width: 800 | image_tag: alt: pm.title, loading: 'lazy' }}</div>
+        {%- endif -%}
+        <a href="{{ cta_url }}" class="btn big">Get Fuller Lips Now</a>
+        <p class="steps-note">Love your lips in 30 days or your money back.</p>
+      </div>
     </div>
 
     <p class="closer">{{ s.closer | default: 'This one gives you a real, visible plump — with a warm spicy tingle instead of a harsh sting, and hydration that stays long after the tingle is gone.' }}</p>

@@ -12,7 +12,7 @@
     <div>
       <div class="stars"><b>★★★★★</b> {{ s.rating_text | default: '4.7 · 2,000+ reviews' }}</div>
       <div class="eyebrow lipfade">{{ s.problem_line | default: 'Noticing Lip Fade? Your lips didn’t vanish — they faded.' }}</div>
-      <h1>{{ s.heading | default: 'Fuller Lips in 5 Minutes.<br>No Needles. No Filler.' }}</h1>
+      <h1>{{ s.heading | default: '<strong>Fuller Lips</strong> in 5 Minutes.<br>No Needles. No Filler.' }}</h1>
       <p class="sub">{{ s.subheading | default: "Swipe it on, feel a warm tingle, and watch your lips look fuller, smoother and more defined in about five minutes. Hyaluronic acid keeps them soft and plump for hours, with none of the dry, cracked aftermath other plumpers leave." }}</p>
 
       <ul class="ticks">
@@ -47,6 +47,7 @@
 
     <div class="hero-media">
       {%- if s.float_one != blank -%}<div class="float one">{{ s.float_one }}</div>{%- endif -%}
+      <div class="hero-ribbon">{{ s.ribbon | default: 'Free US shipping · 30-day money-back promise' }}</div>
       <div class="hero-card">
         <div class="shot">
           {%- if s.image != blank -%}
@@ -65,18 +66,33 @@
   </div>
 </header>
 
+<div class="chips">
+  <div class="wrap">
+    {%- assign chip_list = 'Needle-free|Cinnamon-free|Plumps in 5 minutes|Hydrating|30-day guarantee' | split: '|' -%}
+    {%- for c in chip_list -%}<span class="chip">{{ c }}</span>{%- endfor -%}
+  </div>
+</div>
+<div class="marq" aria-hidden="true">
+  <div class="marq__track">
+    {%- for n in (1..2) -%}
+      <span>No needles</span><span>30-day money-back guarantee</span><span>Free US shipping</span><span>Visible plump in about 5 minutes</span>
+    {%- endfor -%}
+  </div>
+</div>
+
 {% schema %}
 {
   "name": "Hero",
   "settings": [
     { "type": "product", "id": "product", "label": "Product the CTAs link to" },
     { "type": "text", "id": "rating_text", "label": "Rating line", "default": "4.7 · 2,000+ reviews" },
-    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Fuller Lips in 5 Minutes. No Needles. No Filler.</p>" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p><strong>Fuller Lips</strong> in 5 Minutes. No Needles. No Filler.</p>" },
     { "type": "textarea", "id": "subheading", "label": "Sub-heading", "default": "Swipe it on, feel a warm tingle, and watch your lips look fuller, smoother and more defined in about five minutes. Hyaluronic acid keeps them soft and plump for hours, with none of the dry, cracked aftermath other plumpers leave." },
     { "type": "text", "id": "ticks", "label": "Trust ticks (separate with |)", "default": "Visibly fuller lips in about 5 minutes|Warm tingle, not a burn. Cinnamon-free|Try it for 30 days or get your money back" },
     { "type": "text", "id": "price", "label": "Price (leave blank to use the product's real price)" },
     { "type": "text", "id": "compare_price", "label": "Compare-at price (leave blank to use the product's real one)" },
     { "type": "text", "id": "badge", "label": "Discount badge (leave blank to calculate it)" },
+    { "type": "text", "id": "ribbon", "label": "Ribbon above the image", "default": "Free US shipping · 30-day money-back promise" },
     { "type": "text", "id": "problem_line", "label": "Problem line above the headline", "default": "Noticing Lip Fade? Your lips didn’t vanish — they faded." },
     { "type": "text", "id": "cta_primary", "label": "Primary button text (blank = Get Fuller Lips Now)" },
     { "type": "text", "id": "cta_secondary", "label": "Secondary button text", "default": "See How It Works" },

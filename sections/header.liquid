@@ -10,6 +10,24 @@
 
 <div class="nav">
   <div class="wrap">
+    <nav class="nav-left" aria-label="Main">
+      {%- assign contact_url = routes.root_url | append: 'pages/contact' -%}
+      {%- for link in section.settings.menu.links -%}
+        {%- assign lt = link.title | downcase -%}
+        {%- if lt contains 'contact' -%}
+          <a href="{{ contact_url }}" class="hide-sm{% if page.handle == 'contact' %} is-active{% endif %}">{{ link.title }}</a>
+        {%- elsif lt contains 'review' -%}
+          {%- comment -%} handled by the dedicated Reviews link below {%- endcomment -%}
+        {%- else -%}
+          <a href="{{ link.url }}" class="hide-sm{% if link.active %} is-active{% endif %}">{{ link.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- assign reviews_label = section.settings.reviews_label | default: 'Reviews' -%}
+      {%- if reviews_label != blank -%}
+        <a href="{{ routes.root_url }}#reviews" class="hide-sm">{{ reviews_label }}</a>
+      {%- endif -%}
+    </nav>
+
     <a href="{{ routes.root_url }}" class="logo" aria-label="{{ settings.brand_name | default: 'Plump Theory' }} — home">
       {%- if section.settings.logo != blank -%}
         {{ section.settings.logo | image_url: width: 500 | image_tag: alt: settings.brand_name | default: 'Plump Theory', class: 'logo-img' }}
@@ -18,28 +36,13 @@
       {%- endif -%}
     </a>
 
-    <nav class="nav-links">
-      {%- assign contact_url = routes.root_url | append: 'pages/contact' -%}
-      {%- for link in section.settings.menu.links -%}
-        {%- assign lt = link.title | downcase -%}
-        {%- if lt contains 'contact' -%}
-          <a href="{{ contact_url }}" class="hide-sm">{{ link.title }}</a>
-        {%- elsif lt contains 'review' -%}
-          {%- comment -%} handled by the dedicated Reviews link below {%- endcomment -%}
-        {%- else -%}
-          <a href="{{ link.url }}" class="hide-sm">{{ link.title }}</a>
-        {%- endif -%}
-      {%- endfor -%}
-      {%- assign reviews_label = section.settings.reviews_label | default: 'Reviews' -%}
-      {%- if reviews_label != blank -%}
-        <a href="{{ routes.root_url }}#reviews" class="hide-sm">{{ reviews_label }}</a>
-      {%- endif -%}
+    <div class="nav-right">
       <a href="{{ cta_url }}" class="btn nav-cta">{{ section.settings.button_label | default: 'Shop Now' }}</a>
       <button type="button" class="nav-cart" data-cd-open aria-label="Open cart">
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        <span class="nav-cart__count{% if cart.item_count == 0 %} is-zero{% endif %}" data-cd-count>{{ cart.item_count }}</span>
-      </button>
-    </nav>
+            <span class="nav-cart__count{% if cart.item_count == 0 %} is-zero{% endif %}" data-cd-count>{{ cart.item_count }}</span>
+          </button>
+    </div>
   </div>
 </div>
 
