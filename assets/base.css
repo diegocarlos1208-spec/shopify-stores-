@@ -589,3 +589,18 @@ body.has-sbar{padding-bottom:84px}
 }
 
 /* layout refresh v2 */
+
+/* Layout refresh: responsive fixes */
+.hero .float.one{top:60px}
+.nav .logo{grid-column:2}
+.nav-right{grid-column:3}
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;gap:34px}
+  .hero .wrap>.hero-media{order:2}
+  .steps-layout{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+  .nav-left{display:none}
+  .hero .float{display:none}
+  .hero-ribbon{margin:0 12px;font-size:.68rem}
+}
