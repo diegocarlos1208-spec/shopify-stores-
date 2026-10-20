@@ -1,11 +1,16 @@
 {%- assign s = section.settings -%}
 {%- capture cta_url -%}{%- render 'shop-url', section_product: s.button_product -%}{%- endcapture -%}
 {%- assign cta_url = cta_url | strip -%}
+{%- capture offer -%}{%- render 'featured-offer', section_product: s.button_product -%}{%- endcapture -%}
+{%- assign offer_parts = offer | strip | split: '|' -%}
+{%- assign o_price = offer_parts[0] -%}
+{%- assign o_was = offer_parts[1] -%}
+{%- assign o_pct = offer_parts[2] | plus: 0 -%}
 <section class="section reviews" id="reviews">
   <div class="wrap">
     <div class="eyebrow center">{{ s.eyebrow | default: 'Verified Reviews' }}</div>
     <h2 class="center">{{ s.heading | default: '2,000 People Skipped the Filler' }}</h2>
-    <p class="lead center">{{ s.subheading | default: '4.7 / 5 · Verified Buyers' }}</p>
+    <div class="rsum center"><span class="rsum__stars" aria-hidden="true">★★★★★</span><span class="rsum__txt">{{ s.subheading | default: '4.7 / 5 · Verified Buyers' }}</span></div>
 
     <div class="rtrack">
       {%- if section.blocks.size > 0 -%}
@@ -13,6 +18,9 @@
           {%- assign initial = block.settings.name | strip | slice: 0 -%}
           <div class="rcard" {{ block.shopify_attributes }}>
             <div class="rs">★★★★★</div>
+            {%- if block.settings.photo != blank -%}
+              {{ block.settings.photo | image_url: width: 640 | image_tag: class: 'rphoto', alt: block.settings.name | append: ' — customer photo', loading: 'lazy', widths: '320, 480, 640', sizes: '320px' }}
+            {%- endif -%}
             <div class="rt">{{ block.settings.text }}</div>
             <div class="ru">
               <div class="av">{{ initial }}</div>
@@ -32,7 +40,7 @@
       {%- endif -%}
     </div>
 
-    <div style="max-width:360px;margin:8px auto 0"><a href="{{ cta_url }}" class="btn">{{ s.button_label | default: 'Get Yours — 37% Off Today' }}</a></div>
+    <div style="max-width:360px;margin:8px auto 0"><a href="{{ cta_url }}" class="btn">{%- if s.button_label != blank -%}{{ s.button_label }}{%- elsif o_pct > 0 -%}Get Yours — {{ o_pct }}% Off Today{%- else -%}Get Yours{%- endif -%}</a></div>
   </div>
 </section>
 
@@ -44,7 +52,7 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "2,000 People Skipped the Filler" },
     { "type": "text", "id": "subheading", "label": "Sub-heading", "default": "4.7 / 5 · Verified Buyers" },
     { "type": "product", "id": "button_product", "label": "CTA button → product (optional)" },
-    { "type": "text", "id": "button_label", "label": "CTA button label", "default": "Get Yours — 37% Off Today" },
+    { "type": "text", "id": "button_label", "label": "CTA button label (leave blank for auto)" },
     { "type": "paragraph", "content": "Replace the sample reviews with real, verifiable customer reviews before selling." }
   ],
   "blocks": [
@@ -54,7 +62,8 @@
       "settings": [
         { "type": "textarea", "id": "text", "label": "Review text", "default": "\"Loved it.\"" },
         { "type": "text", "id": "name", "label": "Name", "default": "Sarah M." },
-        { "type": "text", "id": "location", "label": "Location / meta", "default": "Austin, TX · Verified ✓" }
+        { "type": "text", "id": "location", "label": "Location / meta", "default": "Austin, TX · Verified ✓" },
+        { "type": "image_picker", "id": "photo", "label": "Customer photo (use real photos from the buyer only)" }
       ]
     }
   ],

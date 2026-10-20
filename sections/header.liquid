@@ -10,20 +10,20 @@
 
 <div class="nav">
   <div class="wrap">
-    <a href="{{ routes.root_url }}" class="logo" aria-label="{{ shop.name }} — home">
+    <a href="{{ routes.root_url }}" class="logo" aria-label="{{ settings.brand_name | default: 'Plump Theory' }} — home">
       {%- if section.settings.logo != blank -%}
-        {{ section.settings.logo | image_url: width: 500 | image_tag: alt: shop.name, class: 'logo-img' }}
+        {{ section.settings.logo | image_url: width: 500 | image_tag: alt: settings.brand_name | default: 'Plump Theory', class: 'logo-img' }}
       {%- else -%}
-        <img class="logo-img" src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" width="954" height="448">
+        <img class="logo-img" src="{{ 'logo.png' | asset_url }}" alt="{{ settings.brand_name | default: 'Plump Theory' }}" width="954" height="448">
       {%- endif -%}
     </a>
 
     <nav class="nav-links">
-      {%- assign contact_email = section.settings.contact_email | default: 'plumptheoryshop@gmail.com' -%}
+      {%- assign contact_url = routes.root_url | append: 'pages/contact' -%}
       {%- for link in section.settings.menu.links -%}
         {%- assign lt = link.title | downcase -%}
-        {%- if lt contains 'contact' and contact_email != blank -%}
-          <a href="mailto:{{ contact_email }}" class="hide-sm">{{ link.title }}</a>
+        {%- if lt contains 'contact' -%}
+          <a href="{{ contact_url }}" class="hide-sm">{{ link.title }}</a>
         {%- elsif lt contains 'review' -%}
           {%- comment -%} handled by the dedicated Reviews link below {%- endcomment -%}
         {%- else -%}
@@ -49,9 +49,8 @@
   "settings": [
     { "type": "text", "id": "announcement", "label": "Announcement bar text", "default": "FREE SHIPPING ON BUNDLES · 4.7 ★ 2,000+ reviews · 30-DAY MONEY-BACK GUARANTEE" },
     { "type": "image_picker", "id": "logo", "label": "Logo image" },
-    { "type": "text", "id": "brand_name", "label": "Brand name (if no logo image)", "default": "Spicy Lip Plumper" },
+    { "type": "text", "id": "brand_name", "label": "Brand name (if no logo image)", "default": "Plump Theory" },
     { "type": "link_list", "id": "menu", "label": "Navigation menu", "default": "main-menu" },
-    { "type": "text", "id": "contact_email", "label": "Contact email (menu \"Contact\" opens this)", "default": "plumptheoryshop@gmail.com" },
     { "type": "text", "id": "reviews_label", "label": "Reviews link label (blank to hide)", "default": "Reviews" },
     { "type": "product", "id": "button_product", "label": "Shop Now button → product" },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Now" }

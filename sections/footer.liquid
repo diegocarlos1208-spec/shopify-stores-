@@ -1,13 +1,12 @@
-{%- assign contact_email = section.settings.contact_email | default: 'plumptheoryshop@gmail.com' -%}
+{%- assign brand = settings.brand_name | default: 'Plump Theory' -%}
+{%- assign contact_url = routes.root_url | append: 'pages/contact' -%}
 <footer class="site-footer">
   <div class="wrap">
     <div class="cols">
       <div>
-        <h4>{{ section.settings.brand_name | default: shop.name }}</h4>
-        <p style="opacity:.8;max-width:280px">{{ section.settings.blurb | default: 'A needle-free, tingling peptide lip plumper for instant volume and softer, more defined lips over time.' }}</p>
-        {%- if contact_email != blank -%}
-          <p style="margin-top:12px;opacity:.9">Contact us:<br><a href="mailto:{{ contact_email }}" style="text-decoration:underline">{{ contact_email }}</a></p>
-        {%- endif -%}
+        <h4>{{ section.settings.brand_name | default: brand }}</h4>
+        <p style="opacity:.8;max-width:280px">{{ section.settings.blurb | default: 'A needle-free, tingling peptide lip oil for instant volume and softer, more defined lips over time.' }}</p>
+        <p style="margin-top:12px;opacity:.9"><a href="{{ contact_url }}" style="text-decoration:underline">Message our team</a> &mdash; we reply by email.</p>
       </div>
 
       {%- for block in section.blocks -%}
@@ -26,7 +25,7 @@
         </div>
         <div>
           <h4>Help</h4>
-          <a href="mailto:{{ contact_email }}">Contact us</a>
+          <a href="{{ contact_url }}">Contact us</a>
           <a href="{{ routes.root_url }}policies/shipping-policy">Shipping &amp; delivery</a>
           <a href="{{ routes.root_url }}policies/refund-policy">Returns &amp; refunds</a>
         </div>
@@ -42,7 +41,7 @@
     <div class="fine">
       {{ section.settings.disclaimer | default: '*Individual results vary. This product is a cosmetic and is not intended to diagnose, treat, cure or prevent any condition. Patch-test before first use and discontinue if irritation occurs. Not for use on broken or chapped skin. Keep out of reach of children.' }}
       <br><br>
-      &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved. Prices in {{ cart.currency.iso_code }}.
+      &copy; {{ 'now' | date: '%Y' }} {{ brand }}. All rights reserved. Prices in {{ cart.currency.iso_code }}.
     </div>
   </div>
 </footer>
@@ -52,9 +51,8 @@
   "name": "Footer",
   "max_blocks": 3,
   "settings": [
-    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "Spicy Lip Plumper" },
-    { "type": "textarea", "id": "blurb", "label": "Short blurb", "default": "A needle-free, tingling peptide lip plumper for instant volume and softer, more defined lips over time." },
-    { "type": "text", "id": "contact_email", "label": "Contact email", "default": "plumptheoryshop@gmail.com" },
+    { "type": "text", "id": "brand_name", "label": "Brand name (blank = theme brand name)" },
+    { "type": "textarea", "id": "blurb", "label": "Short blurb", "default": "A needle-free, tingling peptide lip oil for instant volume and softer, more defined lips over time." },
     { "type": "textarea", "id": "disclaimer", "label": "Legal disclaimer" }
   ],
   "blocks": [

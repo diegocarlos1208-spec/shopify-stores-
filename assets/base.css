@@ -385,3 +385,20 @@ html.cd-lock{overflow:hidden}
 .template-product--lip-mask .pquote::before{content:"\"I put this on every night before bed and my lips stopped peeling within a week. Wakes up so much softer.\"";font-family:var(--serif);font-size:.94rem;font-style:italic;color:var(--ink)}
 .template-product--lip-mask .pquote cite{font-size:0}
 .template-product--lip-mask .pquote cite::before{content:"— Priya N., verified buyer";font-family:var(--font);font-size:.76rem;font-style:normal;font-weight:600;color:var(--ink-soft)}
+
+/* "Will it burn?" callout */
+.burn-note{font-size:.88rem;line-height:1.5;color:var(--ink);background:var(--blush);border-radius:12px;padding:10px 14px;margin:0 0 16px;max-width:520px}
+.burn-note strong{color:var(--wine-deep)}
+.hero .burn-note{margin:14px 0 0}
+
+/* Reviews: rating summary + optional customer photo */
+.rsum{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:26px;font-weight:600;color:var(--ink-soft)}
+.rsum__stars{color:var(--gold);letter-spacing:3px;font-size:1.25rem}
+.rcard .rphoto{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;background:var(--bg-2);display:block}
+
+/* Contact form */
+.contact-form .fld{margin-bottom:12px}
+.contact-form textarea.fld{resize:vertical}
+.contact-ok{background:#1a7f5a14;color:var(--good);font-weight:600;border-radius:12px;padding:14px 16px}
+.contact-err{background:#e02f4a14;color:var(--coral-deep);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.offer-pill{white-space:normal;text-align:right}

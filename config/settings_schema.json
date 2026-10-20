@@ -21,6 +21,7 @@
   {
     "name": "Brand",
     "settings": [
+      { "type": "text", "id": "brand_name", "label": "Brand name", "default": "Plump Theory", "info": "Shown in the footer, page titles and logo alt text." },
       { "type": "image_picker", "id": "favicon", "label": "Favicon" }
     ]
   },

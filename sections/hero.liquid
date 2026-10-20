@@ -1,6 +1,11 @@
 {%- assign s = section.settings -%}
 {%- capture cta_url -%}{%- render 'shop-url', section_product: s.product -%}{%- endcapture -%}
 {%- assign cta_url = cta_url | strip -%}
+{%- capture offer -%}{%- render 'featured-offer', section_product: s.product -%}{%- endcapture -%}
+{%- assign offer_parts = offer | strip | split: '|' -%}
+{%- assign o_price = offer_parts[0] -%}
+{%- assign o_was = offer_parts[1] -%}
+{%- assign o_pct = offer_parts[2] | plus: 0 -%}
 
 <header class="hero">
   <div class="wrap">
@@ -15,19 +20,21 @@
       </ul>
 
       <div class="price">
-        <span class="now">{{ s.price | default: '$24.99' }}</span>
-        {%- if s.compare_price != blank -%}<span class="was">{{ s.compare_price }}</span>{%- endif -%}
-        {%- if s.badge != blank -%}<span class="off">{{ s.badge }}</span>{%- endif -%}
+        <span class="now">{{ s.price | default: o_price }}</span>
+        {%- if s.compare_price != blank -%}<span class="was">{{ s.compare_price }}</span>{%- elsif o_was != blank -%}<span class="was">{{ o_was }}</span>{%- endif -%}
+        {%- if s.badge != blank -%}<span class="off">{{ s.badge }}</span>{%- elsif o_pct > 0 -%}<span class="off">{{ o_pct }}% OFF</span>{%- endif -%}
       </div>
 
       <div class="cta-row">
-        <a href="{{ cta_url }}" class="btn big">{{ s.cta_primary | default: 'Shop Now — 37% Off Today' }}</a>
+        <a href="{{ cta_url }}" class="btn big">{%- if s.cta_primary != blank -%}{{ s.cta_primary }}{%- elsif o_pct > 0 -%}Shop Now — {{ o_pct }}% Off Today{%- else -%}Shop Now{%- endif -%}</a>
         {%- if s.cta_secondary != blank -%}
           <a href="#how" class="btn ghost big">{{ s.cta_secondary }}</a>
         {%- endif -%}
       </div>
 
       {%- if s.urgency != blank -%}<p class="urgency">{{ s.urgency }}</p>{%- endif -%}
+
+      <p class="burn-note"><strong>Will it burn?</strong> No &mdash; expect a warm tingle for about a minute, not a sting. If your lips are sensitive, patch-test on your wrist first.</p>
     </div>
 
     <div class="hero-media">
@@ -35,13 +42,13 @@
       <div class="hero-card">
         <div class="shot">
           {%- if s.image != blank -%}
-            {{ s.image | image_url: width: 900 | image_tag: alt: 'Spicy lip plumper', loading: 'eager' }}
+            {{ s.image | image_url: width: 900 | image_tag: alt: 'Spicy Lip Plumping Oil', loading: 'eager' }}
           {%- elsif s.product != blank and s.product.featured_image -%}
             {{ s.product.featured_image | image_url: width: 900 | image_tag: alt: s.product.title, loading: 'eager' }}
           {%- elsif settings.featured_product != blank and settings.featured_product.featured_image -%}
             {{ settings.featured_product.featured_image | image_url: width: 900 | image_tag: alt: settings.featured_product.title, loading: 'eager' }}
           {%- else -%}
-            <img src="{{ 'plumper-1.jpg' | asset_url }}" alt="Spicy lip plumper" width="600" height="600">
+            <img src="{{ 'plumper-1.jpg' | asset_url }}" alt="Spicy Lip Plumping Oil" width="600" height="600">
           {%- endif -%}
         </div>
       </div>
@@ -59,10 +66,10 @@
     { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Fuller Lips in 5 Minutes. No Needles. No Filler.</p>" },
     { "type": "textarea", "id": "subheading", "label": "Sub-heading", "default": "A tingling peptide gloss that plumps, smooths and redefines your natural lip line — visible volume in minutes, softer lips over weeks. The warm, spicy tingle is how you know it's working." },
     { "type": "text", "id": "ticks", "label": "Trust ticks (separate with |)", "default": "30-Day Guarantee|Free Shipping On Bundles|Plumps In 5 Minutes" },
-    { "type": "text", "id": "price", "label": "Price", "default": "$24.99" },
-    { "type": "text", "id": "compare_price", "label": "Compare-at price", "default": "$39.98" },
-    { "type": "text", "id": "badge", "label": "Discount badge", "default": "37% OFF" },
-    { "type": "text", "id": "cta_primary", "label": "Primary button text", "default": "Shop Now — 37% Off Today" },
+    { "type": "text", "id": "price", "label": "Price (leave blank to use the product's real price)" },
+    { "type": "text", "id": "compare_price", "label": "Compare-at price (leave blank to use the product's real one)" },
+    { "type": "text", "id": "badge", "label": "Discount badge (leave blank to calculate it)" },
+    { "type": "text", "id": "cta_primary", "label": "Primary button text (leave blank for auto)" },
     { "type": "text", "id": "cta_secondary", "label": "Secondary button text", "default": "See How It Works" },
     { "type": "text", "id": "urgency", "label": "Urgency line", "default": "⚡ Processed in 24–48 hrs · Launch Week pricing" },
     { "type": "image_picker", "id": "image", "label": "Hero image" },

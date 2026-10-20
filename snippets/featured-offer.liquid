@@ -1,0 +1,26 @@
+{%- comment -%}
+  Prints "price|compare_at|percent_off" for the product the CTAs point to, straight from
+  Shopify, so hero / final CTA / reviews never drift from the real store price.
+  compare_at is empty and percent is 0 when the variant has no real discount.
+  Usage: {%- capture offer -%}{%- render 'featured-offer', section_product: s.product -%}{%- endcapture -%}
+{%- endcomment -%}
+{%- liquid
+  assign fp = section_product
+  if fp == blank
+    assign fp = settings.featured_product
+  endif
+  if fp == blank
+    assign fp = collections.all.products.first
+  endif
+  assign fv = fp.selected_or_first_available_variant
+  assign pct = 0
+  if fv.compare_at_price > fv.price
+    assign diff = fv.compare_at_price | minus: fv.price
+    assign pct = diff | times: 100.0 | divided_by: fv.compare_at_price | floor
+  endif
+  echo fv.price | money | append: '|'
+  if pct > 0
+    echo fv.compare_at_price | money
+  endif
+  echo '|' | append: pct
+-%}

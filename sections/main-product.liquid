@@ -30,12 +30,12 @@
         {%- else -%}
           {%- assign gallery = 'plumper-1.jpg,plumper-2.jpg,plumper-3.jpg,plumper-4.jpg,plumper-5.jpg' | split: ',' -%}
           <div class="main">
-            <img src="{{ 'plumper-1.jpg' | asset_url }}" alt="{{ p.title | default: 'Spicy Lip Plumper' }}" width="1100" height="1100">
+            <img src="{{ 'plumper-1.jpg' | asset_url }}" alt="{{ p.title | default: 'Spicy Lip Plumping Oil' }}" width="1100" height="1100">
           </div>
           <div class="thumbs">
             {%- for img in gallery -%}
               <button type="button" class="pdp-thumb{% if forloop.first %} active{% endif %}" data-full="{{ img | asset_url }}">
-                <img src="{{ img | asset_url }}" alt="{{ p.title | default: 'Spicy Lip Plumper' }} — view {{ forloop.index }}" loading="lazy">
+                <img src="{{ img | asset_url }}" alt="{{ p.title | default: 'Spicy Lip Plumping Oil' }} — view {{ forloop.index }}" loading="lazy">
               </button>
             {%- endfor -%}
           </div>
@@ -44,13 +44,13 @@
 
       {%- comment -%} -------- Buy box -------- {%- endcomment -%}
       <div id="buybox">
-        <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / {{ p.title | default: 'Spicy Lip Plumper' }}</div>
-        <h1>{{ p.title | default: 'Spicy Lip Plumper — Tingle & Volume Serum' }}</h1>
+        <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / {{ p.title | default: 'Spicy Lip Plumping Oil' }}</div>
+        <h1>{{ p.title | default: 'Spicy Lip Plumping Oil' }}</h1>
         <div class="rate"><b>★★★★★</b> {{ s.rating_text | default: '4.7 · 2,000+ verified reviews' }}</div>
 
         <div class="price">
           <span class="now" id="priceNow">
-            {%- if current_variant -%}{{ current_variant.price | money }}{%- else -%}$24.99{%- endif -%}
+            {%- if current_variant -%}{{ current_variant.price | money }}{%- else -%}$23.99{%- endif -%}
           </span>
           <span class="was" id="priceWas"
             {% unless current_variant.compare_at_price > current_variant.price %}style="display:none"{% endunless %}>
@@ -122,7 +122,7 @@
               <div class="offer-card">
                 <div class="offer-head">
                   <span class="offer-eyebrow">✨ {{ s.option_label | default: 'Bundle &amp; Save — Limited Time' }}</span>
-                  {%- if best_pct > 0 -%}<span class="offer-pill">{{ best_pct }}% OFF</span>{%- endif -%}
+                  {%- if best_pct > 0 -%}<span class="offer-pill">{{ best_pct }}% OFF &middot; {{ best_variant.title | upcase }} ONLY</span>{%- endif -%}
                 </div>
 
                 <div class="bundles">

@@ -13,7 +13,7 @@
     <link rel="apple-touch-icon" href="{{ 'favicon-plump-theory-180.png' | asset_url }}">
   {%- endif -%}
 
-  <title>{{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+  <title>{{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% assign brand = settings.brand_name | default: 'Plump Theory' %}{% unless page_title contains brand %} &ndash; {{ brand }}{% endunless %}</title>
   {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,6 +62,28 @@
       if (blurb) {
         var firstSentence = blurb.textContent.trim().split('.')[0];
         if (firstSentence) blurb.textContent = firstSentence + '.';
+      }
+
+      // "Will it burn?" answered right under the blurb (not buried in the FAQ).
+      // The lip mask has no tingle, so it doesn't get this note.
+      if (blurb && !document.querySelector('.pdp .burn-note') && document.body.className.indexOf('lip-mask') === -1) {
+        var note = document.createElement('p');
+        note.className = 'burn-note';
+        note.innerHTML = '<strong>Will it burn?</strong> No \u2014 expect a warm tingle for about a minute, not a sting. If your lips are sensitive, patch-test on your wrist first.';
+        blurb.parentNode.insertBefore(note, blurb.nextSibling);
+      }
+
+      // The bundle discount pill only applies to the best-value pack, so say which one.
+      var pill = document.querySelector('.offer-pill');
+      if (pill && !/only/i.test(pill.textContent)) {
+        var best = null, bestPct = 0;
+        document.querySelectorAll('input[name="variant-radio"]').forEach(function (r) {
+          var p = parseFloat(r.getAttribute('data-price')), c = parseFloat(r.getAttribute('data-compare'));
+          if (c > p && (c - p) / c > bestPct) { bestPct = (c - p) / c; best = r; }
+        });
+        var bt = best && best.closest('label') && best.closest('label').querySelector('.bt');
+        var packName = bt && bt.firstChild && bt.firstChild.textContent.trim();
+        if (packName) pill.textContent = pill.textContent.trim() + ' \u00b7 ' + packName.toUpperCase() + ' ONLY';
       }
     })();
   </script>

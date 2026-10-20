@@ -1,4 +1,21 @@
 <div class="wrap" style="padding:64px 22px;max-width:760px;margin:0 auto">
   <h1 style="font-family:var(--serif);color:var(--wine-deep);margin-bottom:18px">{{ page.title }}</h1>
   <div class="rte">{{ page.content }}</div>
+  {%- if page.handle == 'contact' -%}
+    {%- form 'contact', class: 'contact-form' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="contact-ok">Thanks &mdash; your message is in. We&rsquo;ll reply to you by email.</p>
+      {%- else -%}
+        <p style="color:var(--ink-soft);margin-bottom:18px">Questions about an order, shipping or which flavor to pick? Send us a message and we&rsquo;ll reply by email.</p>
+        {%- if form.errors -%}<p class="contact-err">{{ form.errors | default_errors }}</p>{%- endif -%}
+        <label for="ContactName" class="visually-hidden">Name</label>
+        <input class="fld" id="ContactName" type="text" name="contact[name]" placeholder="Your name" autocomplete="name" value="{{ form.name }}">
+        <label for="ContactEmail" class="visually-hidden">Email</label>
+        <input class="fld" id="ContactEmail" type="email" name="contact[email]" placeholder="Your email" autocomplete="email" required value="{{ form.email }}">
+        <label for="ContactMessage" class="visually-hidden">Message</label>
+        <textarea class="fld" id="ContactMessage" name="contact[body]" rows="6" placeholder="How can we help?" required>{{ form.body }}</textarea>
+        <button type="submit" class="btn">Send message</button>
+      {%- endif -%}
+    {%- endform -%}
+  {%- endif -%}
 </div>
