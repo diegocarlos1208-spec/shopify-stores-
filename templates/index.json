@@ -1,14 +1,46 @@
 {
   "sections": {
-    "hero":     { "type": "hero" },
-    "features": { "type": "feature-tiles" },
-    "problem":  { "type": "problem" },
-    "solution": { "type": "solution" },
-    "reviews":  { "type": "reviews" },
-    "mask_promo": { "type": "mask-promo" },
-    "specs":    { "type": "specs" },
-    "faq":      { "type": "faq" },
-    "final":    { "type": "final-cta" }
+    "hero": {
+      "type": "hero"
+    },
+    "features": {
+      "type": "feature-tiles"
+    },
+    "problem": {
+      "type": "problem"
+    },
+    "solution": {
+      "type": "solution"
+    },
+    "reviews": {
+      "type": "reviews"
+    },
+    "mask_promo": {
+      "type": "mask-promo"
+    },
+    "specs": {
+      "type": "specs"
+    },
+    "faq": {
+      "type": "faq"
+    },
+    "final": {
+      "type": "final-cta"
+    },
+    "results": {
+      "type": "before-after"
+    }
   },
-  "order": ["hero", "features", "problem", "solution", "reviews", "mask_promo", "specs", "faq", "final"]
+  "order": [
+    "hero",
+    "features",
+    "problem",
+    "solution",
+    "results",
+    "reviews",
+    "mask_promo",
+    "specs",
+    "faq",
+    "final"
+  ]
 }

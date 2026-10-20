@@ -1,11 +1,38 @@
 {
   "sections": {
-    "main": { "type": "main-product" },
-    "problem": { "type": "problem" },
-    "solution": { "type": "solution" },
-    "specs": { "type": "specs" },
-    "reviews": { "type": "reviews" },
-    "faq": { "type": "faq" }
+    "main": {
+      "type": "main-product"
+    },
+    "problem": {
+      "type": "problem"
+    },
+    "solution": {
+      "type": "solution"
+    },
+    "specs": {
+      "type": "specs"
+    },
+    "reviews": {
+      "type": "reviews"
+    },
+    "faq": {
+      "type": "faq"
+    },
+    "results": {
+      "type": "before-after"
+    },
+    "closing": {
+      "type": "final-cta"
+    }
   },
-  "order": ["main", "problem", "solution", "specs", "reviews", "faq"]
+  "order": [
+    "main",
+    "problem",
+    "solution",
+    "specs",
+    "results",
+    "reviews",
+    "faq",
+    "closing"
+  ]
 }

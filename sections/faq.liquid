@@ -2,7 +2,7 @@
 <section class="section faq">
   <div class="wrap" style="max-width:760px">
     <div class="eyebrow center">{{ s.eyebrow | default: 'Questions' }}</div>
-    <h2 class="center">{{ s.heading | default: 'Before You Order' }}</h2>
+    <h2 class="center">{{ s.heading | default: 'The Questions You’re Probably Asking' }}</h2>
     <div style="margin-top:30px">
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
@@ -12,13 +12,15 @@
           </details>
         {%- endfor -%}
       {%- else -%}
-        <details open><summary>Does it actually plump, or is this just gloss?</summary><p>It's the warmth, not the shine, doing the work: capsicum, ginger root and wintergreen boost circulation right at the surface, which is what creates real (if temporary) volume — 92% of buyers report a visible difference on first use. It's not filler-level change, but it's a real, visible plump, not a marketing photo trick.</p></details>
-        <details><summary>Will it burn?</summary><p>It shouldn't. It's dosed for a warm tingle, not a sting — most people feel it as a "buzz" for 30–60 seconds. If it feels like burning rather than warmth, you likely applied too much: one thin layer is all it takes, and more product does not mean more plump.</p></details>
-        <details><summary>Will it dry out my lips like other tingle plumpers?</summary><p>No — this is the complaint we built around. Most tingle formulas plump by irritating and drying the lip. Ours pairs the tingle with hyaluronic acid and vitamin E in the same swipe, so moisture goes back in as fast as the warmth draws it out. Lips end up softer after use, not chapped.</p></details>
-        <details><summary>How long does the plumping effect last?</summary><p>The visible plump typically lasts 2–4 hours per application and can be topped up any time. With daily use, most people notice smoother, fuller-looking lips even between applications after a few weeks.</p></details>
-        <details><summary>Can I wear it under or over lipstick?</summary><p>Both. Wear it alone as a glossy tint, as a base before lip liner and lipstick, or dab it over the top for extra shine and volume.</p></details>
-        <details><summary>What if it doesn't work for me?</summary><p>You're covered by our 30-Day Money-Back Guarantee. If you're not happy with your results, contact us for a full refund — no need to send the tube back.</p></details>
-        <details><summary>How fast is shipping?</summary><p>Orders are processed within 24–48 hours. Delivery is typically 5–9 business days, with tracking emailed to you once your order ships. Bundles ship free over $35.</p></details>
+        <details open><summary>Will it burn?</summary><p>No. It&rsquo;s a warm, spicy tingle that fades in minutes, not a burn. That warmth is the ginger and capsicum bringing blood flow to your lips, and it&rsquo;s how you know it&rsquo;s working. There&rsquo;s no cinnamon, which is what makes many plumpers sting. If it feels like burning rather than warmth, you applied too much: one thin layer is all it takes.</p></details>
+        <details open><summary>Is it safe?</summary><p>It&rsquo;s made without cinnamon or parabens, and one thin layer is all you need. If you have very sensitive lips, start with a small amount. If you&rsquo;re allergic to capsicum, ginger or wintergreen, skip it, and stop using it if irritation doesn&rsquo;t settle.</p></details>
+        <details><summary>How long does it last?</summary><p>The visible plump typically lasts 2&ndash;4 hours per application, and hyaluronic acid keeps lips soft after the tingle fades. Reapply any time. With daily use, most people notice smoother, fuller-looking lips between applications after a few weeks.</p></details>
+        <details><summary>Will it work on thin lips?</summary><p>Thin lips are exactly who it&rsquo;s made for. The tingle brings blood flow to the surface, so lips look fuller, rosier and more defined in about five minutes. It&rsquo;s a visible, temporary plump, not a change to your lip shape like filler, so build up from one thin layer until you like the look.</p></details>
+        <details><summary>Will it dry out my lips like other plumpers?</summary><p>No. This is the complaint we built it around. Hyaluronic acid and vitamin E go on in the same swipe as the tingle, so lips end up softer after use, not chapped.</p></details>
+        <details><summary>Does it actually plump, or is it just gloss?</summary><p>It&rsquo;s the warmth, not the shine, doing the work. You&rsquo;ll see fuller, rosier, more defined lips in about five minutes. It isn&rsquo;t filler, but it&rsquo;s a real, visible plump you can top up any time.</p></details>
+        <details><summary>Can I wear it under or over lipstick?</summary><p>Both. Wear it alone as a glossy tint, as a base before liner and lipstick, or dab it over the top for extra shine and volume.</p></details>
+        <details><summary>What if I don&rsquo;t love it?</summary><p>Love your lips in 30 days or your money back. Contact us for a full refund &mdash; no need to send it back.</p></details>
+        <details><summary>How fast is shipping?</summary><p>Orders are processed in 24&ndash;48 hours and arrive in about 5&ndash;9 business days, with tracking emailed once your order ships. Standard shipping is free in the US; international orders ship for a flat $9.99.</p></details>
       {%- endif -%}
     </div>
   </div>
@@ -29,7 +31,7 @@
   "name": "FAQ",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Questions" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Before You Order" }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Questions You’re Probably Asking" }
   ],
   "blocks": [
     {

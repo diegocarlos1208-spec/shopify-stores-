@@ -1,0 +1,52 @@
+{%- comment -%}
+  Real before/after proof. Renders nothing until at least one block (a real customer photo pair) is added.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- if section.blocks.size > 0 -%}
+<section class="section ba" id="results">
+  <div class="wrap">
+    <div class="eyebrow center">{{ s.eyebrow | default: 'Real Results' }}</div>
+    <h2 class="center">{{ s.heading | default: 'Real Lips. No Needles.' }}</h2>
+    <div class="ba__grid">
+      {%- for block in section.blocks -%}
+        <figure class="ba__item" {{ block.shopify_attributes }}>
+          <div class="ba__pair">
+            {%- if block.settings.before != blank -%}
+              <div class="ba__img"><span class="ba__tag">Before</span>{{ block.settings.before | image_url: width: 600 | image_tag: loading: 'lazy', alt: 'Lips before applying' }}</div>
+            {%- endif -%}
+            {%- if block.settings.after != blank -%}
+              <div class="ba__img"><span class="ba__tag ba__tag--after">After</span>{{ block.settings.after | image_url: width: 600 | image_tag: loading: 'lazy', alt: 'Lips after applying' }}</div>
+            {%- endif -%}
+          </div>
+          <figcaption>{{ block.settings.caption | default: 'Day 1, 5 minutes after applying.' }}{%- if block.settings.who != blank -%} <span class="ba__who">&mdash; {{ block.settings.who }}</span>{%- endif -%}</figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Before & after",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Real Results" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Real Lips. No Needles." },
+    { "type": "paragraph", "content": "Only add photos from real customers (with permission). Same lighting and angle for before and after." }
+  ],
+  "blocks": [
+    {
+      "type": "result",
+      "name": "Before / after",
+      "settings": [
+        { "type": "image_picker", "id": "before", "label": "Before photo" },
+        { "type": "image_picker", "id": "after", "label": "After photo" },
+        { "type": "text", "id": "caption", "label": "Caption", "default": "Day 1, 5 minutes after applying." },
+        { "type": "text", "id": "who", "label": "Name and age (optional)", "default": "" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [{ "name": "Before & after" }]
+}
+{% endschema %}

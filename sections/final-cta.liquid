@@ -1,6 +1,7 @@
 {%- assign s = section.settings -%}
 {%- capture cta_url -%}{%- render 'shop-url', section_product: s.product -%}{%- endcapture -%}
 {%- assign cta_url = cta_url | strip -%}
+{%- if template.name == 'product' and s.product == blank -%}{%- assign cta_url = '#buybox' -%}{%- endif -%}
 {%- capture offer -%}{%- render 'featured-offer', section_product: s.product -%}{%- endcapture -%}
 {%- assign offer_parts = offer | strip | split: '|' -%}
 {%- assign o_price = offer_parts[0] -%}
@@ -9,9 +10,9 @@
 
 <section class="section final" id="buy">
   <div class="wrap">
-    <div class="eyebrow" style="color:#ffd9d0">{{ s.eyebrow | default: 'Zero Risk' }}</div>
-    <h2>{{ s.heading | default: 'Try It Today — Zero Risk' }}</h2>
-    <p class="lead">{{ s.intro | default: 'A visible plump in about five minutes, or your money back. 30-Day Satisfaction Promise on every order.' }}</p>
+    <div class="eyebrow" style="color:#ffd9d0">{{ s.eyebrow | default: 'The 30-Day Promise' }}</div>
+    <h2>{{ s.heading | default: 'Love Your Lips in 30 Days or Your Money Back' }}</h2>
+    <p class="lead">{{ s.intro | default: 'Try it for 30 days. If you don’t love your lips, contact us and we’ll refund you in full — no need to send it back.' }}</p>
 
     <div class="price">
       <span class="now">{{ s.price | default: o_price }}</span>
@@ -19,11 +20,11 @@
       {%- if s.badge != blank -%}<span class="off">{{ s.badge }}</span>{%- elsif o_pct > 0 -%}<span class="off">{{ o_pct }}% OFF</span>{%- endif -%}
     </div>
 
-    <a href="{{ cta_url }}" class="btn big">{%- if s.cta != blank -%}{{ s.cta }}{%- elsif o_pct > 0 -%}Get Yours — {{ o_pct }}% Off Today{%- else -%}Get Yours{%- endif -%}</a>
+    <a href="{{ cta_url }}" class="btn big">{%- if s.cta != blank -%}{{ s.cta }}{%- else -%}Get Fuller Lips Now{%- endif -%}</a>
     {%- if s.urgency != blank -%}<p class="urgency" style="color:#ffd9d0;margin-top:14px">{{ s.urgency }}</p>{%- endif -%}
 
     <div class="badges">
-      {%- assign badges = s.badges | default: '30-Day Satisfaction Promise|Free Shipping On Bundles|Secure Checkout' | split: '|' -%}
+      {%- assign badges = s.badges | default: '30-Day Money-Back Promise|Free US Shipping|Secure Checkout' | split: '|' -%}
       {%- for b in badges -%}<span>✓ {{ b | strip }}</span>{%- endfor -%}
     </div>
   </div>
@@ -34,15 +35,15 @@
   "name": "Final CTA",
   "settings": [
     { "type": "product", "id": "product", "label": "Button → product" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Zero Risk" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Try It Today — Zero Risk" },
-    { "type": "textarea", "id": "intro", "label": "Intro", "default": "A visible plump in about five minutes, or your money back. 30-Day Satisfaction Promise on every order." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The 30-Day Promise" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Love Your Lips in 30 Days or Your Money Back" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Try it for 30 days. If you don’t love your lips, contact us and we’ll refund you in full — no need to send it back." },
     { "type": "text", "id": "price", "label": "Price (leave blank to use the product's real price)" },
     { "type": "text", "id": "compare_price", "label": "Compare-at price (leave blank to use the product's real one)" },
     { "type": "text", "id": "badge", "label": "Discount badge (leave blank to calculate it)" },
-    { "type": "text", "id": "cta", "label": "Button text (leave blank for auto)" },
-    { "type": "text", "id": "urgency", "label": "Urgency line", "default": "⚡ Processed in 24–48 hours · Launch Week pricing" },
-    { "type": "text", "id": "badges", "label": "Trust badges (separate with |)", "default": "30-Day Satisfaction Promise|Free Shipping On Bundles|Secure Checkout" }
+    { "type": "text", "id": "cta", "label": "Button text (blank = Get Fuller Lips Now)" },
+    { "type": "text", "id": "urgency", "label": "Urgency line", "default": "Ships in 24–48 hours with tracking" },
+    { "type": "text", "id": "badges", "label": "Trust badges (separate with |)", "default": "30-Day Money-Back Promise|Free US Shipping|Secure Checkout" }
   ],
   "presets": [{ "name": "Final CTA" }]
 }

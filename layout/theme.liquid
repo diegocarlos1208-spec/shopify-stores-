@@ -69,8 +69,37 @@
       if (blurb && !document.querySelector('.pdp .burn-note') && document.body.className.indexOf('lip-mask') === -1) {
         var note = document.createElement('p');
         note.className = 'burn-note';
-        note.innerHTML = '<strong>Will it burn?</strong> No \u2014 expect a warm tingle for about a minute, not a sting. If your lips are sensitive, patch-test on your wrist first.';
+        note.innerHTML = '<strong>Will it burn?</strong> No \u2014 it\u2019s a warm tingle that fades in minutes, not a burn. Sensitive lips? Start with one thin layer.';
         blurb.parentNode.insertBefore(note, blurb.nextSibling);
+      }
+
+      // The 30-day promise as a bold box right under the buy button.
+      var buy = document.querySelector('.buy-actions');
+      if (buy && !document.querySelector('.promise-box') && document.body.className.indexOf('lip-mask') === -1) {
+        var box = document.createElement('div');
+        box.className = 'promise-box';
+        box.innerHTML = '<strong>Love your lips in 30 days or your money back.</strong><span>Not happy? Contact us for a full refund \u2014 no need to send it back.</span>';
+        buy.parentNode.insertBefore(box, buy.nextSibling);
+      }
+      var assur = document.querySelector('.assur > div');
+      if (assur && /plump in 5 minutes/i.test(assur.textContent)) assur.textContent = '30-day money-back promise \u2014 love your lips or get a refund';
+
+      // Say why the bigger packs exist instead of only showing a discount (numbers come from the live variants).
+      var bundles = document.querySelector('.offer-card .bundles');
+      if (bundles && !document.querySelector('.bundle-why')) {
+        var best = null, bestN = 0;
+        document.querySelectorAll('input[name="variant-radio"]').forEach(function (r) {
+          var lab = r.closest('label'), t = lab && lab.querySelector('.bt');
+          var n = t ? parseInt(t.textContent, 10) : 0;
+          if (n > bestN) { bestN = n; best = r; }
+        });
+        if (best && bestN > 1) {
+          var each = (parseFloat(best.getAttribute('data-price')) / 100 / bestN).toFixed(2);
+          var why = document.createElement('p');
+          why.className = 'bundle-why';
+          why.innerHTML = 'Stock up so you never run out: the ' + bestN + '-pack drops to <strong>$' + each + ' a bottle</strong>.';
+          bundles.parentNode.insertBefore(why, bundles.nextSibling);
+        }
       }
 
       // The bundle discount pill only applies to the best-value pack, so say which one.
