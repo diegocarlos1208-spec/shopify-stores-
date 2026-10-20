@@ -461,10 +461,10 @@ body.has-sbar{padding-bottom:84px}
 
 /* Hero: image left, copy right */
 .hero{background:linear-gradient(180deg,var(--bg-2),var(--bg))}
-.hero .wrap{grid-template-columns:.95fr 1.05fr;gap:56px;padding-top:34px;padding-bottom:56px}
+.hero .wrap{grid-template-columns:.95fr 1.05fr;gap:56px;padding-top:34px;padding-bottom:56px;align-items:start}
 .hero .wrap>.hero-media{order:-1}
 .hero .wrap>div:first-child{display:flex;flex-direction:column;align-items:flex-start}
-.hero .wrap>div:first-child>*{order:20}
+:where(.hero .wrap>div:first-child>*){order:20}
 .hero .eyebrow.lipfade{order:1}
 .hero h1{order:2;font-size:clamp(2.2rem,5vw,3.4rem)}
 .hero h1 strong{color:var(--coral-deep);font-weight:inherit}
