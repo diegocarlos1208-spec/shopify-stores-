@@ -656,3 +656,10 @@ body.template-product:not(.template-product--lip-mask) #how .who__card p{display
 .hero .float{position:static;order:3;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;padding:12px 14px;border-radius:16px;box-shadow:var(--card-shadow)}
 .hero .float.two{order:4}
 .hero .float .big{font-size:1.15rem}
+
+/* PDP buy box: less crowded — three compact benefit chips in one row */
+.pdp .expect{flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px}
+.pdp .expect span{padding:7px 13px;font-size:.78rem;white-space:nowrap}
+.pdp .blurb{margin-bottom:12px}
+.pdp .burn-note{font-size:.82rem;padding:9px 13px;margin:0 0 12px}
+.pdp .pquote{margin:0 0 16px;padding:10px 14px;font-size:.88rem}
