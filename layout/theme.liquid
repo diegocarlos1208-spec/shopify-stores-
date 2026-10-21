@@ -69,6 +69,20 @@
         if (firstSentence) blurb.textContent = firstSentence + '.';
       }
 
+      // Only the small FAQ under Add to Cart stays: drop the accordion under the upsells,
+      // but keep "How to Use" as one more row there (the free-bonus links point at #howtouse).
+      var acc = document.querySelector('.pdp .acc');
+      var mini = document.querySelector('.pdp .mini-faq');
+      if (acc && mini) {
+        var how = null;
+        acc.querySelectorAll('details').forEach(function (d) {
+          var sm = d.querySelector('summary');
+          if (sm && /how to use/i.test(sm.textContent)) how = d;
+        });
+        if (how) mini.appendChild(how);
+        acc.parentNode.removeChild(acc);
+      }
+
       // "Will it burn?" answered right under the blurb (not buried in the FAQ).
       // The lip mask has no tingle, so it doesn't get this note.
       if (blurb && !document.querySelector('.pdp .burn-note') && document.body.className.indexOf('lip-mask') === -1) {
