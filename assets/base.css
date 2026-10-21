@@ -647,3 +647,12 @@ body.template-product:not(.template-product--lip-mask) .shopify-section:has(> .s
 body.template-product:not(.template-product--lip-mask) #how .pcard.step p{display:none}
 body.template-product:not(.template-product--lip-mask) #how .pcard.step{align-items:center}
 body.template-product:not(.template-product--lip-mask) #how .who__card p{display:none}
+
+/* Hero badges: sit under the image card instead of floating over it */
+.hero .hero-media{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:start}
+.hero .hero-media>.hero-ribbon,.hero .hero-media>.hero-card{grid-column:1/-1}
+.hero .hero-media>.hero-ribbon{order:1}
+.hero .hero-media>.hero-card{order:2}
+.hero .float{position:static;order:3;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;padding:12px 14px;border-radius:16px;box-shadow:var(--card-shadow)}
+.hero .float.two{order:4}
+.hero .float .big{font-size:1.15rem}
