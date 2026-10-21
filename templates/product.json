@@ -15,9 +15,6 @@
     "reviews": {
       "type": "reviews"
     },
-    "faq": {
-      "type": "faq"
-    },
     "results": {
       "type": "before-after"
     },
@@ -32,7 +29,6 @@
     "specs",
     "results",
     "reviews",
-    "faq",
     "closing"
   ]
 }
