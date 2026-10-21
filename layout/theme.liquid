@@ -70,6 +70,15 @@
         if (firstSentence) blurb.textContent = firstSentence + '.';
       }
 
+      // Buy-box benefit pills: just the three core promises (no dermatologist / cinnamon / vegan row).
+      if (document.body.className.indexOf('lip-mask') === -1) {
+        var tr = document.querySelector('.pdp .trustrow');
+        if (tr) tr.parentNode.removeChild(tr);
+        var ex = document.querySelectorAll('.pdp .expect span');
+        var exTxt = ['\uD83C\uDF36\uFE0F Warm tingle for 60 seconds', '\uD83D\uDC44 Visibly plumps in 5 minutes', '\uD83D\uDCA7 Hydrates, doesn\u2019t dry'];
+        if (ex.length === 3) ex.forEach(function (el, i) { el.textContent = exTxt[i]; });
+      }
+
       // Show-don't-tell block goes right under the buy box / comparison table.
       var pv = document.querySelector('.pdpv');
       var how = document.getElementById('how');

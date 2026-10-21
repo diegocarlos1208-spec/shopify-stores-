@@ -81,15 +81,9 @@
         </blockquote>
         {%- else -%}
         <div class="expect">
-          <span>{{ s.expect1 | default: '🌶️ Warm tingle, ~60 sec' }}</span>
-          <span>{{ s.expect2 | default: '👄 Visible plump in 5 min' }}</span>
+          <span>{{ s.expect1 | default: '🌶️ Warm tingle for 60 seconds' }}</span>
+          <span>{{ s.expect2 | default: '👄 Visibly plumps in 5 minutes' }}</span>
           <span>{{ s.expect3 | default: "💧 Hydrates, doesn't dry" }}</span>
-        </div>
-
-        <div class="trustrow">
-          <span>{{ s.trust1 | default: '✓ Dermatologist-tested' }}</span>
-          <span>{{ s.trust2 | default: '✓ No cinnamon irritants' }}</span>
-          <span>{{ s.trust3 | default: '✓ Vegan &amp; cruelty-free' }}</span>
         </div>
 
         <blockquote class="pquote">
