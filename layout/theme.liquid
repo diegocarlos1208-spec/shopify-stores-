@@ -49,6 +49,7 @@
 
   {%- comment -%} The live product template is stale-synced, so the closing promise + CTA block is injected here. {%- endcomment -%}
   {%- if template.name == 'product' and template.suffix != 'lip-mask' -%}
+    {% section 'pdp-visuals' %}
     {% section 'final-cta' %}
   {%- endif -%}
 
@@ -67,6 +68,15 @@
       if (blurb) {
         var firstSentence = blurb.textContent.trim().split('.')[0];
         if (firstSentence) blurb.textContent = firstSentence + '.';
+      }
+
+      // Show-don't-tell block goes right under the buy box / comparison table.
+      var pv = document.querySelector('.pdpv');
+      var how = document.getElementById('how');
+      if (pv && how) {
+        var pvWrap = pv.closest('.shopify-section') || pv;
+        var howWrap = how.closest('.shopify-section') || how;
+        howWrap.parentNode.insertBefore(pvWrap, howWrap);
       }
 
       // Only the small FAQ under Add to Cart stays: drop the accordion under the upsells,

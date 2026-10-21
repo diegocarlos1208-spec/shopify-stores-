@@ -1,0 +1,84 @@
+{%- comment -%}
+  Product-page "show, don't tell" block: big-number proof strip, a swipe -> tingle -> plump timeline,
+  and an at-a-glance ingredient grid. Every figure is a claim already made on the product page.
+  Injected on product pages from layout/theme.liquid and moved under the buy box by a small script.
+{%- endcomment -%}
+<section class="pdpv" id="see-it-work">
+  <div class="wrap">
+
+    <div class="pdpv__stats">
+      <div class="pdpv__stat"><b>5 min</b><span>to a visible plump</span></div>
+      <div class="pdpv__stat"><b>~60 sec</b><span>warm tingle, then it fades</span></div>
+      <div class="pdpv__stat"><b>2&ndash;4 hrs</b><span>of plump per application</span></div>
+      <div class="pdpv__stat"><b>0</b><span>needles, no downtime</span></div>
+    </div>
+
+    <div class="eyebrow center">How it works</div>
+    <h2 class="center">Swipe. Tingle. Plump.</h2>
+
+    <ol class="pdpv__steps">
+      <li class="pdpv__step">
+        <span class="pdpv__ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M30 6l12 12-9 9-12-12z"/><path d="M21 15L7 29c-2 2-2 6 0 8l4 4c2 2 6 2 8 0l14-14"/><path d="M12 36l4 4"/></svg></span>
+        <span class="pdpv__time">0:00</span>
+        <strong>Swipe</strong>
+        <p>One thin layer over clean lips.</p>
+      </li>
+      <li class="pdpv__step">
+        <span class="pdpv__ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 4c2 8 12 13 12 24a12 12 0 0 1-24 0c0-6 3-9 6-12 0 4 2 6 4 7-1-8 0-14 2-19z"/><path d="M20 34c0 3 2 5 4 5s4-2 4-5"/></svg></span>
+        <span class="pdpv__time">~1 min</span>
+        <strong>Tingle</strong>
+        <p>Warmth builds as blood flow comes to the surface.</p>
+      </li>
+      <li class="pdpv__step">
+        <span class="pdpv__ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 26c6-8 12-12 20-8 8-4 14 0 20 8-6 10-14 14-20 14S10 36 4 26z"/><path d="M4 26c8 3 14 4 20 4s12-1 20-4"/></svg></span>
+        <span class="pdpv__time">5 min</span>
+        <strong>Plump</strong>
+        <p>Fuller, rosier, more defined lips.</p>
+      </li>
+      <li class="pdpv__step">
+        <span class="pdpv__ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 5C16 16 11 22 11 30a13 13 0 0 0 26 0c0-8-5-14-13-25z"/><path d="M18 31a6 6 0 0 0 6 6"/></svg></span>
+        <span class="pdpv__time">2&ndash;4 hrs</span>
+        <strong>Hold</strong>
+        <p>Hyaluronic acid keeps lips soft and cushiony.</p>
+      </li>
+    </ol>
+
+    <div class="eyebrow center" style="margin-top:56px">What&rsquo;s inside</div>
+    <h2 class="center">At a glance</h2>
+
+    <div class="pdpv__ing">
+      <div class="pdpv__chip">
+        <span class="pdpv__ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M30 8c6 0 10 5 9 12-1 10-9 20-19 20-7 0-11-5-9-11 2-8 9-9 12-14 1-3 3-7 7-7z"/><path d="M30 8c0-3 2-5 5-5"/></svg></span>
+        <strong>Spicy Tingle Complex</strong><span>Capsicum &middot; ginger &middot; wintergreen &mdash; warm tingle, instant volume</span>
+      </div>
+      <div class="pdpv__chip">
+        <span class="pdpv__ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 40c0-18 12-30 32-32-2 20-14 32-32 32z"/><path d="M8 40c8-10 14-16 22-22"/></svg></span>
+        <strong>Tri-peptide blend</strong><span>Smoother-looking lip texture</span>
+      </div>
+      <div class="pdpv__chip">
+        <span class="pdpv__ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 5C16 16 11 22 11 30a13 13 0 0 0 26 0c0-8-5-14-13-25z"/></svg></span>
+        <strong>Hyaluronic acid</strong><span>Pulls moisture in and holds it</span>
+      </div>
+      <div class="pdpv__chip">
+        <span class="pdpv__ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="8"/><path d="M24 5v6M24 37v6M5 24h6M37 24h6M10.5 10.5l4.2 4.2M33.3 33.3l4.2 4.2M10.5 37.5l4.2-4.2M33.3 14.7l4.2-4.2"/></svg></span>
+        <strong>Vitamin E</strong><span>Keeps lips soft, not tight</span>
+      </div>
+      <div class="pdpv__chip">
+        <span class="pdpv__ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="18"/><path d="M11 37L37 11"/></svg></span>
+        <strong>No cinnamon</strong><span>A common lip irritant, left out</span>
+      </div>
+      <div class="pdpv__chip">
+        <span class="pdpv__ic"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 42S6 31 6 18a9 9 0 0 1 18-3 9 9 0 0 1 18 3c0 13-18 24-18 24z"/></svg></span>
+        <strong>Vegan &amp; cruelty-free</strong><span>No animal ingredients, never tested on animals</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PDP visuals",
+  "settings": []
+}
+{% endschema %}
