@@ -605,3 +605,7 @@ body.has-sbar{padding-bottom:84px}
   .hero-ribbon{margin:0 12px;font-size:.68rem}
 }
 /* sync nudge */
+
+/* Product pages: only the small FAQ under Add to Cart (the bottom FAQ section is hidden) */
+body[class*="template-product"] .faq{display:none}
+body[class*="template-product"] .shopify-section:has(> .faq){display:none}

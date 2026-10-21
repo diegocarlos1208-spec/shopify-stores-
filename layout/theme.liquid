@@ -47,6 +47,11 @@
     {{ content_for_layout }}
   </main>
 
+  {%- comment -%} The live product template is stale-synced, so the closing promise + CTA block is injected here. {%- endcomment -%}
+  {%- if template.name == 'product' and template.suffix != 'lip-mask' -%}
+    {% section 'final-cta' %}
+  {%- endif -%}
+
   <script>
     (function () {
       // Mini-FAQ belongs below the buy buttons (Add to Cart / Buy with Shop),

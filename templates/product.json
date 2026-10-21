@@ -14,12 +14,6 @@
     },
     "reviews": {
       "type": "reviews"
-    },
-    "results": {
-      "type": "before-after"
-    },
-    "closing": {
-      "type": "final-cta"
     }
   },
   "order": [
@@ -27,8 +21,6 @@
     "problem",
     "solution",
     "specs",
-    "results",
-    "reviews",
-    "closing"
+    "reviews"
   ]
 }
